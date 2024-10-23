@@ -12,6 +12,12 @@
 		<button type="submit" asp-action="DeleteUsers" class="btn btn-outline-danger">
 			<i class="fas fa-trash-alt"></i> Delete
 		</button>
+		<button type="submit" asp-action="MakeAdmins" class="btn btn-warning">
+			<i class="fas fa-user-shield"></i> Make Admin
+		</button>
+		<button type="submit" asp-action="RemoveAdmins" class="btn btn-outline-secondary">
+			<i class="fas fa-user-slash"></i> Remove Admin
+		</button>
 	</div>
 	<table class="table table-bordered table-hover">
 		<thead class="thead-dark">
@@ -22,6 +28,7 @@
 				<th>Email</th>
 				<th>Last Login</th>
 				<th>Registration Time</th>
+				<th>Role</th>
 				<th>Status</th>
 			</tr>
 		</thead>
@@ -36,10 +43,16 @@
 					<td>@user.LastLoginDate</td>
 					<td>@user.RegistrationDate</td>
 					<td>
+						<span class="@(user.IsAdmin ? "text-warning" : "text-muted")">
+							@(user.IsAdmin ? "Admin" : "User")
+						</span>
+					</td>
+					<td>
 						<span class="@(user.IsBlocked ? "text-danger" : "text-success")">
 							@(user.IsBlocked ? "Blocked" : "Active")
 						</span>
 					</td>
+
 				</tr>
 			}
 		</tbody>
