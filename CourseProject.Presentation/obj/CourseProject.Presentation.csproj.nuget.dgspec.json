@@ -1,0 +1,215 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/sr/RiderProjects/CourseProject/CourseProject.Presentation/CourseProject.Presentation.csproj": {}
+  },
+  "projects": {
+    "/home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/CourseProject.DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/CourseProject.DataAccess.csproj",
+        "projectName": "CourseProject.DataAccess",
+        "projectPath": "/home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/CourseProject.DataAccess.csproj",
+        "packagesPath": "/home/sr/.nuget/packages/",
+        "outputPath": "/home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/sr/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/sr/RiderProjects/CourseProject/CourseProject.Domain/CourseProject.Domain.csproj": {
+                "projectPath": "/home/sr/RiderProjects/CourseProject/CourseProject.Domain/CourseProject.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.110/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/sr/RiderProjects/CourseProject/CourseProject.Domain/CourseProject.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/sr/RiderProjects/CourseProject/CourseProject.Domain/CourseProject.Domain.csproj",
+        "projectName": "CourseProject.Domain",
+        "projectPath": "/home/sr/RiderProjects/CourseProject/CourseProject.Domain/CourseProject.Domain.csproj",
+        "packagesPath": "/home/sr/.nuget/packages/",
+        "outputPath": "/home/sr/RiderProjects/CourseProject/CourseProject.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/sr/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.110/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/sr/RiderProjects/CourseProject/CourseProject.Presentation/CourseProject.Presentation.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/sr/RiderProjects/CourseProject/CourseProject.Presentation/CourseProject.Presentation.csproj",
+        "projectName": "CourseProject.Presentation",
+        "projectPath": "/home/sr/RiderProjects/CourseProject/CourseProject.Presentation/CourseProject.Presentation.csproj",
+        "packagesPath": "/home/sr/.nuget/packages/",
+        "outputPath": "/home/sr/RiderProjects/CourseProject/CourseProject.Presentation/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/sr/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/CourseProject.DataAccess.csproj": {
+                "projectPath": "/home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/CourseProject.DataAccess.csproj"
+              },
+              "/home/sr/RiderProjects/CourseProject/CourseProject.Domain/CourseProject.Domain.csproj": {
+                "projectPath": "/home/sr/RiderProjects/CourseProject/CourseProject.Domain/CourseProject.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.10, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.110/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

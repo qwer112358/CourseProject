@@ -1,0 +1,15 @@
+/home/sr/RiderProjects/CourseProject/CourseProject.Application/bin/Debug/net8.0/CourseProject.Application.deps.json
+/home/sr/RiderProjects/CourseProject/CourseProject.Application/bin/Debug/net8.0/CourseProject.Application.dll
+/home/sr/RiderProjects/CourseProject/CourseProject.Application/bin/Debug/net8.0/CourseProject.Application.pdb
+/home/sr/RiderProjects/CourseProject/CourseProject.Application/obj/Debug/net8.0/CourseProject.Application.GeneratedMSBuildEditorConfig.editorconfig
+/home/sr/RiderProjects/CourseProject/CourseProject.Application/obj/Debug/net8.0/CourseProject.Application.AssemblyInfoInputs.cache
+/home/sr/RiderProjects/CourseProject/CourseProject.Application/obj/Debug/net8.0/CourseProject.Application.AssemblyInfo.cs
+/home/sr/RiderProjects/CourseProject/CourseProject.Application/obj/Debug/net8.0/CourseProject.Application.csproj.CoreCompileInputs.cache
+/home/sr/RiderProjects/CourseProject/CourseProject.Application/obj/Debug/net8.0/CourseProject.Application.dll
+/home/sr/RiderProjects/CourseProject/CourseProject.Application/obj/Debug/net8.0/refint/CourseProject.Application.dll
+/home/sr/RiderProjects/CourseProject/CourseProject.Application/obj/Debug/net8.0/CourseProject.Application.pdb
+/home/sr/RiderProjects/CourseProject/CourseProject.Application/obj/Debug/net8.0/ref/CourseProject.Application.dll
+/home/sr/RiderProjects/CourseProject/CourseProject.Application/bin/Debug/net8.0/CourseProject.Domain.dll
+/home/sr/RiderProjects/CourseProject/CourseProject.Application/bin/Debug/net8.0/CourseProject.Domain.pdb
+/home/sr/RiderProjects/CourseProject/CourseProject.Application/obj/Debug/net8.0/CourseProject.Application.csproj.AssemblyReference.cache
+/home/sr/RiderProjects/CourseProject/CourseProject.Application/obj/Debug/net8.0/CourseProject.Application.csproj.CopyComplete
