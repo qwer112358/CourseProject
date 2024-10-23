@@ -1,4 +1,7 @@
-﻿@model CourseProject.Presentation.ViewModels.RegisterViewModel;
+﻿@using CourseProject.Presentation.Controllers
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<AccountController> Localizer
+@model CourseProject.Application.ViewModels.ApplicationUser.RegisterViewModel;
 
 @{
     ViewData["Title"] = "Register";
@@ -6,7 +9,7 @@
 
 <div class="row d-flex align-items-center justify-content-center mt-5">
     <div class="col-md-5 card p-4 shadow-lg">
-        <h2 class="text-center text-primary mb-4">Register</h2>
+        <h2 class="text-center text-primary mb-4">@Localizer["Register"]</h2>
         <form asp-action="Register" method="post">
             <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
             <div class="mb-3">

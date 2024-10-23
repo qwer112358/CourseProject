@@ -1,5 +1,6 @@
 using System.Diagnostics;
-using CourseProject.Presentation.ViewModels;
+using CourseProject.Application.ViewModels.ApplicationUser;
+using CourseProject.Presentation.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CourseProject.Presentation.Controllers;
@@ -14,11 +15,6 @@ public class HomeController : Controller
     }
 
     public IActionResult Index()
-    {
-        return View();
-    }
-
-    public IActionResult Privacy()
     {
         return View();
     }

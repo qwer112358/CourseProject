@@ -1,10 +1,8 @@
-﻿using CourseProjectItems.Models;
-using System.Threading.Tasks;
+﻿using CourseProject.Domain.Models;
 
-namespace CourseProjectItems.Interfaces
+namespace CourseProject.Domain.Abstractions.IRepositories;
+
+public interface ILikesRepository : IGenericRepository<Like>
 {
-	public interface ILikesRepository : IGenericRepository<Like>
-	{
-		Task<bool> IsLikedByUser(int itemId, string userId);
-	}
+	Task<bool> IsLikedByUser(int itemId, string userId);
 }

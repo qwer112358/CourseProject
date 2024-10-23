@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CourseProject.Application.ViewModels;
+namespace CourseProject.Application.ViewModels.ApplicationUser;
 
 public class RegisterViewModel
 {

@@ -1,12 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Localization;
 
 namespace CourseProject.Presentation.Controllers;
 
 public class LanguageController : Controller
 {
-    // GET
-    public IActionResult Index()
+    [HttpPost]
+    public IActionResult SetLanguage(string culture)
     {
-        return View();
+        Response.Cookies.Append(
+            CookieRequestCultureProvider.DefaultCookieName,
+            CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+            new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+        );
+        
+        return Redirect(Request.Headers["Referer"].ToString());
     }
 }

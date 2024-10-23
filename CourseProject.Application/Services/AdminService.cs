@@ -9,7 +9,7 @@ namespace CourseProject.Application.Services;
 public class AdminService(
     UserManager<ApplicationUser> userManager,
     SignInManager<ApplicationUser> signInManager)
-    : IUserManagementService
+    : IAdminService
 {
     public async Task<List<ApplicationUser>> GetAllUsersAsync()
     {

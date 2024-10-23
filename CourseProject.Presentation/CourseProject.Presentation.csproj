@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\CourseProject.Application\CourseProject.Application.csproj" />
       <ProjectReference Include="..\CourseProject.DataAccess\CourseProject.DataAccess.csproj" />
       <ProjectReference Include="..\CourseProject.Domain\CourseProject.Domain.csproj" />
     </ItemGroup>
@@ -15,7 +16,7 @@
     <ItemGroup>
       <AdditionalFiles Include="Views\Account\Login.cshtml" />
       <AdditionalFiles Include="Views\Account\Register.cshtml" />
-      <AdditionalFiles Include="Views\UserManagement\Index.cshtml" />
+      <AdditionalFiles Include="Views\Admin\Index.cshtml" />
     </ItemGroup>
 
     <ItemGroup>

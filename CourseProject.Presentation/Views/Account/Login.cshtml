@@ -1,4 +1,7 @@
-﻿@model CourseProject.Presentation.ViewModels.LoginViewModel;
+﻿@using CourseProject.Presentation.Controllers
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<AccountController> Localizer
+@model CourseProject.Application.ViewModels.ApplicationUser.LoginViewModel;
 
 @{
     ViewData["Title"] = "Login";
@@ -6,7 +9,7 @@
 
 <div class="row d-flex align-items-center justify-content-center mt-5">
     <div class="col-md-4 card p-4 shadow-lg">
-        <h2 class="text-center text-primary mb-4">Login</h2>
+        <h2 class="text-center text-primary mb-4">@Localizer["Login"]</h2>
         <form asp-action="Login" method="post">
             <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
             <div class="mb-3">
@@ -25,8 +28,8 @@
                 </label>
             </div>
             <div class="d-flex justify-content-between align-items-center">
-                <a asp-action="Register" class="text-decoration-none">Don't have an account?</a>
-                <button type="submit" class="btn btn-primary btn-lg">Login</button>
+                <a asp-action="Register" class="text-decoration-none">@Localizer["Register as a new user"]</a>
+                <button type="submit" class="btn btn-primary btn-lg">@Localizer["Login"]</button>
             </div>
         </form>
     </div>

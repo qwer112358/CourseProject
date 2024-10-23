@@ -2,7 +2,6 @@
 
 namespace CourseProject.Domain.Abstractions.IRepositories;
 
-public interface ICommentRepository : IGenericRepository<Comment>
+public interface IFromTemplatesRepository : IGenericRepository<Comment>
 {
-	Task<IEnumerable<Comment>> GetCommentsByItemId(int itemId);
 }

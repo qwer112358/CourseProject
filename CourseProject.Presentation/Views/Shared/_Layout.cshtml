@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="@System.Threading.Thread.CurrentThread.CurrentUICulture.Name">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -20,7 +20,21 @@
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Admin" asp-action="Index">Admin Panel</a>
+                        </li>
+                    }
                 </ul>
+                <div class="d-inline-flex align-items-center">
+                    <!-- <form id="languageForm" asp-controller="Language" asp-action="SetLanguage" method="post" class="d-inline-flex">
+                        <select name="culture" class="form-select" onchange="document.getElementById('languageForm').submit();">
+                            <option value="en" @(System.Threading.Thread.CurrentThread.CurrentUICulture.Name == "en" ? "selected" : "")>English</option>
+                            <option value="ru" @(System.Threading.Thread.CurrentThread.CurrentUICulture.Name == "ru" ? "selected" : "")>Русский</option>
+                        </select>
+                    </form> -->
+                </div>
                 <partial name="_LoginPartial"/>
             </div>
         </div>
@@ -34,7 +48,7 @@
 
 <footer class="border-top footer text-muted">
     <div class="container">
-        &copy; 2024 - CourseProject.Presentation - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        &copy; 2024 - Course Project
     </div>
 </footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -1,4 +1,4 @@
-namespace CourseProject.Presentation.ViewModels;
+namespace CourseProject.Presentation.Models;
 
 public class ErrorViewModel
 {

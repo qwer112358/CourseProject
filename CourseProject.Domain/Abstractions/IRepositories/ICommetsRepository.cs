@@ -2,7 +2,7 @@
 
 namespace CourseProject.Domain.Abstractions.IRepositories;
 
-public interface ILikesRepository : IGenericRepository<Like>
+public interface ICommentRepository : IGenericRepository<Comment>
 {
-	Task<bool> IsLikedByUser(int itemId, string userId);
+	Task<IEnumerable<Comment>> GetCommentsByItemId(int itemId);
 }

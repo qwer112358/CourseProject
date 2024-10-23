@@ -4,6 +4,63 @@
     "/home/sr/RiderProjects/CourseProject/CourseProject.Presentation/CourseProject.Presentation.csproj": {}
   },
   "projects": {
+    "/home/sr/RiderProjects/CourseProject/CourseProject.Application/CourseProject.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/sr/RiderProjects/CourseProject/CourseProject.Application/CourseProject.Application.csproj",
+        "projectName": "CourseProject.Application",
+        "projectPath": "/home/sr/RiderProjects/CourseProject/CourseProject.Application/CourseProject.Application.csproj",
+        "packagesPath": "/home/sr/.nuget/packages/",
+        "outputPath": "/home/sr/RiderProjects/CourseProject/CourseProject.Application/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/sr/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/sr/RiderProjects/CourseProject/CourseProject.Domain/CourseProject.Domain.csproj": {
+                "projectPath": "/home/sr/RiderProjects/CourseProject/CourseProject.Domain/CourseProject.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.110/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "/home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/CourseProject.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -115,6 +172,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "CloudinaryDotNet": {
+              "target": "Package",
+              "version": "[1.26.2, )"
+            },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.10, )"
@@ -162,6 +227,9 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+              "/home/sr/RiderProjects/CourseProject/CourseProject.Application/CourseProject.Application.csproj": {
+                "projectPath": "/home/sr/RiderProjects/CourseProject/CourseProject.Application/CourseProject.Application.csproj"
+              },
               "/home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/CourseProject.DataAccess.csproj": {
                 "projectPath": "/home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/CourseProject.DataAccess.csproj"
               },

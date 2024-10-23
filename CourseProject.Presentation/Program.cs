@@ -1,12 +1,19 @@
+using CourseProject.Application.Interfaces;
+using CourseProject.Application.Services;
 using CourseProject.DataAccess.Data;
 using CourseProject.DataAccess.Seeds;
+using CourseProject.Domain.Abstractions;
 using CourseProject.Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.AddControllersWithViews().AddViewLocalization();
+
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -30,14 +37,17 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/Account/AccessDenied";
 });
 
+builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+
 var app = builder.Build();
 
 
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    // Вызов метода для создания ролей и администратора
-    await SeedData.InitializeAsync(services);
+    // Method call to create roles and administrator
+    await SeedRole.InitializeAsync(services, "Admin");
 }
 
 // Configure the HTTP request pipeline.
@@ -55,6 +65,19 @@ app.UseRouting();
 
 app.UseAuthentication(); 
 app.UseAuthorization();
+
+var supportedCultures = new[]
+{
+    new CultureInfo("en"),
+    new CultureInfo("ru"),
+};
+
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("ru"),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures
+});
 
 app.MapControllerRoute(
     name: "default",

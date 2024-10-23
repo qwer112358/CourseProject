@@ -9,6 +9,6 @@ public class ApplicationUser : IdentityUser
     public DateTime LastLoginDate { get; set; }
     public bool IsBlocked { get; set; }
     public bool IsAdmin { get; set; } 
-    //public ICollection<Form> Form { get; set; }
-    //public ICollection<FormTemplate> FormTemplate { get; set; }
+    public ICollection<Form> Form { get; set; } = new List<Form>();
+    public ICollection<FormTemplate> FormTemplate { get; set; } = new List<FormTemplate>();
 }
