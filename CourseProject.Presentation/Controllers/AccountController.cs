@@ -1,6 +1,5 @@
 using CourseProject.Domain.Models;
 using CourseProject.Presentation.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 

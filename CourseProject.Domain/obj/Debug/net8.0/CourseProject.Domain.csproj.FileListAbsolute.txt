@@ -10,3 +10,4 @@
 /home/sr/RiderProjects/CourseProject/CourseProject.Domain/obj/Debug/net8.0/refint/CourseProject.Domain.dll
 /home/sr/RiderProjects/CourseProject/CourseProject.Domain/obj/Debug/net8.0/CourseProject.Domain.pdb
 /home/sr/RiderProjects/CourseProject/CourseProject.Domain/obj/Debug/net8.0/ref/CourseProject.Domain.dll
+/home/sr/RiderProjects/CourseProject/CourseProject.Domain/obj/Debug/net8.0/CourseProject.Domain.sourcelink.json

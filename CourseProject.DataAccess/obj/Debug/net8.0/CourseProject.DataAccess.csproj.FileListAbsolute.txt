@@ -15,3 +15,4 @@
 /home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/obj/Debug/net8.0/CourseProject.DataAccess.pdb
 /home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/obj/Debug/net8.0/CourseProject.DataAccess.genruntimeconfig.cache
 /home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/obj/Debug/net8.0/ref/CourseProject.DataAccess.dll
+/home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/obj/Debug/net8.0/CourseProject.DataAccess.sourcelink.json
