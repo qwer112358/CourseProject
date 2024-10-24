@@ -128,3 +128,8 @@
 /home/sr/RiderProjects/CourseProject/CourseProject.Presentation/obj/Debug/net8.0/ru/CourseProject.Presentation.resources.dll
 /home/sr/RiderProjects/CourseProject/CourseProject.Presentation/bin/Debug/net8.0/CloudinaryDotNet.dll
 /home/sr/RiderProjects/CourseProject/CourseProject.Presentation/bin/Debug/net8.0/Newtonsoft.Json.dll
+/home/sr/RiderProjects/CourseProject/CourseProject.Presentation/bin/Debug/net8.0/Microsoft.OpenApi.dll
+/home/sr/RiderProjects/CourseProject/CourseProject.Presentation/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
+/home/sr/RiderProjects/CourseProject/CourseProject.Presentation/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/home/sr/RiderProjects/CourseProject/CourseProject.Presentation/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/home/sr/RiderProjects/CourseProject/CourseProject.Presentation/obj/Debug/net8.0/CourseProject.Presentation.MvcApplicationPartsAssemblyInfo.cs

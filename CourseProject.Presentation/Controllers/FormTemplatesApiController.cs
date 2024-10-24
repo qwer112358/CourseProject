@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using CourseProject.Application.ViewModels;
 using CourseProject.Domain.Abstractions.IServices;
 using CourseProject.Domain.Models;
@@ -6,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CourseProject.Presentation.Controllers;
 
-public class FormTemplatesController(IFormTemplatesService formTemplatesService) : Controller
+[ApiController]
+[Route("api/[controller]")]
+public class FormTemplatesApiController(IFormTemplatesService formTemplatesService) : ControllerBase
 {
-    [HttpGet]
+     [HttpGet]
     public async Task<ActionResult<ICollection<FormTemplateViewModel>>> Index()
     {
         var formTemplates = await formTemplatesService.GetAllFormTemplates();
@@ -79,7 +82,7 @@ public class FormTemplatesController(IFormTemplatesService formTemplatesService)
             TopicId = model.TopicId,
             ImageUrl = model.ImageUrl,
             IsPublic = model.IsPublic,
-            CreatorId = Guid.Parse(User.FindFirst("UserId").Value)
+            CreatorId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value)
         };
 
         await formTemplatesService.CreateFormTemplate(formTemplate);

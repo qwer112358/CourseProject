@@ -8,11 +8,12 @@ public class FormTemplate
     public Guid TopicId { get; set; }
     public Topic Topic { get; set; }
     public string ImageUrl { get; set; }
-    public ICollection<Tag> Tags { get; set; }
     public bool IsPublic { get; set; }
-    public ICollection<Question> Questions { get; set; }
     public Guid CreatorId { get; set; }
     public ApplicationUser Creator { get; set; }
-    public ICollection<Like> Likes { get; set; }
-    public ICollection<Comment> Comments { get; set; }
+    public ICollection<Tag> Tags { get; set; } = new List<Tag>();
+    public ICollection<Question> Questions { get; set; } = new List<Question>();
+    public ICollection<Like> Likes { get; set; } = new List<Like>();
+    public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+    public ICollection<Form> Forms { get; set; } = new List<Form>();
 }
