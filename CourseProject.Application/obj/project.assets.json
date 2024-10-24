@@ -4122,7 +4122,8 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "CourseProject.Domain >= 1.0.0"
+      "CourseProject.Domain >= 1.0.0",
+      "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 8.0.10"
     ]
   },
   "packageFolders": {
@@ -4165,6 +4166,12 @@
     "frameworks": {
       "net8.0": {
         "targetAlias": "net8.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[8.0.10, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",
