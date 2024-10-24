@@ -133,3 +133,4 @@
 /home/sr/RiderProjects/CourseProject/CourseProject.Presentation/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /home/sr/RiderProjects/CourseProject/CourseProject.Presentation/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll
 /home/sr/RiderProjects/CourseProject/CourseProject.Presentation/obj/Debug/net8.0/CourseProject.Presentation.MvcApplicationPartsAssemblyInfo.cs
+/home/sr/RiderProjects/CourseProject/CourseProject.Presentation/bin/Debug/net8.0/System.Security.Permissions.dll
