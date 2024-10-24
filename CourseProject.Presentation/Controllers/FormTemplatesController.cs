@@ -79,7 +79,7 @@ public class FormTemplatesController(IFormTemplatesService formTemplatesService)
             TopicId = model.TopicId,
             ImageUrl = model.ImageUrl,
             IsPublic = model.IsPublic,
-            CreatorId = Guid.Parse(User.FindFirst("UserId").Value)
+            CreatorId = User.FindFirst("ApplicationUserId").Value
         };
 
         await formTemplatesService.CreateFormTemplate(formTemplate);

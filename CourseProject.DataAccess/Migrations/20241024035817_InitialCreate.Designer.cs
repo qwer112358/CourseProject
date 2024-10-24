@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CourseProject.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241024003157_InitialCreate")]
+    [Migration("20241024035817_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -114,6 +114,10 @@ namespace CourseProject.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -124,17 +128,11 @@ namespace CourseProject.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("UserId1")
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("FormTemplateId");
+                    b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("FormTemplateId");
 
                     b.ToTable("Comments");
                 });
@@ -145,8 +143,9 @@ namespace CourseProject.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ApplicationUserID")
-                        .HasColumnType("uuid");
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<Guid>("FormTemplateId")
                         .HasColumnType("uuid");
@@ -154,14 +153,11 @@ namespace CourseProject.DataAccess.Migrations
                     b.Property<DateTime>("SubmissionDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("FormTemplateId");
+                    b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("FormTemplateId");
 
                     b.ToTable("Forms");
                 });
@@ -197,10 +193,8 @@ namespace CourseProject.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("CreatorId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("CreatorId1")
+                    b.Property<string>("CreatorId")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Description")
@@ -223,7 +217,7 @@ namespace CourseProject.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatorId1");
+                    b.HasIndex("CreatorId");
 
                     b.HasIndex("TopicId");
 
@@ -236,21 +230,16 @@ namespace CourseProject.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ApplicationUserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("ApplicationUserId1")
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<Guid>("FormTemplateId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("TemplateId")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId1");
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("FormTemplateId");
 
@@ -263,14 +252,10 @@ namespace CourseProject.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<Guid>("FormTemplateId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -312,6 +297,23 @@ namespace CourseProject.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Topics");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("dc4ca1a3-8ffa-4a60-82a7-da8102b7523f"),
+                            Name = "Education"
+                        },
+                        new
+                        {
+                            Id = new Guid("8b678150-c2d9-4e83-9664-925fbc123d63"),
+                            Name = "Test"
+                        },
+                        new
+                        {
+                            Id = new Guid("fee96596-d935-407c-9026-7fae1df7c4c7"),
+                            Name = "Other"
+                        });
                 });
 
             modelBuilder.Entity("FormTemplateTag", b =>
@@ -463,36 +465,40 @@ namespace CourseProject.DataAccess.Migrations
 
             modelBuilder.Entity("CourseProject.Domain.Models.Comment", b =>
                 {
+                    b.HasOne("CourseProject.Domain.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Comments")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("CourseProject.Domain.Models.FormTemplate", "FormTemplate")
                         .WithMany("Comments")
                         .HasForeignKey("FormTemplateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CourseProject.Domain.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId1");
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("FormTemplate");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CourseProject.Domain.Models.Form", b =>
                 {
+                    b.HasOne("CourseProject.Domain.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Forms")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("CourseProject.Domain.Models.FormTemplate", "FormTemplate")
-                        .WithMany()
+                        .WithMany("Forms")
                         .HasForeignKey("FormTemplateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CourseProject.Domain.Models.ApplicationUser", "User")
-                        .WithMany("Forms")
-                        .HasForeignKey("UserId");
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("FormTemplate");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CourseProject.Domain.Models.FormAnswer", b =>
@@ -514,12 +520,14 @@ namespace CourseProject.DataAccess.Migrations
                 {
                     b.HasOne("CourseProject.Domain.Models.ApplicationUser", "Creator")
                         .WithMany("FormTemplates")
-                        .HasForeignKey("CreatorId1");
+                        .HasForeignKey("CreatorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("CourseProject.Domain.Models.Topic", "Topic")
                         .WithMany("FormTemplates")
                         .HasForeignKey("TopicId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Creator");
@@ -530,8 +538,10 @@ namespace CourseProject.DataAccess.Migrations
             modelBuilder.Entity("CourseProject.Domain.Models.Like", b =>
                 {
                     b.HasOne("CourseProject.Domain.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId1");
+                        .WithMany("Likes")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CourseProject.Domain.Models.FormTemplate", "FormTemplate")
                         .WithMany("Likes")
@@ -623,9 +633,13 @@ namespace CourseProject.DataAccess.Migrations
 
             modelBuilder.Entity("CourseProject.Domain.Models.ApplicationUser", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("FormTemplates");
 
                     b.Navigation("Forms");
+
+                    b.Navigation("Likes");
                 });
 
             modelBuilder.Entity("CourseProject.Domain.Models.Form", b =>
@@ -636,6 +650,8 @@ namespace CourseProject.DataAccess.Migrations
             modelBuilder.Entity("CourseProject.Domain.Models.FormTemplate", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("Forms");
 
                     b.Navigation("Likes");
 

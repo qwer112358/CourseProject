@@ -11,4 +11,6 @@ public class ApplicationUser : IdentityUser
     public bool IsAdmin { get; set; }
     public ICollection<Form> Forms { get; set; } = new List<Form>();
     public ICollection<FormTemplate> FormTemplates { get; set; } = new List<FormTemplate>();
+    public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+    public ICollection<Like> Likes { get; set; } = new List<Like>();
 }

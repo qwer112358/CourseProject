@@ -82,7 +82,7 @@ public class FormTemplatesApiController(IFormTemplatesService formTemplatesServi
             TopicId = model.TopicId,
             ImageUrl = model.ImageUrl,
             IsPublic = model.IsPublic,
-            CreatorId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value)
+            CreatorId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value
         };
 
         await formTemplatesService.CreateFormTemplate(formTemplate);

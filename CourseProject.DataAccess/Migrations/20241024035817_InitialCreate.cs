@@ -4,6 +4,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace CourseProject.DataAccess.Migrations
 {
     /// <inheritdoc />
@@ -196,23 +198,23 @@ namespace CourseProject.DataAccess.Migrations
                     TopicId = table.Column<Guid>(type: "uuid", nullable: false),
                     ImageUrl = table.Column<string>(type: "text", nullable: false),
                     IsPublic = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatorId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CreatorId1 = table.Column<string>(type: "text", nullable: true)
+                    CreatorId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FormTemplates", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FormTemplates_AspNetUsers_CreatorId1",
-                        column: x => x.CreatorId1,
+                        name: "FK_FormTemplates_AspNetUsers_CreatorId",
+                        column: x => x.CreatorId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_FormTemplates_Topics_TopicId",
                         column: x => x.TopicId,
                         principalTable: "Topics",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -222,18 +224,18 @@ namespace CourseProject.DataAccess.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Text = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    UserId1 = table.Column<string>(type: "text", nullable: true),
+                    ApplicationUserId = table.Column<string>(type: "text", nullable: false),
                     FormTemplateId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comments_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Comments_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Comments_FormTemplates_FormTemplateId",
                         column: x => x.FormTemplateId,
@@ -248,18 +250,18 @@ namespace CourseProject.DataAccess.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     FormTemplateId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ApplicationUserID = table.Column<Guid>(type: "uuid", nullable: false),
-                    UserId = table.Column<string>(type: "text", nullable: true),
+                    ApplicationUserId = table.Column<string>(type: "text", nullable: false),
                     SubmissionDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Forms", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Forms_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Forms_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Forms_FormTemplates_FormTemplateId",
                         column: x => x.FormTemplateId,
@@ -297,19 +299,18 @@ namespace CourseProject.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    TemplateId = table.Column<Guid>(type: "uuid", nullable: false),
                     FormTemplateId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ApplicationUserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ApplicationUserId1 = table.Column<string>(type: "text", nullable: true)
+                    ApplicationUserId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Likes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Likes_AspNetUsers_ApplicationUserId1",
-                        column: x => x.ApplicationUserId1,
+                        name: "FK_Likes_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Likes_FormTemplates_FormTemplateId",
                         column: x => x.FormTemplateId,
@@ -323,8 +324,7 @@ namespace CourseProject.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Title = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
+                    Text = table.Column<string>(type: "text", nullable: false),
                     Type = table.Column<int>(type: "integer", nullable: false),
                     FormTemplateId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
@@ -362,6 +362,16 @@ namespace CourseProject.DataAccess.Migrations
                         principalTable: "Questions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Topics",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("8b678150-c2d9-4e83-9664-925fbc123d63"), "Test" },
+                    { new Guid("dc4ca1a3-8ffa-4a60-82a7-da8102b7523f"), "Education" },
+                    { new Guid("fee96596-d935-407c-9026-7fae1df7c4c7"), "Other" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -408,14 +418,14 @@ namespace CourseProject.DataAccess.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_ApplicationUserId",
+                table: "Comments",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Comments_FormTemplateId",
                 table: "Comments",
                 column: "FormTemplateId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comments_UserId1",
-                table: "Comments",
-                column: "UserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FormAnswers_FormId",
@@ -428,19 +438,19 @@ namespace CourseProject.DataAccess.Migrations
                 column: "QuestionId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Forms_ApplicationUserId",
+                table: "Forms",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Forms_FormTemplateId",
                 table: "Forms",
                 column: "FormTemplateId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Forms_UserId",
-                table: "Forms",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FormTemplates_CreatorId1",
+                name: "IX_FormTemplates_CreatorId",
                 table: "FormTemplates",
-                column: "CreatorId1");
+                column: "CreatorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FormTemplates_TopicId",
@@ -453,9 +463,9 @@ namespace CourseProject.DataAccess.Migrations
                 column: "TagsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Likes_ApplicationUserId1",
+                name: "IX_Likes_ApplicationUserId",
                 table: "Likes",
-                column: "ApplicationUserId1");
+                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Likes_FormTemplateId",

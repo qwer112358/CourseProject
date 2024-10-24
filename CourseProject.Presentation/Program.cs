@@ -21,6 +21,7 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     await SeedRole.InitializeAsync(services, UserRoles.Admin);
+    
 }
 
 // Configure the HTTP request pipeline.
