@@ -3,6 +3,7 @@ using CourseProject.Application.ViewModels.ApplicationUser;
 using CourseProject.Domain.Models;
 using Microsoft.AspNetCore.Identity;
 
+
 namespace CourseProject.Application.Services;
 
 public class AccountService : IAccountService
@@ -13,7 +14,7 @@ public class AccountService : IAccountService
     public AccountService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
     {
         _userManager = userManager;
-        _signInManager = signInManager;
+        _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
     }
 
     public async Task<IdentityResult> RegisterAsync(RegisterViewModel model)
