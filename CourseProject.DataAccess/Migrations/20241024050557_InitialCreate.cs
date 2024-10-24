@@ -324,8 +324,10 @@ namespace CourseProject.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Text = table.Column<string>(type: "text", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
                     Type = table.Column<int>(type: "integer", nullable: false),
+                    Order = table.Column<int>(type: "integer", nullable: false),
                     FormTemplateId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
@@ -344,9 +346,11 @@ namespace CourseProject.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    FormId = table.Column<Guid>(type: "uuid", nullable: false),
                     QuestionId = table.Column<Guid>(type: "uuid", nullable: false),
                     AnswerText = table.Column<string>(type: "text", nullable: false),
-                    FormId = table.Column<Guid>(type: "uuid", nullable: true)
+                    AnswerInteger = table.Column<int>(type: "integer", nullable: true),
+                    AnswerCheckbox = table.Column<bool>(type: "boolean", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -355,7 +359,8 @@ namespace CourseProject.DataAccess.Migrations
                         name: "FK_FormAnswers_Forms_FormId",
                         column: x => x.FormId,
                         principalTable: "Forms",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_FormAnswers_Questions_QuestionId",
                         column: x => x.QuestionId,
@@ -365,13 +370,23 @@ namespace CourseProject.DataAccess.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Tags",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("5eaf6aaf-1362-4999-bb6e-b33d5735b9e3"), "Tag 1" },
+                    { new Guid("9ae431be-b406-476e-a62a-7491b188c5a6"), "Tag 2" },
+                    { new Guid("fbebfb85-7bea-43b1-9c8a-1cdd02b9835d"), "Tag 3" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Topics",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("8b678150-c2d9-4e83-9664-925fbc123d63"), "Test" },
-                    { new Guid("dc4ca1a3-8ffa-4a60-82a7-da8102b7523f"), "Education" },
-                    { new Guid("fee96596-d935-407c-9026-7fae1df7c4c7"), "Other" }
+                    { new Guid("6ab100d9-3e6f-43b1-b7dc-38f570bee4f6"), "Other" },
+                    { new Guid("74274e0f-8f3d-4da3-b0dd-7a47465d493a"), "Education" },
+                    { new Guid("957698fa-b632-44b1-b161-d4a06e7c02b2"), "Test" }
                 });
 
             migrationBuilder.CreateIndex(

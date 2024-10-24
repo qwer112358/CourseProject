@@ -1,6 +1,7 @@
 namespace CourseProject.Domain.Models;
 
-public class Form {
+public class Form 
+{
     public Guid Id { get; set; }
     public Guid FormTemplateId { get; set; }
     public FormTemplate FormTemplate { get; set; }

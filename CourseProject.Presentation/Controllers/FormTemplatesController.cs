@@ -25,7 +25,8 @@ public class FormTemplatesController(IFormTemplatesService formTemplatesService)
             Questions = ft.Questions?.Select(q => new QuestionViewModel
             {
                 Id = q.Id,
-                Text = q.Text,
+                Title = q.Title,
+                Description = q.Description,
                 Type = q.Type
             }).ToList() ?? new List<QuestionViewModel>(),
             CreatorName = ft.Creator?.Name,
@@ -56,9 +57,10 @@ public class FormTemplatesController(IFormTemplatesService formTemplatesService)
             Questions = formTemplate.Questions?.Select(q => new QuestionViewModel
             {
                 Id = q.Id,
-                Text = q.Text,
+                Title = q.Title,
+                Description = q.Description,
                 Type = q.Type
-            }).ToList(),
+            }).ToList() ?? new List<QuestionViewModel>(),
             CreatorName = formTemplate.Creator?.Name,
             LikeCount = formTemplate.Likes?.Count ?? 0,
             CommentCount = formTemplate.Comments?.Count ?? 0

@@ -51,11 +51,11 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
             .WithMany(u => u.Forms)
             .HasForeignKey(f => f.ApplicationUserId)
             .OnDelete(DeleteBehavior.Cascade);
-
+        
         // Связь один-ко-многим: Question и FormAnswer
-        builder.Entity<FormAnswer>()
-            .HasOne(fa => fa.Question)
-            .WithMany()
+        builder.Entity<Question>()
+            .HasMany(q => q.FormAnswers)
+            .WithOne(fa => fa.Question)
             .HasForeignKey(fa => fa.QuestionId)
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -96,6 +96,12 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
             new Topic { Id = Guid.NewGuid(), Name = "Education" },
             new Topic { Id = Guid.NewGuid(), Name = "Test" },
             new Topic { Id = Guid.NewGuid(), Name = "Other" }
+        );
+        
+        builder.Entity<Tag>().HasData(
+            new Topic { Id = Guid.NewGuid(), Name = "Tag 1" },
+            new Topic { Id = Guid.NewGuid(), Name = "Tag 2" },
+            new Topic { Id = Guid.NewGuid(), Name = "Tag 3" }
         );
         
         builder.Entity<ApplicationUser>()

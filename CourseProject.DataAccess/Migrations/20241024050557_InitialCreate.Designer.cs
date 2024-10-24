@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CourseProject.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241024035817_InitialCreate")]
+    [Migration("20241024050557_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -168,11 +168,17 @@ namespace CourseProject.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<bool?>("AnswerCheckbox")
+                        .HasColumnType("boolean");
+
+                    b.Property<int?>("AnswerInteger")
+                        .HasColumnType("integer");
+
                     b.Property<string>("AnswerText")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("FormId")
+                    b.Property<Guid>("FormId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("QuestionId")
@@ -252,10 +258,17 @@ namespace CourseProject.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<Guid>("FormTemplateId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Text")
+                    b.Property<int>("Order")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -282,6 +295,23 @@ namespace CourseProject.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tags");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("5eaf6aaf-1362-4999-bb6e-b33d5735b9e3"),
+                            Name = "Tag 1"
+                        },
+                        new
+                        {
+                            Id = new Guid("9ae431be-b406-476e-a62a-7491b188c5a6"),
+                            Name = "Tag 2"
+                        },
+                        new
+                        {
+                            Id = new Guid("fbebfb85-7bea-43b1-9c8a-1cdd02b9835d"),
+                            Name = "Tag 3"
+                        });
                 });
 
             modelBuilder.Entity("CourseProject.Domain.Models.Topic", b =>
@@ -301,17 +331,17 @@ namespace CourseProject.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("dc4ca1a3-8ffa-4a60-82a7-da8102b7523f"),
+                            Id = new Guid("74274e0f-8f3d-4da3-b0dd-7a47465d493a"),
                             Name = "Education"
                         },
                         new
                         {
-                            Id = new Guid("8b678150-c2d9-4e83-9664-925fbc123d63"),
+                            Id = new Guid("957698fa-b632-44b1-b161-d4a06e7c02b2"),
                             Name = "Test"
                         },
                         new
                         {
-                            Id = new Guid("fee96596-d935-407c-9026-7fae1df7c4c7"),
+                            Id = new Guid("6ab100d9-3e6f-43b1-b7dc-38f570bee4f6"),
                             Name = "Other"
                         });
                 });
@@ -503,15 +533,19 @@ namespace CourseProject.DataAccess.Migrations
 
             modelBuilder.Entity("CourseProject.Domain.Models.FormAnswer", b =>
                 {
-                    b.HasOne("CourseProject.Domain.Models.Form", null)
+                    b.HasOne("CourseProject.Domain.Models.Form", "Form")
                         .WithMany("Answers")
-                        .HasForeignKey("FormId");
+                        .HasForeignKey("FormId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CourseProject.Domain.Models.Question", "Question")
-                        .WithMany()
+                        .WithMany("FormAnswers")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Form");
 
                     b.Navigation("Question");
                 });
@@ -656,6 +690,11 @@ namespace CourseProject.DataAccess.Migrations
                     b.Navigation("Likes");
 
                     b.Navigation("Questions");
+                });
+
+            modelBuilder.Entity("CourseProject.Domain.Models.Question", b =>
+                {
+                    b.Navigation("FormAnswers");
                 });
 
             modelBuilder.Entity("CourseProject.Domain.Models.Topic", b =>
