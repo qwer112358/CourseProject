@@ -1,6 +1,6 @@
 using FormBuilder.Domain.Enums;
 
-namespace CourseProject.Application.ViewModels;
+namespace CourseProject.Presentation.ViewModels;
 
 public class QuestionViewModel
 {

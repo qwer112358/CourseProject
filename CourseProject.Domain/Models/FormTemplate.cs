@@ -7,8 +7,8 @@ public class FormTemplate
     public string Description { get; set; }
     public Guid TopicId { get; set; }
     public Topic Topic { get; set; }
-    public string ImageUrl { get; set; }
-    public bool IsPublic { get; set; }
+    public string ImageUrl { get; set; } = string.Empty;
+    public bool IsPublic { get; set; } = true;
     public string CreatorId { get; set; }
     public ApplicationUser Creator { get; set; }
     public ICollection<Tag> Tags { get; set; } = new List<Tag>();

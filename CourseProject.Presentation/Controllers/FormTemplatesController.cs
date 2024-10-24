@@ -1,52 +1,100 @@
-using CourseProject.Application.Mappers;
-using CourseProject.Application.ViewModels;
 using CourseProject.Domain.Abstractions.IServices;
+using CourseProject.Domain.Models;
+using CourseProject.Presentation.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CourseProject.Presentation.Controllers;
 
 [Route("[controller]")]
-public class FormTemplatesController(IFormTemplatesService formTemplatesService) : Controller
+public class FormTemplatesController(
+    IFormTemplatesService formTemplatesService,
+    ITagsService tagsService,
+    ITopicsService topicsService,
+    UserManager<ApplicationUser> userManager) : Controller
 {
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<FormTemplateViewModel>>> Index()
+    public async Task<IActionResult> Index()
     {
         var formTemplates = await formTemplatesService.GetAllFormTemplates();
-        var result = formTemplates.Select(ft => ft.ToViewModel());
-        return View(result);
+        return View(formTemplates);
     }
-    
+
     [HttpGet("{id}")]
-    public async Task<ActionResult<FormTemplateViewModel>> GetFormTemplateById(Guid id)
+    public async Task<IActionResult> GetById(Guid id)
     {
         var formTemplate = await formTemplatesService.GetFormTemplateById(id);
-        if (formTemplate is null)
+        if (formTemplate == null)
+        {
             return NotFound();
-        return Ok(formTemplate.ToViewModel());
+        }
+
+        return Ok(formTemplate);
+    }
+
+    [HttpGet("Create")]
+    public async Task<ActionResult> Create()
+    {
+        ViewData["AllTopics"] = await topicsService.GetAllTopicsAsync();
+        ViewData["Tags"] = await tagsService.GetAllTagsAsync();
+        return View();
     }
     
-    [HttpPost]
-    public async Task<ActionResult<FormTemplateViewModel>> CreateFormTemplate([FromBody] FormTemplateViewModel viewModel)
+    [Authorize]
+    [HttpPost("Create")]
+    public async Task<IActionResult> Create(FormTemplateViewModel viewModel)
     {
-        var formTemplate = viewModel.ToModel();
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var user = await userManager.GetUserAsync(User);
+    
+        var formTemplate = new FormTemplate
+        {
+            Title = viewModel.Title,
+            Description = viewModel.Description,
+            Topic = await topicsService.GetTopicByIdAsync(viewModel.TopicId),
+            Creator = user,
+            CreatorId = user.Id,
+            ImageUrl = viewModel.ImageUrl,
+            IsPublic = viewModel.IsPublic,
+            Tags = await tagsService.GetTagsByIdsAsync(viewModel.SelectedTagIds)
+        };
         await formTemplatesService.CreateFormTemplate(formTemplate);
-        return CreatedAtAction(nameof(GetFormTemplateById), new { id = formTemplate.Id }, formTemplate.ToViewModel());
+        return CreatedAtAction(nameof(GetById), new { id = formTemplate.Id }, formTemplate);
     }
-    
+
+
     [HttpPut("{id}")]
-    public async Task<ActionResult> UpdateFormTemplate(Guid id, [FromBody] FormTemplateViewModel viewModel)
+    public async Task<IActionResult> Update(Guid id, [FromBody] FormTemplate formTemplate)
     {
-        var formTemplate = await formTemplatesService.GetFormTemplateById(id);
-        if (formTemplate is null)
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var existingFormTemplate = await formTemplatesService.GetFormTemplateById(id);
+        if (existingFormTemplate == null)
+        {
             return NotFound();
-        var updatedFormTemplate = viewModel.ToModel();
-        await formTemplatesService.UpdateFormTemplate(updatedFormTemplate);
+        }
+
+        formTemplate.Id = id;
+        await formTemplatesService.UpdateFormTemplate(formTemplate);
+
         return NoContent();
     }
-    
+
     [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteFormTemplate(Guid id)
+    public async Task<IActionResult> Delete(Guid id)
     {
+        var formTemplate = await formTemplatesService.GetFormTemplateById(id);
+        if (formTemplate == null)
+        {
+            return NotFound();
+        }
+
         await formTemplatesService.DeleteFormTemplate(id);
         return NoContent();
     }

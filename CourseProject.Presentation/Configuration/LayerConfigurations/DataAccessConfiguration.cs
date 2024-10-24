@@ -13,5 +13,7 @@ public static class DataAccessConfiguration
         services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
         
         services.AddScoped<IFormTemplatesRepository, FormTemplatesRepository>();
+        services.AddScoped<ITopicsRepository, TopicsRepository>();
+        services.AddScoped<ITagsRepository, TagsRepository>();
     }
 }

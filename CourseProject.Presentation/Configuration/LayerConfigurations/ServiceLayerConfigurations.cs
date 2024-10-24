@@ -30,9 +30,17 @@ public static class ServiceLayerConfigurations
             options.LogoutPath = "/Account/Logout";
             options.AccessDeniedPath = "/Account/AccessDenied";
         });
+        
+        services.AddControllers()
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+            });
 
         services.AddScoped<IAdminService, AdminService>();
         services.AddScoped<IAccountService, AccountService>();
         services.AddScoped<IFormTemplatesService, FormTemplatesService>();
+        services.AddScoped<ITopicsService, TopicsService>();
+        services.AddScoped<ITagsService, TagsService>();
     }
 }

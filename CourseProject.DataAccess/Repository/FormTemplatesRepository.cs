@@ -10,7 +10,9 @@ public class FormTemplatesRepository(ApplicationDbContext dbContext) : IFormTemp
 {
     public async Task<ICollection<FormTemplate>> GetAll()
     {
-        return await dbContext.FormTemplates.ToListAsync();
+        return await dbContext.FormTemplates
+            .Include(ft => ft.Topic)
+            .ToListAsync();
     }
     
     public async Task<FormTemplate> GetById(Guid id)

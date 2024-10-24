@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using CourseProject.Application.ViewModels.ApplicationUser;
 using CourseProject.Presentation.Models;
 using Microsoft.AspNetCore.Mvc;
 

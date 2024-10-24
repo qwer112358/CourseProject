@@ -10,5 +10,5 @@ public interface IGenericRepository<T> where T : class
     Task Create(T entity);
     Task Update(T entity); 
     Task Delete(Guid id); 
-    IQueryable<FormTemplate?> Find(Expression<Func<T, bool>> expression);
+    IQueryable<T> Find(Expression<Func<T, bool>> expression);
 }

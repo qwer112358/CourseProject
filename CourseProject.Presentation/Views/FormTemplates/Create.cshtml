@@ -1,0 +1,47 @@
+@using System.Collections
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model CourseProject.Presentation.ViewModels.FormTemplateViewModel
+
+<h2>Create New Form Template</h2>
+
+<form asp-action="Create" asp-controller="FormTemplates" method="post">
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TopicId">Topic Name</label>
+        <select asp-for="TopicId" class="form-control" asp-items="@(new SelectList((IEnumerable)ViewData["AllTopics"], "Id", "Name"))">
+            <option value="">Select a Topic</option>
+        </select>
+        <span asp-validation-for="TopicId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SelectedTagIds">Tags</label>
+        <select asp-for="SelectedTagIds" class="form-control" asp-items="@(new SelectList((IEnumerable)ViewData["Tags"], "Id", "Name"))" multiple="multiple">
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IsPublic"></label>
+        <input asp-for="IsPublic" type="checkbox" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ImageUrl">Image URL</label>
+        <input asp-for="ImageUrl" class="form-control" type="url" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+

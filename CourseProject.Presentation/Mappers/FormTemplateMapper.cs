@@ -1,8 +1,8 @@
-using CourseProject.Application.ViewModels;
 using CourseProject.Domain.Models;
+using CourseProject.Presentation.ViewModels;
 
-namespace CourseProject.Application.Mappers;
-
+namespace CourseProject.Presentation.Mappers;
+/*
 public static class FormTemplateMapper
 {
     public static FormTemplateViewModel ToViewModel(this FormTemplate formTemplate)
@@ -38,4 +38,4 @@ public static class FormTemplateMapper
             Questions = viewModel.Questions.Select(q => q.ToModel(viewModel.Id)).ToList()
         };
     }
-}
+}*/

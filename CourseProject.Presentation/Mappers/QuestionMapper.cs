@@ -1,7 +1,7 @@
-using CourseProject.Application.ViewModels;
 using CourseProject.Domain.Models;
+using CourseProject.Presentation.ViewModels;
 
-namespace CourseProject.Application.Mappers;
+namespace CourseProject.Presentation.Mappers;
 
 public static class QuestionMapper
 {
