@@ -21,7 +21,8 @@ public static class ServiceLayerConfigurations
                 options.SignIn.RequireConfirmedAccount = false;
             }) 
             .AddRoles<IdentityRole>() 
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddSignInManager<SignInManager<ApplicationUser>>();;
 
         services.ConfigureApplicationCookie(options =>
         {
