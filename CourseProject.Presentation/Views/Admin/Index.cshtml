@@ -1,21 +1,22 @@
-﻿@using CourseProject.Domain.Models;
+﻿@using CourseProject.Domain
+@using CourseProject.Domain.Models;
 @model IEnumerable<ApplicationUser>
 
 <form method="post">
 	<div class="toolbar mb-3">
-		<button type="submit" asp-action="BlockUsers" class="btn btn-danger">
+		<button type="submit" asp-controller="Admin" asp-action="BlockUsers" class="btn btn-danger">
 			<i class="fas fa-ban"></i> Block
 		</button>
-		<button type="submit" asp-action="UnblockUsers" class="btn btn-outline-success">
+		<button type="submit" asp-controller="Admin" asp-action="UnblockUsers" class="btn btn-outline-success">
 			<i class="fas fa-unlock"></i> Unblock
 		</button>
-		<button type="submit" asp-action="DeleteUsers" class="btn btn-outline-danger">
+		<button type="submit" asp-controller="Admin" asp-action="DeleteUsers" class="btn btn-outline-danger">
 			<i class="fas fa-trash-alt"></i> Delete
 		</button>
-		<button type="submit" asp-action="MakeAdmins" class="btn btn-warning">
+		<button type="submit" asp-controller="Admin" asp-action="MakeAdmins" class="btn btn-warning">
 			<i class="fas fa-user-shield"></i> Make Admin
 		</button>
-		<button type="submit" asp-action="RemoveAdmins" class="btn btn-outline-secondary">
+		<button type="submit" asp-controller="Admin" asp-action="RemoveAdmins" class="btn btn-outline-secondary">
 			<i class="fas fa-user-slash"></i> Remove Admin
 		</button>
 	</div>
@@ -44,7 +45,7 @@
 					<td>@user.RegistrationDate</td>
 					<td>
 						<span class="@(user.IsAdmin ? "text-warning" : "text-muted")">
-							@(user.IsAdmin ? "Admin" : "ApplicationUser")
+							@(user.IsAdmin ? @UserRoles.Admin : @UserRoles.User)
 						</span>
 					</td>
 					<td>

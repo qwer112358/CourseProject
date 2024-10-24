@@ -4,53 +4,59 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CourseProject.Presentation.Controllers;
 
+[Route("[controller]")]
 public class AccountController(IAccountService accountService) : Controller
 {
-    [HttpGet]
+    [HttpGet(nameof(Register))]
     public IActionResult Register()
     {
         return View();
     }
 
-    [HttpPost]
+    [HttpPost(nameof(Register))]
     public async Task<IActionResult> Register(RegisterViewModel model)
     {
         if (!ModelState.IsValid) return View(model);
+        
         var result = await accountService.RegisterAsync(model);
         if (result.Succeeded)
         {
-            await accountService.LoginAsync(new LoginViewModel {Email = model.Email, Password = model.Password});
+            await accountService.LoginAsync(new LoginViewModel { Email = model.Email, Password = model.Password });
             return RedirectToAction("Index", "Home");
         }
         
         foreach (var error in result.Errors)
             ModelState.AddModelError(string.Empty, error.Description);
+        
         return View(model);
     }
 
-    [HttpGet]
+    [HttpGet(nameof(Login))]
     public IActionResult Login()
     {
         return View();
     }
 
-    [HttpPost]
+    [HttpPost(nameof(Login))]
     public async Task<IActionResult> Login(LoginViewModel model)
     {
         if (!ModelState.IsValid) return View(model);
+        
         var validationMessage = await accountService.LoginAsync(model);
         if (string.IsNullOrEmpty(validationMessage))
             return RedirectToAction("Index", "Home");
+        
         ModelState.AddModelError(string.Empty, validationMessage);
         return View(model);
     }
 
-    [HttpGet]
+    [HttpGet(nameof(Logout))]
     public async Task<IActionResult> Logout()
     {
         await accountService.LogoutAsync();
         return RedirectToHome();
     }
-    
-    private IActionResult RedirectToHome() => RedirectToAction("Index","Home");
+
+    private IActionResult RedirectToHome() => RedirectToAction("Index", "Home");
 }
+

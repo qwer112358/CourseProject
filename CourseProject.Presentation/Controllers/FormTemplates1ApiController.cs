@@ -7,7 +7,7 @@ namespace CourseProject.Presentation.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class FormTemplatesApiController(IFormTemplatesService formTemplatesService) : ControllerBase
+public class FormTemplates1ApiController(IFormTemplatesService formTemplatesService) : ControllerBase
 {
     [HttpGet]
     public async Task<ActionResult<IEnumerable<FormTemplateViewModel>>> GetAllFormTemplates()

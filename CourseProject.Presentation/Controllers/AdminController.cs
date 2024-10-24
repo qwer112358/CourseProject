@@ -5,55 +5,49 @@ using CourseProject.Domain.Abstractions.IServices;
 
 namespace CourseProject.Presentation.Controllers;
 
-[Route("admin")]
+[Route("[controller]")]
 [Authorize(Roles = UserRoles.Admin)]
-public class AdminController : Controller
+public class AdminController(IAdminService adminService) : Controller
 {
-    private readonly IAdminService _adminService;
-
-    public AdminController(IAdminService adminService)
-    {
-        _adminService = adminService;
-    }
-
+    [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var users = await _adminService.GetAllUsersAsync();
+        var users = await adminService.GetAllUsersAsync();
         return View(users);
     }
 
-    [HttpPost]
+    [HttpPost(nameof(BlockUsers))]
     public async Task<IActionResult> BlockUsers(string[] userIds)
     {
-        await _adminService.BlockUsersAsync(userIds, User);
+        await adminService.BlockUsersAsync(userIds, User);
         return RedirectToHome();
     }
 
-    [HttpPost]
+    [HttpPost(nameof(UnblockUsers))]
     public async Task<IActionResult> UnblockUsers(string[] userIds)
     {
-        await _adminService.UnblockUsersAsync(userIds);
+        await adminService.UnblockUsersAsync(userIds);
         return RedirectToHome();
     }
 
-    [HttpPost]
+    [HttpPost(nameof(DeleteUsers))]
     public async Task<IActionResult> DeleteUsers(string[] userIds)
     {
-        await _adminService.DeleteUsersAsync(userIds, User);
+        await adminService.DeleteUsersAsync(userIds, User);
         return RedirectToHome();
     }
     
-    [HttpPost]
+    [HttpPost(nameof(MakeAdmins))]
     public async Task<IActionResult> MakeAdmins(string[] userIds)
     {
-        await _adminService.MakeAdminsAsync(userIds);
+        await adminService.MakeAdminsAsync(userIds);
         return RedirectToHome();
     }
     
-    [HttpPost]
+    [HttpPost(nameof(RemoveAdmins))]
     public async Task<IActionResult> RemoveAdmins(string[] userIds)
     {
-        await _adminService.RemoveAdminsAsync(userIds);
+        await adminService.RemoveAdminsAsync(userIds);
         return RedirectToHome();
     }
     

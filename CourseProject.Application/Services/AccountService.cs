@@ -27,19 +27,11 @@ public class AccountService : IAccountService
     {
         var user = await _userManager.FindByEmailAsync(model.Email!);
         string validationMessage = ValidateUser(user);
-        
         if (!string.IsNullOrEmpty(validationMessage))
-        {
             return validationMessage;
-        }
-
         var result = await _signInManager.PasswordSignInAsync(model.Email!, model.Password!, model.RememberMe, false);
-        if (result.Succeeded)
-        {
-            await UpdateLastLoginDateAsync(user);
-            return string.Empty;
-        }
-
+        if (!result.Succeeded) return validationMessage;
+        await UpdateLastLoginDateAsync(user);
         return string.Empty;
     }
 

@@ -5,14 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CourseProject.Presentation.Controllers;
 
+[Route("[controller]")]
 public class FormTemplatesController(IFormTemplatesService formTemplatesService) : Controller
 {
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<FormTemplateViewModel>>> GetAllFormTemplates()
+    public async Task<ActionResult<IEnumerable<FormTemplateViewModel>>> Index()
     {
         var formTemplates = await formTemplatesService.GetAllFormTemplates();
         var result = formTemplates.Select(ft => ft.ToViewModel());
-        return Ok(result);
+        return View(result);
     }
     
     [HttpGet("{id}")]

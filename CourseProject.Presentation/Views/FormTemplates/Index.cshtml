@@ -1,3 +1,33 @@
-@{
-    ViewData["Title"] = "Form Templates";
-}
+@model IEnumerable<CourseProject.Application.ViewModels.FormTemplateViewModel>
+
+<div class="container">
+    <h2>Form Templates</h2>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Topic</th>
+            <th>Public</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var formTemplate in Model)
+        {
+            <tr>
+                <td>@formTemplate.Title</td>
+                <td>@formTemplate.TopicName</td>
+                <td>@(formTemplate.IsPublic ? "Yes" : "No")</td>
+                <td>
+                    <a href="@Url.Action("Details", new { id = formTemplate.Id })" class="btn btn-link">View</a> |
+                    <a href="@Url.Action("Edit", new { id = formTemplate.Id })" class="btn btn-link">Edit</a> |
+                    <a href="@Url.Action("Delete", new { id = formTemplate.Id })" class="btn btn-link">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <a href="@Url.Action("Create")" class="btn">Create New Form Template</a>
+</div>
