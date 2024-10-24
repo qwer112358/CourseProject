@@ -1,7 +1,9 @@
-﻿using CourseProject.Domain.Models;
+﻿using CourseProject.Domain.Abstractions.IRepositories.Common;
+using CourseProject.Domain.Models;
 
 namespace CourseProject.Domain.Abstractions.IRepositories;
 
-public interface IFromTemplatesRepository : IGenericRepository<Comment>
+public interface IFormTemplatesRepository : IGenericRepository<FormTemplate>
 {
+    Task<ICollection<FormTemplate>> GetFormTemplatesByUserId(Guid userId);
 }

@@ -14,7 +14,7 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
     public DbSet<Comment> Comments { get; set; }
     public DbSet<Form> Forms { get; set; }
     public DbSet<FormAnswer> FormAnswers { get; set; }
-    public DbSet<FormTemplate> FormTemplates { get; set; }
+    public DbSet<FormTemplate?> FormTemplates { get; set; }
     public DbSet<Like> Likes { get; set; }
     public DbSet<Question> Questions { get; set; }
     public DbSet<Tag> Tags { get; set; }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using CourseProject.Domain.Abstractions;
+using CourseProject.Domain.Abstractions.IServices;
 
 namespace CourseProject.Presentation.Controllers;
 

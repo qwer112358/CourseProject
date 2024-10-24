@@ -1,5 +1,5 @@
 using System.Security.Claims;
-using CourseProject.Domain.Abstractions;
+using CourseProject.Domain.Abstractions.IServices;
 using CourseProject.Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +11,7 @@ public class AdminService(
     SignInManager<ApplicationUser> signInManager)
     : IAdminService
 {
-    public async Task<List<ApplicationUser>> GetAllUsersAsync()
+    public async Task<ICollection<ApplicationUser>> GetAllUsersAsync()
     {
         return await userManager.Users.ToListAsync();
     }

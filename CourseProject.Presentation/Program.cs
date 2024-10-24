@@ -2,12 +2,13 @@ using CourseProject.Application.Interfaces;
 using CourseProject.Application.Services;
 using CourseProject.DataAccess.Data;
 using CourseProject.DataAccess.Seeds;
-using CourseProject.Domain.Abstractions;
+using CourseProject.Domain.Abstractions.IServices;
 using CourseProject.Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
+using CourseProject.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,7 +48,7 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     // Method call to create roles and administrator
-    await SeedRole.InitializeAsync(services, "Admin");
+    await SeedRole.InitializeAsync(services, UserRoles.Admin);
 }
 
 // Configure the HTTP request pipeline.
