@@ -2,7 +2,7 @@ namespace CourseProject.Domain.Models;
 
 public class FormAnswer
 {
-    public Guid Id { get; set; } 
+    public Guid Id { get; set; } = Guid.NewGuid();
     public Guid FormId { get; set; } 
     public Form Form { get; set; }
     public Guid QuestionId { get; set; } 

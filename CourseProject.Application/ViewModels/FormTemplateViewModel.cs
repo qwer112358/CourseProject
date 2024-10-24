@@ -9,7 +9,7 @@ public class FormTemplateViewModel
     public string TopicName { get; set; } 
     public string ImageUrl { get; set; }
     public bool IsPublic { get; set; }
-    public List<string> TagNames { get; set; } 
+    public List<TagViewModel> Tags { get; set; } 
     public List<QuestionViewModel> Questions { get; set; } 
     public string CreatorName { get; set; }
     public int LikeCount { get; set; } 

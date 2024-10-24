@@ -5,47 +5,55 @@ using CourseProject.Domain.Abstractions.IServices;
 
 namespace CourseProject.Presentation.Controllers;
 
+[Route("admin")]
 [Authorize(Roles = UserRoles.Admin)]
-public class AdminController(IAdminService adminService) : Controller
+public class AdminController : Controller
 {
+    private readonly IAdminService _adminService;
+
+    public AdminController(IAdminService adminService)
+    {
+        _adminService = adminService;
+    }
+
     public async Task<IActionResult> Index()
     {
-        var users = await adminService.GetAllUsersAsync();
+        var users = await _adminService.GetAllUsersAsync();
         return View(users);
     }
 
     [HttpPost]
     public async Task<IActionResult> BlockUsers(string[] userIds)
     {
-        await adminService.BlockUsersAsync(userIds, User);
+        await _adminService.BlockUsersAsync(userIds, User);
         return RedirectToHome();
     }
 
     [HttpPost]
     public async Task<IActionResult> UnblockUsers(string[] userIds)
     {
-        await adminService.UnblockUsersAsync(userIds);
+        await _adminService.UnblockUsersAsync(userIds);
         return RedirectToHome();
     }
 
     [HttpPost]
     public async Task<IActionResult> DeleteUsers(string[] userIds)
     {
-        await adminService.DeleteUsersAsync(userIds, User);
+        await _adminService.DeleteUsersAsync(userIds, User);
         return RedirectToHome();
     }
     
     [HttpPost]
     public async Task<IActionResult> MakeAdmins(string[] userIds)
     {
-        await adminService.MakeAdminsAsync(userIds);
+        await _adminService.MakeAdminsAsync(userIds);
         return RedirectToHome();
     }
     
     [HttpPost]
     public async Task<IActionResult> RemoveAdmins(string[] userIds)
     {
-        await adminService.RemoveAdminsAsync(userIds);
+        await _adminService.RemoveAdminsAsync(userIds);
         return RedirectToHome();
     }
     
