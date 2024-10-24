@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CourseProject.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241023160923_InitialCreate")]
+    [Migration("20241024003157_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -60,6 +60,7 @@ namespace CourseProject.DataAccess.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("NormalizedEmail")
@@ -268,9 +269,6 @@ namespace CourseProject.DataAccess.Migrations
 
                     b.Property<Guid>("FormTemplateId")
                         .HasColumnType("uuid");
-
-                    b.Property<bool>("ShowInSummary")
-                        .HasColumnType("boolean");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -489,7 +487,7 @@ namespace CourseProject.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("CourseProject.Domain.Models.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("Forms")
                         .HasForeignKey("UserId");
 
                     b.Navigation("FormTemplate");
@@ -515,7 +513,7 @@ namespace CourseProject.DataAccess.Migrations
             modelBuilder.Entity("CourseProject.Domain.Models.FormTemplate", b =>
                 {
                     b.HasOne("CourseProject.Domain.Models.ApplicationUser", "Creator")
-                        .WithMany()
+                        .WithMany("FormTemplates")
                         .HasForeignKey("CreatorId1");
 
                     b.HasOne("CourseProject.Domain.Models.Topic", "Topic")
@@ -621,6 +619,13 @@ namespace CourseProject.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CourseProject.Domain.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("FormTemplates");
+
+                    b.Navigation("Forms");
                 });
 
             modelBuilder.Entity("CourseProject.Domain.Models.Form", b =>

@@ -7,6 +7,5 @@ public class Question {
     public string Title { get; set; }
     public string Description { get; set; }
     public QuestionType Type { get; set; } // Enum: SingleLine, MultiLine, Integer, etc.
-    public bool ShowInSummary { get; set; }
     public FormTemplate FormTemplate { get; set; } 
 }

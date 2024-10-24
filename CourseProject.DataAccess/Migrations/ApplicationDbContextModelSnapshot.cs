@@ -57,6 +57,7 @@ namespace CourseProject.DataAccess.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("NormalizedEmail")
@@ -135,7 +136,7 @@ namespace CourseProject.DataAccess.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("CourseProject.Domain.Models.Forms", b =>
+            modelBuilder.Entity("CourseProject.Domain.Models.Form", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -187,7 +188,7 @@ namespace CourseProject.DataAccess.Migrations
                     b.ToTable("FormAnswers");
                 });
 
-            modelBuilder.Entity("CourseProject.Domain.Models.FormTemplates", b =>
+            modelBuilder.Entity("CourseProject.Domain.Models.FormTemplate", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -265,9 +266,6 @@ namespace CourseProject.DataAccess.Migrations
 
                     b.Property<Guid>("FormTemplateId")
                         .HasColumnType("uuid");
-
-                    b.Property<bool>("ShowInSummary")
-                        .HasColumnType("boolean");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -462,7 +460,7 @@ namespace CourseProject.DataAccess.Migrations
 
             modelBuilder.Entity("CourseProject.Domain.Models.Comment", b =>
                 {
-                    b.HasOne("CourseProject.Domain.Models.FormTemplates", "FormTemplates")
+                    b.HasOne("CourseProject.Domain.Models.FormTemplate", "FormTemplate")
                         .WithMany("Comments")
                         .HasForeignKey("FormTemplateId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -472,31 +470,31 @@ namespace CourseProject.DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("UserId1");
 
-                    b.Navigation("FormTemplates");
+                    b.Navigation("FormTemplate");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CourseProject.Domain.Models.Forms", b =>
+            modelBuilder.Entity("CourseProject.Domain.Models.Form", b =>
                 {
-                    b.HasOne("CourseProject.Domain.Models.FormTemplates", "FormTemplates")
+                    b.HasOne("CourseProject.Domain.Models.FormTemplate", "FormTemplate")
                         .WithMany()
                         .HasForeignKey("FormTemplateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CourseProject.Domain.Models.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("Forms")
                         .HasForeignKey("UserId");
 
-                    b.Navigation("FormTemplates");
+                    b.Navigation("FormTemplate");
 
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("CourseProject.Domain.Models.FormAnswer", b =>
                 {
-                    b.HasOne("CourseProject.Domain.Models.Forms", null)
+                    b.HasOne("CourseProject.Domain.Models.Form", null)
                         .WithMany("Answers")
                         .HasForeignKey("FormId");
 
@@ -509,10 +507,10 @@ namespace CourseProject.DataAccess.Migrations
                     b.Navigation("Question");
                 });
 
-            modelBuilder.Entity("CourseProject.Domain.Models.FormTemplates", b =>
+            modelBuilder.Entity("CourseProject.Domain.Models.FormTemplate", b =>
                 {
                     b.HasOne("CourseProject.Domain.Models.ApplicationUser", "Creator")
-                        .WithMany()
+                        .WithMany("FormTemplates")
                         .HasForeignKey("CreatorId1");
 
                     b.HasOne("CourseProject.Domain.Models.Topic", "Topic")
@@ -532,7 +530,7 @@ namespace CourseProject.DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("ApplicationUserId1");
 
-                    b.HasOne("CourseProject.Domain.Models.FormTemplates", "FormTemplates")
+                    b.HasOne("CourseProject.Domain.Models.FormTemplate", "FormTemplate")
                         .WithMany("Likes")
                         .HasForeignKey("FormTemplateId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -540,23 +538,23 @@ namespace CourseProject.DataAccess.Migrations
 
                     b.Navigation("ApplicationUser");
 
-                    b.Navigation("FormTemplates");
+                    b.Navigation("FormTemplate");
                 });
 
             modelBuilder.Entity("CourseProject.Domain.Models.Question", b =>
                 {
-                    b.HasOne("CourseProject.Domain.Models.FormTemplates", "FormTemplates")
+                    b.HasOne("CourseProject.Domain.Models.FormTemplate", "FormTemplate")
                         .WithMany("Questions")
                         .HasForeignKey("FormTemplateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("FormTemplates");
+                    b.Navigation("FormTemplate");
                 });
 
             modelBuilder.Entity("FormTemplateTag", b =>
                 {
-                    b.HasOne("CourseProject.Domain.Models.FormTemplates", null)
+                    b.HasOne("CourseProject.Domain.Models.FormTemplate", null)
                         .WithMany()
                         .HasForeignKey("FormTemplatesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -620,12 +618,19 @@ namespace CourseProject.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CourseProject.Domain.Models.Forms", b =>
+            modelBuilder.Entity("CourseProject.Domain.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("FormTemplates");
+
+                    b.Navigation("Forms");
+                });
+
+            modelBuilder.Entity("CourseProject.Domain.Models.Form", b =>
                 {
                     b.Navigation("Answers");
                 });
 
-            modelBuilder.Entity("CourseProject.Domain.Models.FormTemplates", b =>
+            modelBuilder.Entity("CourseProject.Domain.Models.FormTemplate", b =>
                 {
                     b.Navigation("Comments");
 

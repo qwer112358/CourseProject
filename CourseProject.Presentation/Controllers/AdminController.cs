@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using CourseProject.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using CourseProject.Domain.Abstractions.IServices;
 
 namespace CourseProject.Presentation.Controllers;
 
-[Authorize(Roles = "Admin")]
+[Authorize(Roles = UserRoles.Admin)]
 public class AdminController(IAdminService adminService) : Controller
 {
     public async Task<IActionResult> Index()

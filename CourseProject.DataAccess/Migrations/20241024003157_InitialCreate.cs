@@ -31,7 +31,7 @@ namespace CourseProject.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: true),
+                    Name = table.Column<string>(type: "text", nullable: false),
                     RegistrationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     LastLoginDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     IsBlocked = table.Column<bool>(type: "boolean", nullable: false),
@@ -326,7 +326,6 @@ namespace CourseProject.DataAccess.Migrations
                     Title = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     Type = table.Column<int>(type: "integer", nullable: false),
-                    ShowInSummary = table.Column<bool>(type: "boolean", nullable: false),
                     FormTemplateId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
