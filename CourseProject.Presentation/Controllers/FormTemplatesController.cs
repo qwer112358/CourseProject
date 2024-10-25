@@ -34,7 +34,7 @@ public class FormTemplatesController(
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(Guid id)
     {
-        var formTemplate = await formTemplatesService.GetFormTemplateById(id);
+        var formTemplate = await formTemplatesService.GetFormTemplateByIdAsync(id);
         if (formTemplate == null)
         {
             return NotFound();
@@ -84,7 +84,7 @@ public class FormTemplatesController(
     [HttpGet("Details/{id}")]
     public async Task<IActionResult> Details(Guid id)
     {
-        var formTemplate = await formTemplatesService.GetFormTemplateById(id);
+        var formTemplate = await formTemplatesService.GetFormTemplateByIdAsync(id);
         if (formTemplate == null)
         {
             return NotFound();
@@ -120,7 +120,7 @@ public class FormTemplatesController(
     [HttpGet("Edit/{id}")]
     public async Task<IActionResult> Edit(Guid id)
     {
-        var formTemplate = await formTemplatesService.GetFormTemplateById(id);
+        var formTemplate = await formTemplatesService.GetFormTemplateByIdAsync(id);
         if (formTemplate == null || formTemplate.CreatorId != userManager.GetUserId(User))
         {
             return Unauthorized();
@@ -156,7 +156,7 @@ public class FormTemplatesController(
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        var existingFormTemplate = await formTemplatesService.GetFormTemplateById(id);
+        var existingFormTemplate = await formTemplatesService.GetFormTemplateByIdAsync(id);
         if (existingFormTemplate == null || existingFormTemplate.CreatorId != userManager.GetUserId(User))
         {
             return Unauthorized();
@@ -188,7 +188,7 @@ public class FormTemplatesController(
     [HttpGet("Delete/{id}")]
     public async Task<IActionResult> Delete(Guid id)
     {
-        var formTemplate = await formTemplatesService.GetFormTemplateById(id);
+        var formTemplate = await formTemplatesService.GetFormTemplateByIdAsync(id);
         if (formTemplate == null || formTemplate.CreatorId != userManager.GetUserId(User))
         {
             return Unauthorized();
@@ -201,7 +201,7 @@ public class FormTemplatesController(
     [HttpPost("DeleteConfirmed/{id}")]
     public async Task<IActionResult> DeleteConfirmed(Guid id)
     {
-        var formTemplate = await formTemplatesService.GetFormTemplateById(id);
+        var formTemplate = await formTemplatesService.GetFormTemplateByIdAsync(id);
         if (formTemplate == null || formTemplate.CreatorId != userManager.GetUserId(User))
         {
             return Unauthorized();

@@ -8,7 +8,7 @@ public class FormAnswer
     public Guid QuestionId { get; set; } 
     public Question Question { get; set; }
     
-    public string AnswerText { get; set; } // (for SingleLine, MultiLine)
+    public string? AnswerText { get; set; } // (for SingleLine, MultiLine)
     public int? AnswerInteger { get; set; } // (for Integer)
     public bool? AnswerCheckbox { get; set; } // (for Checkbox)
 }

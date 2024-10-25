@@ -18,5 +18,6 @@ public static class DataAccessConfiguration
         services.AddScoped<ITagsRepository, TagsRepository>();
         services.AddScoped<ICommentsRepository, CommentsRepository>();
         services.AddScoped<IQuestionRepository, QuestionRepository>();
+        services.AddScoped<IFormsRepository, FormsRepository>();
     }
 }

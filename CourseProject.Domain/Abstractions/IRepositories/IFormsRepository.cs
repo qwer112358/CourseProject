@@ -3,7 +3,7 @@ using CourseProject.Domain.Models;
 
 namespace CourseProject.Domain.Abstractions.IRepositories;
 
-public interface IFormRepository : IGenericRepository<Form>
+public interface IFormsRepository : IGenericRepository<Form>
 {
-    
+    Task<ICollection<Form>> GetByIdsAsync(IEnumerable<Guid> ids);
 }

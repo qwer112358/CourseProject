@@ -2,6 +2,7 @@ using CourseProject.Domain.Models;
 using CourseProject.Presentation.ViewModels;
 
 namespace CourseProject.Presentation.Mappers;
+/*
 public static class FormMapper
 {
     public static FormViewModel ToViewModel(this Form form)
@@ -30,3 +31,4 @@ public static class FormMapper
         };
     }
 }
+*/

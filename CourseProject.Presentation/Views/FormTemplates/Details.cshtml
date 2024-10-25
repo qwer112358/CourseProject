@@ -1,6 +1,7 @@
 @model CourseProject.Domain.Models.FormTemplate
 
 <div class="container">
+    <a asp-controller="Forms" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-link">Create a form</a>
     <h2>@Model.Title</h2>
 
     <div class="mb-3">
@@ -32,7 +33,7 @@
         <strong>Image:</strong>
         @if (!string.IsNullOrEmpty(Model.ImageUrl))
         {
-        <img src="@Model.ImageUrl" alt="Image" class="img-thumbnail" />
+            <img src="@Model.ImageUrl" alt="Image" class="img-thumbnail"/>
         }
     </div>
 
@@ -43,7 +44,7 @@
             {
                 <li>
                     <strong>@question.Title:</strong> @question.Description
-                    <br />
+                    <br/>
                     <em>Type:</em> @question.Type
                 </li>
             }
@@ -55,28 +56,28 @@
         <ul>
             @foreach (var comment in Model.Comments)
             {
-            <li>
-                <strong>@comment.ApplicationUser.UserName</strong> (@comment.CreatedAt.ToLocalTime()):<br />
-                @comment.Text
-            </li>
+                <li>
+                    <strong>@comment.ApplicationUser.UserName</strong> (@comment.CreatedAt.ToLocalTime()):<br/>
+                    @comment.Text
+                </li>
             }
         </ul>
     </div>
 
     @if (User.Identity.IsAuthenticated)
     {
-    <form asp-action="AddComment" method="post">
-        <input type="hidden" name="formTemplateId" value="@Model.Id" />
-        <div class="form-group">
-            <label for="commentText">Add Comment:</label>
-            <textarea name="text" class="form-control" rows="3" id="commentText"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+        <form asp-action="AddComment" method="post">
+            <input type="hidden" name="formTemplateId" value="@Model.Id"/>
+            <div class="form-group">
+                <label for="commentText">Add Comment:</label>
+                <textarea name="text" class="form-control" rows="3" id="commentText"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
     }
     else
     {
-    <p>Please <a asp-controller="Account" asp-action="Login">log in</a> to add comments.</p>
+        <p>Please <a asp-controller="Account" asp-action="Login">log in</a> to add comments.</p>
     }
 
     <a asp-action="Index" class="btn btn-secondary">Back to List</a>

@@ -1,0 +1,26 @@
+@model CourseProject.Presentation.ViewModels.SearchViewModel
+
+<!-- Search form -->
+<form method="get" asp-action="Index" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="searchTerm" value="@Model.SearchTerm" class="form-control" placeholder="Search templates..."/>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+@if (Model.FormTemplates != null && Model.FormTemplates.Any())
+{
+    <h3>Search Results for "@Model.SearchTerm"</h3>
+    @foreach (var template in Model.FormTemplates)
+    {
+        <li>
+            <a asp-controller="FormTemplates" asp-action="Details" asp-route-id="@template.Id">
+                @template.Title
+            </a>
+        </li>
+    }
+}
+else
+{
+    <p>No templates found matching your search.</p>
+}

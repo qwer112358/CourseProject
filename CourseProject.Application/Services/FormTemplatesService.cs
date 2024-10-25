@@ -16,7 +16,7 @@ public class FormTemplatesService(IFormTemplatesRepository formTemplatesReposito
         return await formTemplatesRepository.GetAll();
     }
 
-    public async Task<FormTemplate> GetFormTemplateById(Guid id)
+    public async Task<FormTemplate> GetFormTemplateByIdAsync(Guid id)
     {
         return await formTemplatesRepository.GetById(id);
     }

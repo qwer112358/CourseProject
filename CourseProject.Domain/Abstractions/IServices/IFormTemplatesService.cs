@@ -7,7 +7,7 @@ public interface IFormTemplatesService
 {
     Task<ICollection<FormTemplate>> SearchFormTemplatesAsync(string searchTerm);
     Task<ICollection<FormTemplate>> GetAllFormTemplates();
-    Task<FormTemplate> GetFormTemplateById(Guid id);
+    Task<FormTemplate> GetFormTemplateByIdAsync(Guid id);
     Task CreateFormTemplate(FormTemplate formTemplate);
     Task UpdateFormTemplate(FormTemplate formTemplate);
     Task DeleteFormTemplate(Guid id);

@@ -7,19 +7,15 @@
 <div class="container">
     <h2>Form Templates</h2>
 
+    <!-- Search form -->
+    @{ Html.RenderPartial("_SearchForm", Model); }
+
+    
     @if (signInManager.IsSignedIn(User))
     {
         <a asp-controller="FormTemplates" asp-action="Create" class="btn btn-link">Create New Form Template</a>
     }
-
-    <!-- Search form -->
-    <form method="get" asp-action="Index" class="mb-3">
-        <div class="input-group">
-            <input type="text" name="searchTerm" value="@Model.SearchTerm" class="form-control" placeholder="Search templates..." />
-            <button type="submit" class="btn btn-primary">Search</button>
-        </div>
-    </form>
-
+    
     <!-- Templates table -->
     <table class="table">
         <thead>
