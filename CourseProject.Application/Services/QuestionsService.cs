@@ -4,7 +4,7 @@ using CourseProject.Domain.Models;
 
 namespace CourseProject.Application.Services;
 
-public class QuestionService(IQuestionRepository questionRepository) : IQuestionService
+public class QuestionsService(IQuestionRepository questionRepository) : IQuestionService
 {
     public async Task<ICollection<Question>> GetAllQuestionsAsync()
     {

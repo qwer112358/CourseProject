@@ -2,7 +2,7 @@
 
 <div class="container">
     <h2>@Model.Title</h2>
-    
+
     <div class="mb-3">
         <strong>Description:</strong>
         <p>@Model.Description</p>
@@ -32,9 +32,52 @@
         <strong>Image:</strong>
         @if (!string.IsNullOrEmpty(Model.ImageUrl))
         {
-            <img src="@Model.ImageUrl" alt="Image" class="img-thumbnail" />
+        <img src="@Model.ImageUrl" alt="Image" class="img-thumbnail" />
         }
     </div>
+
+    <div class="mb-3">
+        <strong>Questions:</strong>
+        <ul>
+            @foreach (var question in Model.Questions.OrderBy(q => q.Order))
+            {
+                <li>
+                    <strong>@question.Title:</strong> @question.Description
+                    <br />
+                    <em>Type:</em> @question.Type
+                </li>
+            }
+        </ul>
+    </div>
+
+    <div class="mb-3">
+        <strong>Comments:</strong>
+        <ul>
+            @foreach (var comment in Model.Comments)
+            {
+            <li>
+                <strong>@comment.ApplicationUser.UserName</strong> (@comment.CreatedAt.ToLocalTime()):<br />
+                @comment.Text
+            </li>
+            }
+        </ul>
+    </div>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+    <form asp-action="AddComment" method="post">
+        <input type="hidden" name="formTemplateId" value="@Model.Id" />
+        <div class="form-group">
+            <label for="commentText">Add Comment:</label>
+            <textarea name="text" class="form-control" rows="3" id="commentText"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    }
+    else
+    {
+    <p>Please <a asp-controller="Account" asp-action="Login">log in</a> to add comments.</p>
+    }
 
     <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>

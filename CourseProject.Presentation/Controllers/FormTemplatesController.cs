@@ -8,25 +8,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace CourseProject.Presentation.Controllers;
 
 [Route("[controller]")]
-public class FormTemplatesController : Controller
+public class FormTemplatesController(
+    IFormTemplatesService formTemplatesService,
+    ITagsService tagsService,
+    ITopicsService topicsService,
+    ICommentsService commentsService,
+    UserManager<ApplicationUser> userManager)
+    : Controller
 {
-    private readonly IFormTemplatesService formTemplatesService;
-    private readonly ITagsService tagsService;
-    private readonly ITopicsService topicsService;
-    private readonly UserManager<ApplicationUser> userManager;
-
-    public FormTemplatesController(
-        IFormTemplatesService formTemplatesService,
-        ITagsService tagsService,
-        ITopicsService topicsService,
-        UserManager<ApplicationUser> userManager)
-    {
-        this.formTemplatesService = formTemplatesService;
-        this.tagsService = tagsService;
-        this.topicsService = topicsService;
-        this.userManager = userManager;
-    }
-
     [HttpGet]
     public async Task<IActionResult> Index()
     {
@@ -71,7 +60,14 @@ public class FormTemplatesController : Controller
             CreatorId = user.Id,
             ImageUrl = viewModel.ImageUrl,
             IsPublic = viewModel.IsPublic,
-            Tags = await tagsService.GetTagsByIdsAsync(viewModel.SelectedTagIds)
+            Tags = await tagsService.GetTagsByIdsAsync(viewModel.SelectedTagIds),
+            Questions = viewModel.Questions.Select(q => new Question
+            {
+                Title = q.Title,
+                Description = q.Description,
+                Type = q.Type,
+                Order = q.Order
+                }).ToList()
         };
         await formTemplatesService.CreateFormTemplate(formTemplate);
         return RedirectToAction("Index");
@@ -87,6 +83,29 @@ public class FormTemplatesController : Controller
         }
 
         return View(formTemplate);
+    }
+    
+    [Authorize]
+    [HttpPost("AddComment")]
+    public async Task<IActionResult> AddComment(Guid formTemplateId, string text)
+    {
+        if (string.IsNullOrWhiteSpace(text)) 
+        {
+            ModelState.AddModelError(string.Empty, "Comment cannot be empty.");
+            return RedirectToAction("Details", new { id = formTemplateId });
+        }
+
+        var user = await userManager.GetUserAsync(User);
+        var comment = new Comment
+        {
+            Text = text,
+            ApplicationUserId = user.Id,
+            FormTemplateId = formTemplateId
+        };
+
+        await commentsService.CreateCommentAsync(comment);
+
+        return RedirectToAction("Details", new { id = formTemplateId });
     }
 
     [Authorize]

@@ -31,7 +31,7 @@ public class FormTemplatesService(IFormTemplatesRepository formTemplatesReposito
         await formTemplatesRepository.Delete(id);
     }
 
-    public async Task<ICollection<FormTemplate>> GetFormTemplatesByUserId(Guid userId)
+    public async Task<ICollection<FormTemplate>> GetFormTemplatesByUserId(string userId)
     {
         return await formTemplatesRepository.GetFormTemplatesByUserId(userId);
     }

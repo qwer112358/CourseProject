@@ -39,7 +39,43 @@
         <input asp-for="ImageUrl" class="form-control" type="url" />
     </div>
 
+    <h3>Questions</h3>
+    <div id="questions-container">
+        <!-- Questions will be added here -->
+    </div>
+    <button type="button" onclick="addQuestion()">Add Question</button>
+    
     <button type="submit" class="btn btn-primary">Create</button>
 </form>
+
+@section Scripts {
+<script>
+    let questionCount = 0;
+    function addQuestion() {
+        const container = document.getElementById('questions-container');
+        const questionHtml = `
+                <div class="question-group">
+                    <label for="Questions[${questionCount}].Title">Question Title</label>
+                    <input name="Questions[${questionCount}].Title" class="form-control" />
+
+                    <label for="Questions[${questionCount}].Type">Question Type</label>
+                    <select name="Questions[${questionCount}].Type" class="form-control">
+                        <option value="SingleLine">Single Line</option>
+                        <option value="MultiLine">Multi Line</option>
+                        <option value="Integer">Integer</option>
+                        <option value="Checkbox">Checkbox</option>
+                    </select>
+
+                    <button type="button" onclick="removeQuestion(this)">Remove Question</button>
+                </div>`;
+        container.insertAdjacentHTML('beforeend', questionHtml);
+        questionCount++;
+    }
+
+    function removeQuestion(button) {
+        button.parentElement.remove();
+    }
+</script>
+}
 
 

@@ -1,6 +1,7 @@
 using CourseProject.DataAccess.Data;
 using CourseProject.DataAccess.Repository;
 using CourseProject.Domain.Abstractions.IRepositories;
+using CourseProject.Domain.Abstractions.IServices;
 using Microsoft.EntityFrameworkCore;
 
 namespace CourseProject.Presentation.Configuration.LayerConfigurations;
@@ -15,5 +16,6 @@ public static class DataAccessConfiguration
         services.AddScoped<IFormTemplatesRepository, FormTemplatesRepository>();
         services.AddScoped<ITopicsRepository, TopicsRepository>();
         services.AddScoped<ITagsRepository, TagsRepository>();
+        services.AddScoped<ICommentsRepository, CommentsRepository>();
     }
 }

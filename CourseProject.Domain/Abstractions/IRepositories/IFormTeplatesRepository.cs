@@ -5,5 +5,5 @@ namespace CourseProject.Domain.Abstractions.IRepositories;
 
 public interface IFormTemplatesRepository : IGenericRepository<FormTemplate>
 {
-    Task<ICollection<FormTemplate>> GetFormTemplatesByUserId(Guid userId);
+    Task<ICollection<FormTemplate>> GetFormTemplatesByUserId(string userId);
 }

@@ -21,7 +21,13 @@ public class FormTemplatesRepository(ApplicationDbContext dbContext) : IFormTemp
     
     public async Task<FormTemplate> GetById(Guid id)
     {
-        return await dbContext.FormTemplates.FirstOrDefaultAsync(x => x.Id == id);
+        return await dbContext.FormTemplates
+            .Include(ft => ft.Topic)
+            .Include(ft => ft.Comments)
+            .Include(ft => ft.Questions)
+            .Include(ft => ft.Creator)
+            .Include(ft => ft.Tags)
+            .FirstOrDefaultAsync(x => x.Id == id);
     }
     
     public async Task Create(FormTemplate? queston)
@@ -73,9 +79,11 @@ public class FormTemplatesRepository(ApplicationDbContext dbContext) : IFormTemp
         return dbContext.FormTemplates.Where(expression);
     }
 
-    public async Task<ICollection<FormTemplate>> GetFormTemplatesByUserId(Guid userId)
+    public async Task<ICollection<FormTemplate>> GetFormTemplatesByUserId(string userId)
     {
-        var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Id.Equals(userId));
+        var user = await dbContext.Users
+            .Include(u => u.FormTemplates)
+            .FirstOrDefaultAsync(u => u.Id.Equals(userId));
         return user.FormTemplates;
     }
 }

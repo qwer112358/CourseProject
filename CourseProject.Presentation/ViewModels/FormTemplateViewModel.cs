@@ -18,6 +18,7 @@ public class FormTemplateViewModel
     public string ImageUrl { get; set; }
     public bool IsPublic { get; set; } = true;
     public List<Guid> SelectedTagIds { get; set; } = new List<Guid>();
+    public List<QuestionViewModel> Questions { get; set; } = new();
     /*public string CreatorId { get; set; }
     public string CreatorName { get; set; }*/
 }

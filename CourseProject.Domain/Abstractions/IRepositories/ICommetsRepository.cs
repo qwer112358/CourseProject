@@ -3,7 +3,7 @@ using CourseProject.Domain.Models;
 
 namespace CourseProject.Domain.Abstractions.IRepositories;
 
-public interface ICommentRepository : IGenericRepository<Comment>
+public interface ICommentsRepository : IGenericRepository<Comment>
 {
-	Task<IEnumerable<Comment>> GetCommentsByItemId(int itemId);
+	Task<ICollection<Comment>> GetCommentsByUserId(string userId);
 }

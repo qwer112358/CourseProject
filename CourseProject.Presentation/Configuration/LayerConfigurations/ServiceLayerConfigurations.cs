@@ -42,5 +42,6 @@ public static class ServiceLayerConfigurations
         services.AddScoped<IFormTemplatesService, FormTemplatesService>();
         services.AddScoped<ITopicsService, TopicsService>();
         services.AddScoped<ITagsService, TagsService>();
+        services.AddScoped<ICommentsService, CommentsService>();
     }
 }

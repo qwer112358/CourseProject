@@ -7,8 +7,8 @@ public interface IFormTemplatesService
 {
     Task<ICollection<FormTemplate>> GetAllFormTemplates();
     Task<FormTemplate> GetFormTemplateById(Guid id);
-    Task CreateFormTemplate(FormTemplate collection);
-    Task UpdateFormTemplate(FormTemplate collection);
+    Task CreateFormTemplate(FormTemplate formTemplate);
+    Task UpdateFormTemplate(FormTemplate formTemplate);
     Task DeleteFormTemplate(Guid id);
-    Task<ICollection<FormTemplate>> GetFormTemplatesByUserId(Guid userId);
+    Task<ICollection<FormTemplate>> GetFormTemplatesByUserId(string userId);
 }
