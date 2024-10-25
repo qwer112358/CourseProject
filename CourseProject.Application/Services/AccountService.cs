@@ -30,7 +30,7 @@ public class AccountService : IAccountService
         if (!string.IsNullOrEmpty(validationMessage))
             return validationMessage;
         var result = await _signInManager.PasswordSignInAsync(model.Email!, model.Password!, model.RememberMe, false);
-        if (!result.Succeeded) return validationMessage;
+        if (!result.Succeeded) return "Incorrect login or password.";
         await UpdateLastLoginDateAsync(user);
         return string.Empty;
     }

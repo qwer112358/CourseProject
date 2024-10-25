@@ -6,6 +6,7 @@ public interface IQuestionService
 {
     Task<ICollection<Question>> GetAllQuestionsAsync();
     Task<Question> GetQuestionByIdAsync(Guid id);
+    Task<ICollection<Question>> GetQuestionsByIdsAsync(ICollection<Guid> ids);
     Task AddQuestionAsync(Question question);
     Task DeleteQuestionByIdAsync(Guid id);
 }

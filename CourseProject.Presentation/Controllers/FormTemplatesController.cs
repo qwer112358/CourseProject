@@ -13,6 +13,7 @@ public class FormTemplatesController(
     ITagsService tagsService,
     ITopicsService topicsService,
     ICommentsService commentsService,
+    IQuestionService questionService,
     UserManager<ApplicationUser> userManager)
     : Controller
 {
@@ -45,8 +46,8 @@ public class FormTemplatesController(
     [HttpGet("Create")]
     public async Task<IActionResult> Create()
     {
-        ViewData["AllTopics"] = await topicsService.GetAllTopicsAsync();
-        ViewData["Tags"] = await tagsService.GetAllTagsAsync();
+        ViewBag.AllTopics = await topicsService.GetAllTopicsAsync();
+        ViewBag.Tags = await tagsService.GetAllTagsAsync();
         return View();
     }
     
@@ -125,6 +126,7 @@ public class FormTemplatesController(
             return Unauthorized();
         }
 
+        
         var viewModel = new FormTemplateViewModel
         {
             Title = formTemplate.Title,
@@ -132,7 +134,14 @@ public class FormTemplatesController(
             TopicId = formTemplate.TopicId,
             ImageUrl = formTemplate.ImageUrl,
             IsPublic = formTemplate.IsPublic,
-            SelectedTagIds = formTemplate.Tags.Select(tag => tag.Id).ToList()
+            SelectedTagIds = formTemplate.Tags.Select(tag => tag.Id).ToList(),
+            Questions = formTemplate.Questions.Select(q => new QuestionViewModel
+            {
+                Id = q.Id,
+                Title = q.Title,
+                Description = q.Description,
+                Type = q.Type,
+            }).ToList()
         };
 
         ViewData["AllTopics"] = await topicsService.GetAllTopicsAsync();
@@ -159,11 +168,21 @@ public class FormTemplatesController(
         existingFormTemplate.ImageUrl = viewModel.ImageUrl;
         existingFormTemplate.IsPublic = viewModel.IsPublic;
         existingFormTemplate.Tags = await tagsService.GetTagsByIdsAsync(viewModel.SelectedTagIds);
+        existingFormTemplate.Questions = viewModel.Questions.Select(q => new Question
+        {
+            Id = q.Id,
+            Title = q.Title,
+            Description = q.Description,
+            Type = q.Type,
+            Order = q.Order,
+            FormTemplateId = existingFormTemplate.Id
+        }).ToList();
 
         await formTemplatesService.UpdateFormTemplate(existingFormTemplate);
 
         return RedirectToAction("Index");
     }
+
 
     [Authorize]
     [HttpGet("Delete/{id}")]

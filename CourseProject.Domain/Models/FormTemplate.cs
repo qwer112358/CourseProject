@@ -9,6 +9,7 @@ public class FormTemplate
     public Topic Topic { get; set; }
     public string ImageUrl { get; set; } = string.Empty;
     public bool IsPublic { get; set; } = true;
+    public DateTime DateCreated { get; set; } = DateTime.UtcNow;
     public string CreatorId { get; set; }
     public ApplicationUser Creator { get; set; }
     public ICollection<Tag> Tags { get; set; } = new List<Tag>();

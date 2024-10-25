@@ -6,7 +6,7 @@ public class Question
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public string Title { get; set; } 
-    public string Description { get; set; } 
+    public string? Description { get; set; } 
     public QuestionType Type { get; set; } // Enum: SingleLine, MultiLine, Integer, Checkbox
     public int Order { get; set; }
     public Guid FormTemplateId { get; set; }

@@ -44,4 +44,9 @@ public class QuestionRepository(ApplicationDbContext dbContext) : IQuestionRepos
     {
         return dbContext.Questions.Where(expression);
     }
+
+    public async Task<ICollection<Question>> GetByIdsAsync(ICollection<Guid> ids)
+    {
+        return await dbContext.Questions.Where(t => ids.Contains(t.Id)).ToListAsync();  
+    }
 }

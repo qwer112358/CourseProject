@@ -2,80 +2,127 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @model CourseProject.Presentation.ViewModels.FormTemplateViewModel
 
-<h2>Create New Form Template</h2>
+<div class="container mt-5">
+    <h2 class="mb-4">Create New Form Template</h2>
+    <form asp-action="Create" asp-controller="FormTemplates" method="post" class="needs-validation" novalidate>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label>User</label>
+                <input type="text" class="form-control" value="@User.Identity.Name" readonly />
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Date</label>
+                <input type="text" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" readonly />
+            </div>
+        </div>
 
-<form asp-action="Create" asp-controller="FormTemplates" method="post">
-    <div class="form-group">
-        <label asp-for="Title"></label>
-        <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Description"></label>
-        <textarea asp-for="Description" class="form-control"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="TopicId">Topic</label>
-        <select asp-for="TopicId" class="form-control" asp-items="@(new SelectList((IEnumerable<CourseProject.Domain.Models.Topic>)ViewData["AllTopics"], "Id", "Name"))"></select>
-        <span asp-validation-for="TopicId" class="text-danger"></span>
-    </div>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label asp-for="TopicId">Topic</label>
+                <select asp-for="TopicId" class="form-control" asp-items="@(new SelectList((IEnumerable<CourseProject.Domain.Models.Topic>)ViewBag.AllTopics, "Id", "Name"))"></select>
+                <span asp-validation-for="TopicId" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 form-group">
+                <label asp-for="SelectedTagIds">Tags</label>
+                <select asp-for="SelectedTagIds" class="form-control" asp-items="@(new SelectList((IEnumerable)ViewBag.Tags, "Id", "Name"))" multiple="multiple"></select>
+            </div>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="SelectedTagIds">Tags</label>
-        <select asp-for="SelectedTagIds" class="form-control" asp-items="@(new SelectList((IEnumerable)ViewData["Tags"], "Id", "Name"))" multiple="multiple">
-        </select>
-    </div>
+        <div class="form-group form-check">
+            <input asp-for="IsPublic" class="form-check-input" />
+            <label asp-for="IsPublic" class="form-check-label">Is Public</label>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="IsPublic">Is Public</label>
-        <input asp-for="IsPublic" class="form-check-input" />
-    </div>
+        <div class="form-group">
+            <label asp-for="ImageUrl">Image URL</label>
+            <input asp-for="ImageUrl" class="form-control" type="url" />
+        </div>
 
-    <div class="form-group">
-        <label asp-for="ImageUrl">Image URL</label>
-        <input asp-for="ImageUrl" class="form-control" type="url" />
-    </div>
+        <h3 class="mt-4">Questions</h3>
+        <div id="questions-container" class="sortable"></div>
+        <button type="button" class="btn btn-outline-primary mt-3" onclick="addQuestion()">Add Question</button>
 
-    <h3>Questions</h3>
-    <div id="questions-container">
-        <!-- Questions will be added here -->
-    </div>
-    <button type="button" onclick="addQuestion()">Add Question</button>
-    
-    <button type="submit" class="btn btn-primary">Create</button>
-</form>
+        <button type="submit" class="btn btn-primary mt-3">Create</button>
+    </form>
+</div>
 
-@section Scripts {
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
     let questionCount = 0;
+
     function addQuestion() {
         const container = document.getElementById('questions-container');
         const questionHtml = `
-                <div class="question-group">
-                    <label for="Questions[${questionCount}].Title">Question Title</label>
-                    <input name="Questions[${questionCount}].Title" class="form-control" />
+            <div class="question-group" id="question-${questionCount}" draggable="true" ondragstart="drag(event)">
+                <label>Question Title</label>
+                <input name="Questions[${questionCount}].Title" class="form-control mb-2" required />
 
-                    <label for="Questions[${questionCount}].Type">Question Type</label>
-                    <select name="Questions[${questionCount}].Type" class="form-control">
-                        <option value="SingleLine">Single Line</option>
-                        <option value="MultiLine">Multi Line</option>
-                        <option value="Integer">Integer</option>
-                        <option value="Checkbox">Checkbox</option>
-                    </select>
+                <label>Description (optional)</label>
+                <textarea name="Questions[${questionCount}].Description" class="form-control mb-2"></textarea>
 
-                    <button type="button" onclick="removeQuestion(this)">Remove Question</button>
-                </div>`;
+                <label for="Questions[${questionCount}].Type">Question Type</label>
+                <select name="Questions[${questionCount}].Type" class="form-control mb-2" onchange="updateQuestionInput(${questionCount})">
+                    <option value="SingleLine">Single Line</option>
+                    <option value="MultiLine">Multi Line</option>
+                    <option value="Integer">Integer</option>
+                    <option value="Checkbox">Checkbox</option>
+                </select>
+
+                <div class="dynamic-input mb-2" id="dynamic-input-${questionCount}"></div>
+
+                <button type="button" class="btn btn-danger btn-sm" onclick="removeQuestion(this)">Remove Question</button>
+            </div>`;
         container.insertAdjacentHTML('beforeend', questionHtml);
         questionCount++;
+    }
+
+    function updateQuestionInput(index) {
+        const dynamicInputContainer = document.getElementById(`dynamic-input-${index}`);
+        dynamicInputContainer.innerHTML = '';
     }
 
     function removeQuestion(button) {
         button.parentElement.remove();
     }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    document.getElementById('questions-container').addEventListener('dragover', (ev) => {
+        ev.preventDefault();
+    });
+
+    document.getElementById('questions-container').addEventListener('drop', (ev) => {
+        ev.preventDefault();
+        const data = ev.dataTransfer.getData("text");
+        const draggedElement = document.getElementById(data);
+        const targetElement = ev.target.closest('.question-group');
+        if (targetElement && draggedElement) {
+            targetElement.before(draggedElement);
+        }
+    });
 </script>
-}
 
-
+<style>
+    .question-group {
+        border: 1px solid #dee2e6;
+        padding: 1rem;
+        border-radius: 0.25rem;
+        margin-bottom: 1rem;
+        background-color: #f8f9fa;
+    }
+</style>

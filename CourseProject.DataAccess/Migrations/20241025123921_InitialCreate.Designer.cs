@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CourseProject.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241024050557_InitialCreate")]
+    [Migration("20241025123921_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -203,6 +203,9 @@ namespace CourseProject.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
@@ -299,17 +302,17 @@ namespace CourseProject.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5eaf6aaf-1362-4999-bb6e-b33d5735b9e3"),
+                            Id = new Guid("1cdba3b1-3745-4010-ba94-d075a1584669"),
                             Name = "Tag 1"
                         },
                         new
                         {
-                            Id = new Guid("9ae431be-b406-476e-a62a-7491b188c5a6"),
+                            Id = new Guid("cf50760f-83ff-4392-be1a-670dadbb48eb"),
                             Name = "Tag 2"
                         },
                         new
                         {
-                            Id = new Guid("fbebfb85-7bea-43b1-9c8a-1cdd02b9835d"),
+                            Id = new Guid("723148bf-f4f2-4091-a7c8-2c60ca0b631f"),
                             Name = "Tag 3"
                         });
                 });
@@ -331,17 +334,17 @@ namespace CourseProject.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("74274e0f-8f3d-4da3-b0dd-7a47465d493a"),
+                            Id = new Guid("e0d5e7e5-632f-4205-acb6-39978f500ee1"),
                             Name = "Education"
                         },
                         new
                         {
-                            Id = new Guid("957698fa-b632-44b1-b161-d4a06e7c02b2"),
+                            Id = new Guid("63805a3f-8c6a-4a7b-bd02-8c9bbab21a43"),
                             Name = "Test"
                         },
                         new
                         {
-                            Id = new Guid("6ab100d9-3e6f-43b1-b7dc-38f570bee4f6"),
+                            Id = new Guid("4c0b247e-b534-4bc8-ac6e-64b6e9a9cf38"),
                             Name = "Other"
                         });
                 });

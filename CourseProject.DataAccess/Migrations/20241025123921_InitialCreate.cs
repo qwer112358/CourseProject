@@ -198,6 +198,7 @@ namespace CourseProject.DataAccess.Migrations
                     TopicId = table.Column<Guid>(type: "uuid", nullable: false),
                     ImageUrl = table.Column<string>(type: "text", nullable: false),
                     IsPublic = table.Column<bool>(type: "boolean", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatorId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
@@ -374,9 +375,9 @@ namespace CourseProject.DataAccess.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("5eaf6aaf-1362-4999-bb6e-b33d5735b9e3"), "Tag 1" },
-                    { new Guid("9ae431be-b406-476e-a62a-7491b188c5a6"), "Tag 2" },
-                    { new Guid("fbebfb85-7bea-43b1-9c8a-1cdd02b9835d"), "Tag 3" }
+                    { new Guid("1cdba3b1-3745-4010-ba94-d075a1584669"), "Tag 1" },
+                    { new Guid("723148bf-f4f2-4091-a7c8-2c60ca0b631f"), "Tag 3" },
+                    { new Guid("cf50760f-83ff-4392-be1a-670dadbb48eb"), "Tag 2" }
                 });
 
             migrationBuilder.InsertData(
@@ -384,9 +385,9 @@ namespace CourseProject.DataAccess.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("6ab100d9-3e6f-43b1-b7dc-38f570bee4f6"), "Other" },
-                    { new Guid("74274e0f-8f3d-4da3-b0dd-7a47465d493a"), "Education" },
-                    { new Guid("957698fa-b632-44b1-b161-d4a06e7c02b2"), "Test" }
+                    { new Guid("4c0b247e-b534-4bc8-ac6e-64b6e9a9cf38"), "Other" },
+                    { new Guid("63805a3f-8c6a-4a7b-bd02-8c9bbab21a43"), "Test" },
+                    { new Guid("e0d5e7e5-632f-4205-acb6-39978f500ee1"), "Education" }
                 });
 
             migrationBuilder.CreateIndex(

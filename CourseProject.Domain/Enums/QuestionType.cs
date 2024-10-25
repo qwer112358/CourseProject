@@ -5,4 +5,5 @@ public enum QuestionType
     SingleLine,
     MultiLine,
     Integer,
+    Checkbox,
 }
