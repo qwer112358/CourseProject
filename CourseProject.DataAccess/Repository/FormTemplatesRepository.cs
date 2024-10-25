@@ -12,6 +12,10 @@ public class FormTemplatesRepository(ApplicationDbContext dbContext) : IFormTemp
     {
         return await dbContext.FormTemplates
             .Include(ft => ft.Topic)
+            .Include(ft => ft.Comments)
+            .Include(ft => ft.Questions)
+            .Include(ft => ft.Creator)
+            .Include(ft => ft.Tags)
             .ToListAsync();
     }
     
@@ -20,31 +24,42 @@ public class FormTemplatesRepository(ApplicationDbContext dbContext) : IFormTemp
         return await dbContext.FormTemplates.FirstOrDefaultAsync(x => x.Id == id);
     }
     
-    public async Task Create(FormTemplate? formTemplate)
+    public async Task Create(FormTemplate? queston)
     {
-        await dbContext.FormTemplates.AddAsync(formTemplate);
+        await dbContext.FormTemplates.AddAsync(queston);
         await dbContext.SaveChangesAsync();
     }
     
     public async Task Update(FormTemplate formTemplate)
     {
+        // Обновляем простые свойства шаблона
         await dbContext.FormTemplates
             .Where(x => x.Id == formTemplate.Id)
             .ExecuteUpdateAsync(s => s
                 .SetProperty(x => x.Title, formTemplate.Title)
                 .SetProperty(x => x.Description, formTemplate.Description)
-                .SetProperty(x => x.Tags, formTemplate.Tags)
                 .SetProperty(x => x.TopicId, formTemplate.TopicId)
-                .SetProperty(x => x.Topic, formTemplate.Topic)
                 .SetProperty(x => x.ImageUrl, formTemplate.ImageUrl)
-                .SetProperty(x => x.Tags, formTemplate.Tags)
                 .SetProperty(x => x.IsPublic, formTemplate.IsPublic)
-                .SetProperty(x => x.Questions, formTemplate.Questions)
                 .SetProperty(x => x.CreatorId, formTemplate.CreatorId)
-                .SetProperty(x => x.Creator, formTemplate.Creator)
-                .SetProperty(x => x.Likes, formTemplate.Likes)
-                .SetProperty(x => x.Comments, formTemplate.Comments));
+            );
+        
+        var existingTemplate = await dbContext.FormTemplates
+            .Include(x => x.Tags)
+            .FirstOrDefaultAsync(x => x.Id == formTemplate.Id);
+
+        if (existingTemplate != null)
+        {
+            //existingTemplate.Tags.Clear();
+            //existingTemplate.Tags.AddRange(formTemplate.Tags);
+            existingTemplate.Questions = formTemplate.Questions;
+            existingTemplate.Likes = formTemplate.Likes;
+            existingTemplate.Comments = formTemplate.Comments;
+        
+            await dbContext.SaveChangesAsync();
+        }
     }
+
     
     public async Task Delete(Guid id)
     {

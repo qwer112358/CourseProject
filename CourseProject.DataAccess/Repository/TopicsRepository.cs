@@ -18,9 +18,9 @@ public class TopicsRepository(ApplicationDbContext dbContext)  : ITopicsReposito
         return await dbContext.Topics.FirstOrDefaultAsync(t => t.Id == id);
     }
 
-    public async Task Create(Topic topic)
+    public async Task Create(Topic queston)
     {
-        await dbContext.Topics.AddAsync(topic);
+        await dbContext.Topics.AddAsync(queston);
         await dbContext.SaveChangesAsync();;
     }
 

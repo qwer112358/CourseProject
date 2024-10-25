@@ -18,9 +18,9 @@ public class TagsRepository(ApplicationDbContext dbContext) : ITagsRepository
         return await dbContext.Tags.FirstOrDefaultAsync(t => t.Id == id);
     }
 
-    public async Task Create(Tag tag)
+    public async Task Create(Tag queston)
     {
-        await dbContext.Tags.AddAsync(tag);
+        await dbContext.Tags.AddAsync(queston);
         await dbContext.SaveChangesAsync();;
     }
 

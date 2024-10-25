@@ -7,7 +7,7 @@ public interface IGenericRepository<T> where T : class
 {
     Task<ICollection<T>> GetAll(); 
     Task<T> GetById(Guid id); 
-    Task Create(T entity);
+    Task Create(T queston);
     Task Update(T entity); 
     Task Delete(Guid id); 
     IQueryable<T> Find(Expression<Func<T, bool>> expression);

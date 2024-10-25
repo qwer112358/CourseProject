@@ -1,8 +1,14 @@
 @model IEnumerable<CourseProject.Domain.Models.FormTemplate>
+@using CourseProject.Domain.Models;
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> signInManager
 
 <div class="container">
     <h2>Form Templates</h2>
-
+    @if (signInManager.IsSignedIn(User))
+    {
+        <a asp-controller="FormTemplates" asp-action="Create" method="post" class="btn btn-link">Create New Form Template</a>
+    }
     <table class="table">
         <thead>
         <tr>
@@ -20,14 +26,15 @@
                 <td>@formTemplate.Topic.Name</td>
                 <td>@(formTemplate.IsPublic ? "Yes" : "No")</td>
                 <td>
-                    <a href="@Url.Action("Details", new { id = formTemplate.Id })" class="btn btn-link">View</a> |
-                    <a href="@Url.Action("Edit", new { id = formTemplate.Id })" class="btn btn-link">Edit</a> |
-                    <a href="@Url.Action("Delete", new { id = formTemplate.Id })" class="btn btn-link">Delete</a>
+                    <a href="@Url.Action("Details", new { id = formTemplate.Id })" class="btn btn-link">View</a>
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        <a href="@Url.Action("Edit", new { id = formTemplate.Id })" class="btn btn-link">Edit</a>
+                        <a href="@Url.Action("Delete", new { id = formTemplate.Id })" class="btn btn-link">Delete</a>
+                    }
                 </td>
             </tr>
         }
         </tbody>
     </table>
-
-    <a asp-controller="FormTemplates" asp-action="Create" method="post" class="btn">Create New Form Template</a>
 </div>

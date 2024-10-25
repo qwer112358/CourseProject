@@ -1,0 +1,40 @@
+@model CourseProject.Domain.Models.FormTemplate
+
+<div class="container">
+    <h2>@Model.Title</h2>
+    
+    <div class="mb-3">
+        <strong>Description:</strong>
+        <p>@Model.Description</p>
+    </div>
+
+    <div class="mb-3">
+        <strong>Topic:</strong>
+        <p>@Model.Topic?.Name</p>
+    </div>
+
+    <div class="mb-3">
+        <strong>Tags:</strong>
+        <p>@string.Join(", ", Model.Tags.Select(t => t.Name))</p>
+    </div>
+
+    <div class="mb-3">
+        <strong>Public:</strong>
+        <p>@(Model.IsPublic ? "Yes" : "No")</p>
+    </div>
+
+    <div class="mb-3">
+        <strong>Created By:</strong>
+        <p>@Model.Creator?.UserName</p>
+    </div>
+
+    <div class="mb-3">
+        <strong>Image:</strong>
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <img src="@Model.ImageUrl" alt="Image" class="img-thumbnail" />
+        }
+    </div>
+
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
