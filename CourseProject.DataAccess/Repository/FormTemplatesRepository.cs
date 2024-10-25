@@ -96,12 +96,14 @@ public class FormTemplatesRepository(ApplicationDbContext dbContext) : IFormTemp
         
         var lowerSearchTerm = searchTerm.ToLower();
         return await dbContext.FormTemplates
-            .Where(ft => ft.Title.ToLower().Contains(lowerSearchTerm))
             .Include(ft => ft.Topic)
             .Include(ft => ft.Comments)
             .Include(ft => ft.Questions)
             .Include(ft => ft.Creator)
             .Include(ft => ft.Tags)
+            .Where(ft => ft.Title.Contains(lowerSearchTerm) 
+                         || ft.Questions.Any(q => q.Description.Contains(lowerSearchTerm)) 
+                         || ft.Comments.Any(c => c.Text.Contains(lowerSearchTerm)))
             .ToListAsync();
     }
 }
