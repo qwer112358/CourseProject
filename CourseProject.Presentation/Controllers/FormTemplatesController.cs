@@ -17,12 +17,26 @@ public class FormTemplatesController(
     : Controller
 {
     [HttpGet]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string searchTerm)
     {
         var formTemplates = await formTemplatesService.GetAllFormTemplates();
-        return View(formTemplates);
-    }
+        
+        if (!string.IsNullOrWhiteSpace(searchTerm))
+        {
+            formTemplates = formTemplates
+                .Where(ft => ft.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+        }
+        
+        var viewModel = new SearchViewModel
+        {
+            SearchTerm = searchTerm,
+            FormTemplates = formTemplates
+        };
 
+        return View(viewModel);
+    }
+    
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(Guid id)
     {
