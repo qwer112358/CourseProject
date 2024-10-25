@@ -86,4 +86,22 @@ public class FormTemplatesRepository(ApplicationDbContext dbContext) : IFormTemp
             .FirstOrDefaultAsync(u => u.Id.Equals(userId));
         return user.FormTemplates;
     }
+
+    public async Task<ICollection<FormTemplate>> SearchAsync(string searchTerm)
+    {
+        if (string.IsNullOrWhiteSpace(searchTerm))
+        {
+            return await GetAll();
+        }
+        
+        var lowerSearchTerm = searchTerm.ToLower();
+        return await dbContext.FormTemplates
+            .Where(ft => ft.Title.ToLower().Contains(lowerSearchTerm))
+            .Include(ft => ft.Topic)
+            .Include(ft => ft.Comments)
+            .Include(ft => ft.Questions)
+            .Include(ft => ft.Creator)
+            .Include(ft => ft.Tags)
+            .ToListAsync();
+    }
 }

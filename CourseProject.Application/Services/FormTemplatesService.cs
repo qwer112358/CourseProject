@@ -6,6 +6,11 @@ namespace CourseProject.Application.Services;
 
 public class FormTemplatesService(IFormTemplatesRepository formTemplatesRepository) : IFormTemplatesService
 {
+    public async Task<ICollection<FormTemplate>> SearchFormTemplatesAsync(string searchTerm)
+    {
+        return await formTemplatesRepository.SearchAsync(searchTerm);
+    }
+
     public async Task<ICollection<FormTemplate>> GetAllFormTemplates()
     {
         return await formTemplatesRepository.GetAll();

@@ -19,14 +19,7 @@ public class FormTemplatesController(
     [HttpGet]
     public async Task<IActionResult> Index(string searchTerm)
     {
-        var formTemplates = await formTemplatesService.GetAllFormTemplates();
-        
-        if (!string.IsNullOrWhiteSpace(searchTerm))
-        {
-            formTemplates = formTemplates
-                .Where(ft => ft.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-        }
+        var formTemplates = await formTemplatesService.SearchFormTemplatesAsync(searchTerm);
         
         var viewModel = new SearchViewModel
         {

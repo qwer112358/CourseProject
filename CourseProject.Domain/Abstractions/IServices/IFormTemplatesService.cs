@@ -5,6 +5,7 @@ namespace CourseProject.Domain.Abstractions.IServices;
 
 public interface IFormTemplatesService
 {
+    Task<ICollection<FormTemplate>> SearchFormTemplatesAsync(string searchTerm);
     Task<ICollection<FormTemplate>> GetAllFormTemplates();
     Task<FormTemplate> GetFormTemplateById(Guid id);
     Task CreateFormTemplate(FormTemplate formTemplate);
