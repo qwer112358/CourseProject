@@ -10,24 +10,12 @@ public class FormTemplatesRepository(ApplicationDbContext dbContext) : IFormTemp
 {
     public async Task<ICollection<FormTemplate>> GetAll()
     {
-        return await dbContext.FormTemplates
-            .Include(ft => ft.Topic)
-            .Include(ft => ft.Comments)
-            .Include(ft => ft.Questions)
-            .Include(ft => ft.Creator)
-            .Include(ft => ft.Tags)
-            .ToListAsync();
+        return await GetFormTemplatesQuery().ToListAsync();
     }
     
     public async Task<FormTemplate> GetById(Guid id)
     {
-        return await dbContext.FormTemplates
-            .Include(ft => ft.Topic)
-            .Include(ft => ft.Comments)
-            .Include(ft => ft.Questions)
-            .Include(ft => ft.Creator)
-            .Include(ft => ft.Tags)
-            .FirstOrDefaultAsync(x => x.Id == id);
+        return await GetFormTemplatesQuery().FirstOrDefaultAsync(x => x.Id == id);
     }
     
     public async Task Create(FormTemplate? queston)
@@ -38,7 +26,6 @@ public class FormTemplatesRepository(ApplicationDbContext dbContext) : IFormTemp
     
     public async Task Update(FormTemplate formTemplate)
     {
-        // Обновляем простые свойства шаблона
         await dbContext.FormTemplates
             .Where(x => x.Id == formTemplate.Id)
             .ExecuteUpdateAsync(s => s
@@ -65,7 +52,6 @@ public class FormTemplatesRepository(ApplicationDbContext dbContext) : IFormTemp
             await dbContext.SaveChangesAsync();
         }
     }
-
     
     public async Task Delete(Guid id)
     {
@@ -89,21 +75,22 @@ public class FormTemplatesRepository(ApplicationDbContext dbContext) : IFormTemp
 
     public async Task<ICollection<FormTemplate>> SearchAsync(string searchTerm)
     {
-        if (string.IsNullOrWhiteSpace(searchTerm))
-        {
-            return await GetAll();
-        }
-        
+        if (string.IsNullOrWhiteSpace(searchTerm)) return await GetAll();
         var lowerSearchTerm = searchTerm.ToLower();
-        return await dbContext.FormTemplates
-            .Include(ft => ft.Topic)
-            .Include(ft => ft.Comments)
-            .Include(ft => ft.Questions)
-            .Include(ft => ft.Creator)
-            .Include(ft => ft.Tags)
+        return await GetFormTemplatesQuery()
             .Where(ft => ft.Title.Contains(lowerSearchTerm) 
                          || ft.Questions.Any(q => q.Description.Contains(lowerSearchTerm)) 
                          || ft.Comments.Any(c => c.Text.Contains(lowerSearchTerm)))
             .ToListAsync();
+    }
+    
+    private IQueryable<FormTemplate> GetFormTemplatesQuery()
+    {
+        return dbContext.FormTemplates
+            .Include(ft => ft.Topic)
+            .Include(ft => ft.Comments)
+            .Include(ft => ft.Questions)
+            .Include(ft => ft.Creator)
+            .Include(ft => ft.Tags);
     }
 }
