@@ -22,9 +22,9 @@
                 <ul class="navbar-nav flex-grow-1">
                     @if (User.IsInRole("Admin"))
                     {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Admin" asp-action="Index">Admin Panel</a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Admin" asp-action="Index">Admin Panel</a>
+                    </li>
                     }
                 </ul>
                 <div class="d-inline-flex align-items-center">
@@ -42,11 +42,19 @@
 </header>
 
 <div class="container">
+    <!-- Включение формы поиска -->
+    @{
+        var searchModel = ViewData["SearchModel"] as CourseProject.Presentation.ViewModels.SearchViewModel;
+    }
+    @if (searchModel != null)
+    {
+       // <partial name="_SearchForm" model="searchModel" />
+    }
+
     <main role="main" class="pb-3">
         @RenderBody()
     </main>
 </div>
-
 
 <footer class="border-top footer text-muted">
     <div class="container">

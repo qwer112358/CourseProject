@@ -50,8 +50,13 @@ public class FormsRepository(ApplicationDbContext dbContext) : IFormsRepository
         return await dbContext.Forms.Where(t => ids.Contains(t.Id)).ToListAsync();  
     }
 
+    public async Task<ICollection<Form>> GetByTemplateIdAsync(Guid formTemplateId)
+    {
+        return await dbContext.Forms.Where(f => f.FormTemplateId == formTemplateId).ToListAsync();
+    }
+
     public async Task<ICollection<Form>> GetByIdsAsync(ICollection<Guid> ids)
     {
-        return await dbContext.Forms.Where(t => ids.Contains(t.Id)).ToListAsync();  
+        return await dbContext.Forms.Where(f => ids.Contains(f.Id)).ToListAsync();  
     }
 }

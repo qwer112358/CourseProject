@@ -1,0 +1,43 @@
+@model ICollection<CourseProject.Domain.Models.Form>
+
+<h2>Forms for Template</h2>
+
+@if (!Model.Any())
+{
+    <p>No forms found for this template.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>User</th>
+            <th>Submission Date</th>
+            <th>Answers</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var form in Model)
+        {
+            <tr>
+                <td>@form.ApplicationUser?.UserName ?? "Unknown User"</td>
+                <td>@form.SubmissionDate.ToString("g")</td>
+                <td>
+                    <ul>
+                        @foreach (var answer in form.Answers)
+                        {
+                            <li>
+                                Question ID: @answer.QuestionId,
+                                Answer: 
+                                @if (!string.IsNullOrEmpty(answer.AnswerText)) { @answer.AnswerText }
+                                else if (answer.AnswerInteger.HasValue) { @answer.AnswerInteger }
+                                else { @(answer.AnswerCheckbox.HasValue ? "Yes" : "No") }
+                            </li>
+                        }
+                    </ul>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

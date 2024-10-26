@@ -21,6 +21,11 @@ public class FormsService(IFormsRepository formsRepository) : IFormsService
         return await formsRepository.GetByIdsAsync(ids);
     }
 
+    public async Task<ICollection<Form>> GetFormsByTemplateIdAsync(Guid formTemplateId)
+    {
+        return await formsRepository.GetByTemplateIdAsync(formTemplateId);
+    }
+
     public async Task AddFormAsync(Form Form)
     {
         await formsRepository.Create(Form);

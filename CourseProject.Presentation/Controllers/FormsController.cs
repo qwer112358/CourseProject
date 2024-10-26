@@ -15,6 +15,38 @@ public class FormsController(
     IQuestionService questionService) : Controller
 {
     [Authorize]
+    [HttpGet("{formTemplateId}")]
+    public async Task<IActionResult> Index(Guid formTemplateId)
+    {
+        var forms = await formsService.GetFormsByTemplateIdAsync(formTemplateId);
+        if (forms == null || !forms.Any())
+        {
+            return NotFound("Формы по указанному шаблону не найдены.");
+        }
+
+        /*
+        var viewModel = new Form
+        {
+            FormTemplateId = templateId,
+            Forms = forms.Select(f => new FormViewModel
+            {
+                Id = f.Id,
+                ApplicationUserName = f.ApplicationUser.UserName,
+                SubmissionDate = f.SubmissionDate,
+                Answers = f.Answers.Select(a => new FormAnswerViewModel
+                {
+                    QuestionId = a.QuestionId,
+                    AnswerText = a.AnswerText,
+                    AnswerInteger = a.AnswerInteger,
+                    AnswerCheckbox = a.AnswerCheckbox
+                }).ToList()
+            }).ToList()
+        };*/
+
+        return View(forms);
+    }
+    
+    [Authorize]
     [HttpGet("Create/{id}")]
     public async Task<IActionResult> Create(Guid id)
     {
