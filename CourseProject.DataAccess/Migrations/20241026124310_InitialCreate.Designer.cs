@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CourseProject.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241025123921_InitialCreate")]
+    [Migration("20241026124310_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -175,7 +175,6 @@ namespace CourseProject.DataAccess.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("AnswerText")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<Guid>("FormId")
@@ -262,7 +261,6 @@ namespace CourseProject.DataAccess.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<Guid>("FormTemplateId")
@@ -302,17 +300,17 @@ namespace CourseProject.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("1cdba3b1-3745-4010-ba94-d075a1584669"),
+                            Id = new Guid("ae62b2d4-82fc-4cf5-b96e-096208698261"),
                             Name = "Tag 1"
                         },
                         new
                         {
-                            Id = new Guid("cf50760f-83ff-4392-be1a-670dadbb48eb"),
+                            Id = new Guid("192702f0-e775-4075-89f4-edce51492bb5"),
                             Name = "Tag 2"
                         },
                         new
                         {
-                            Id = new Guid("723148bf-f4f2-4091-a7c8-2c60ca0b631f"),
+                            Id = new Guid("5c84bb0c-faec-47fd-bd10-52d31c565bd7"),
                             Name = "Tag 3"
                         });
                 });
@@ -334,17 +332,17 @@ namespace CourseProject.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e0d5e7e5-632f-4205-acb6-39978f500ee1"),
+                            Id = new Guid("46822e5b-6eff-4c67-83bb-a70e8ab7c42d"),
                             Name = "Education"
                         },
                         new
                         {
-                            Id = new Guid("63805a3f-8c6a-4a7b-bd02-8c9bbab21a43"),
+                            Id = new Guid("933844f5-6056-4bec-9901-1c21a4321de2"),
                             Name = "Test"
                         },
                         new
                         {
-                            Id = new Guid("4c0b247e-b534-4bc8-ac6e-64b6e9a9cf38"),
+                            Id = new Guid("c678f4f1-538c-4bc0-8a87-d82f26f075f5"),
                             Name = "Other"
                         });
                 });

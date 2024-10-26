@@ -26,7 +26,7 @@ public class FormQuestionViewModel
     public string? Title { get; set; }
     public string? Description { get; set; }
     public QuestionType Type { get; set; }
-    public string AnswerText { get; set; } // Для SingleLine, MultiLine
+    public string? AnswerText { get; set; } // Для SingleLine, MultiLine
     public int? AnswerInteger { get; set; } // Для Integer
     public bool AnswerCheckbox { get; set; } // Для Checkbox
 }

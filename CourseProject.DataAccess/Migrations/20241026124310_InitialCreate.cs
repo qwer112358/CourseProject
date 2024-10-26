@@ -326,7 +326,7 @@ namespace CourseProject.DataAccess.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Title = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
                     Type = table.Column<int>(type: "integer", nullable: false),
                     Order = table.Column<int>(type: "integer", nullable: false),
                     FormTemplateId = table.Column<Guid>(type: "uuid", nullable: false)
@@ -349,7 +349,7 @@ namespace CourseProject.DataAccess.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     FormId = table.Column<Guid>(type: "uuid", nullable: false),
                     QuestionId = table.Column<Guid>(type: "uuid", nullable: false),
-                    AnswerText = table.Column<string>(type: "text", nullable: false),
+                    AnswerText = table.Column<string>(type: "text", nullable: true),
                     AnswerInteger = table.Column<int>(type: "integer", nullable: true),
                     AnswerCheckbox = table.Column<bool>(type: "boolean", nullable: true)
                 },
@@ -375,9 +375,9 @@ namespace CourseProject.DataAccess.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("1cdba3b1-3745-4010-ba94-d075a1584669"), "Tag 1" },
-                    { new Guid("723148bf-f4f2-4091-a7c8-2c60ca0b631f"), "Tag 3" },
-                    { new Guid("cf50760f-83ff-4392-be1a-670dadbb48eb"), "Tag 2" }
+                    { new Guid("192702f0-e775-4075-89f4-edce51492bb5"), "Tag 2" },
+                    { new Guid("5c84bb0c-faec-47fd-bd10-52d31c565bd7"), "Tag 3" },
+                    { new Guid("ae62b2d4-82fc-4cf5-b96e-096208698261"), "Tag 1" }
                 });
 
             migrationBuilder.InsertData(
@@ -385,9 +385,9 @@ namespace CourseProject.DataAccess.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("4c0b247e-b534-4bc8-ac6e-64b6e9a9cf38"), "Other" },
-                    { new Guid("63805a3f-8c6a-4a7b-bd02-8c9bbab21a43"), "Test" },
-                    { new Guid("e0d5e7e5-632f-4205-acb6-39978f500ee1"), "Education" }
+                    { new Guid("46822e5b-6eff-4c67-83bb-a70e8ab7c42d"), "Education" },
+                    { new Guid("933844f5-6056-4bec-9901-1c21a4321de2"), "Test" },
+                    { new Guid("c678f4f1-538c-4bc0-8a87-d82f26f075f5"), "Other" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -1,3 +1,4 @@
+@using CourseProject.Domain.Models
 @model ICollection<CourseProject.Domain.Models.Form>
 
 <h2>Forms for Template</h2>
@@ -30,6 +31,8 @@ else
                                 Question title: @answer.Question.Title
                                 <br/>
                                 Question description: @answer.Question.Description,
+                                <br/>
+                                Type: @answer.Question.Type,
                                 <br/>
                                 Answer: 
                                 @if (!string.IsNullOrEmpty(answer.AnswerText)) { @answer.AnswerText }
