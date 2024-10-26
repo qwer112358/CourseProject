@@ -15,6 +15,9 @@
                 <small class="form-text text-muted">@question.Description</small>
             }
 
+            <!-- Скрытое поле для сохранения QuestionId -->
+            <input type="hidden" asp-for="Questions[i].QuestionId" />
+
             @switch (question.Type)
             {
                 case QuestionType.SingleLine:

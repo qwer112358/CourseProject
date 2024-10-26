@@ -1,0 +1,57 @@
+@model CourseProject.Presentation.ViewModels.SearchViewModel
+@using CourseProject.Domain.Models;
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@inject SignInManager<ApplicationUser> signInManager
+
+<div class="container">
+    <h2>Form Templates</h2>
+
+    <!-- Search form -->
+    @{ Html.RenderPartial("_SearchForm", Model); }
+
+    
+    @if (signInManager.IsSignedIn(User))
+    {
+        <a asp-controller="FormTemplates" asp-action="Create" class="btn btn-link">Create New Form Template</a>
+    }
+    
+    <!-- Templates table -->
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Topic</th>
+            <th>Public</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @if (!Model.FormTemplates.Any())
+        {
+            <tr>
+                <td colspan="4" class="text-center">No templates found.</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var formTemplate in Model.FormTemplates)
+            {
+                <tr>
+                    <td>@formTemplate.Title</td>
+                    <td>@formTemplate.Topic?.Name</td>
+                    <td>@(formTemplate.IsPublic ? "Yes" : "No")</td>
+                    <td>
+                        <a href="@Url.Action("Details", new { id = formTemplate.Id })" class="btn btn-link">View</a>
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <a href="@Url.Action("Edit", new { id = formTemplate.Id })" class="btn btn-link">Edit</a>
+                            <a href="@Url.Action("Delete", new { id = formTemplate.Id })" class="btn btn-link">Delete</a>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+</div>

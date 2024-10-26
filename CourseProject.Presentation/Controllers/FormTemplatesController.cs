@@ -42,6 +42,29 @@ public class FormTemplatesController(
 
         return Ok(formTemplate);
     }
+    
+    [HttpGet("GetByUserName/{userName}")]
+    public async Task<IActionResult> GetByUserName(string userName)
+    {
+        var user = await userManager.FindByNameAsync(userName);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        var formTemplates = await formTemplatesService.GetFormTemplatesByUserId(user.Id);
+        if (formTemplates == null || !formTemplates.Any())
+        {
+            return NotFound();
+        }
+
+        var model = new SearchViewModel
+        {
+            FormTemplates = formTemplates
+        };
+
+        return View(model);
+    }
 
     [HttpGet("Create")]
     public async Task<IActionResult> Create()

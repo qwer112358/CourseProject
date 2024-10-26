@@ -82,6 +82,6 @@ public class FormsController(
 
         await formsService.AddFormAsync(form);
 
-        return RedirectToAction("Index");
+        return Redirect("/");
     }
 }
