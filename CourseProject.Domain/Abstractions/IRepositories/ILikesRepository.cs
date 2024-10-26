@@ -5,5 +5,5 @@ namespace CourseProject.Domain.Abstractions.IRepositories;
 
 public interface ILikesRepository : IGenericRepository<Like>
 {
-	Task<bool> IsLikedByUser(int itemId, string userId);
+	Task<bool> IsLikedByUser(Guid templateId, string userId);
 }

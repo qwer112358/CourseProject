@@ -45,5 +45,6 @@ public static class ServiceLayerConfigurations
         services.AddScoped<ICommentsService, CommentsService>();
         services.AddScoped<IQuestionService, QuestionsService>();
         services.AddScoped<IFormsService, FormsService>();
+        services.AddScoped<ILikesService, LikesService>();
     }
 }

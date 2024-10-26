@@ -56,7 +56,7 @@ public class FormTemplatesRepository(ApplicationDbContext dbContext) : IFormTemp
     public async Task Delete(Guid id)
     {
         await dbContext.FormTemplates
-            .Where(x => x.Id == id)
+            .Where(ft => ft.Id == id)
             .ExecuteDeleteAsync();
     }
     
@@ -91,6 +91,7 @@ public class FormTemplatesRepository(ApplicationDbContext dbContext) : IFormTemp
             .Include(ft => ft.Comments)
             .Include(ft => ft.Questions)
             .Include(ft => ft.Creator)
-            .Include(ft => ft.Tags);
+            .Include(ft => ft.Tags)
+            .Include(ft => ft.Likes);
     }
 }

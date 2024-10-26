@@ -13,7 +13,6 @@ public class FormTemplatesController(
     ITagsService tagsService,
     ITopicsService topicsService,
     ICommentsService commentsService,
-    IQuestionService questionService,
     UserManager<ApplicationUser> userManager)
     : Controller
 {
