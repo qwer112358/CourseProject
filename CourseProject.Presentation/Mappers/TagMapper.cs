@@ -5,6 +5,7 @@ namespace CourseProject.Presentation.Mappers;
 
 public static class TagMapper
 {
+   
     public static TagViewModel ToViewModel(this Tag tag)
     {
         return new TagViewModel
@@ -13,8 +14,8 @@ public static class TagMapper
             Name = tag.Name
         };
     }
-
-    public static Tag ToModel(this TagViewModel viewModel)
+//
+    public static Tag ToDomain(this TagViewModel viewModel)
     {
         return new Tag
         {

@@ -6,6 +6,6 @@ public class CommentViewModel
     public string Text { get; set; }
     public DateTime CreatedAt { get; set; }
     public string ApplicationUserId { get; set; }
-    public string ApplicationUserName { get; set; } // Display user's name
+    public string ApplicationUserName { get; set; }
     public Guid FormTemplateId { get; set; }
 }

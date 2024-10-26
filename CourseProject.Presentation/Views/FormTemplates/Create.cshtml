@@ -1,6 +1,6 @@
 @using System.Collections
 @using Microsoft.AspNetCore.Mvc.TagHelpers
-@model CourseProject.Presentation.ViewModels.FormTemplateViewModel
+@model CourseProject.Presentation.ViewModels.FormTemplateViewModels.FormTemplateRequestViewModel
 
 <div class="container mt-5">
     <h2 class="mb-4">Create New Form Template</h2>
@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-6 form-group">
                 <label>User</label>
-                <input type="text" class="form-control" value="@User.Identity.Name" readonly />
+                <input type="text" asp-for="CreatorUserName" class="form-control" value="@User.Identity.Name" readonly />
             </div>
             <div class="col-md-6 form-group">
                 <label>Date</label>
@@ -31,7 +31,7 @@
         <div class="row">
             <div class="col-md-6 form-group">
                 <label asp-for="TopicId">Topic</label>
-                <select asp-for="TopicId" class="form-control" asp-items="@(new SelectList((IEnumerable<CourseProject.Domain.Models.Topic>)ViewBag.AllTopics, "Id", "Name"))"></select>
+                <select asp-for="TopicId" class="form-control" asp-items="@(new SelectList((IEnumerable)ViewBag.AllTopics, "Id", "Name"))"></select>
                 <span asp-validation-for="TopicId" class="text-danger"></span>
             </div>
             <div class="col-md-6 form-group">
@@ -58,9 +58,18 @@
     </form>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
+    function updateTopicName(selectElement) {
+        const selectedOption = selectElement.options[selectElement.selectedIndex];
+        const topicNameInput = document.querySelector('input[name="Topic.Name"]');
+        if (topicNameInput) {
+            topicNameInput.value = selectedOption.text;
+        }
+    }
+    
     let questionCount = 0;
 
     function addQuestion() {
@@ -115,6 +124,34 @@
             targetElement.before(draggedElement);
         }
     });
+
+    /*$(document).ready(function () {
+        // Загрузка данных из ViewBag.Tags, переданного с сервера
+        const tagsData = @Html.Raw(Json.Serialize(ViewBag.Tags));
+
+        // Инициализация select2 для выбора и создания тегов
+        $('#tags-selector').select2({
+            tags: true,
+            data: tagsData,
+            placeholder: 'Add tags',
+            allowClear: true,
+            createTag: function (params) {
+                const term = $.trim(params.term);
+                if (term === '') {
+                    return null;
+                }
+                return {
+                    id: term,
+                    text: term,
+                    newTag: true
+                };
+            }
+        }).on('change', function (e) {
+            // Обновляем скрытое поле с выбранными тегами
+            const selectedTags = $(this).val();
+            $('#tags-input').val(selectedTags ? selectedTags.join(',') : '');
+        });
+    });*/
 </script>
 
 <style>
@@ -126,3 +163,4 @@
         background-color: #f8f9fa;
     }
 </style>
+

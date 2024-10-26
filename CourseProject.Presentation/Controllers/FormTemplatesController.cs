@@ -1,6 +1,7 @@
 using CourseProject.Domain.Abstractions.IServices;
 using CourseProject.Domain.Models;
-using CourseProject.Presentation.ViewModels;
+using CourseProject.Presentation.Mappers;
+using CourseProject.Presentation.ViewModels.FormTemplateViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -20,85 +21,38 @@ public class FormTemplatesController(
     public async Task<IActionResult> Index(string searchTerm)
     {
         var formTemplates = await formTemplatesService.SearchFormTemplatesAsync(searchTerm);
-        
-        var viewModel = new SearchViewModel
-        {
-            SearchTerm = searchTerm,
-            FormTemplates = formTemplates
-        };
-
+        var viewModel = SearchModelMapper.ToSearchViewModel(formTemplates, searchTerm);
         return View(viewModel);
-    }
-    
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(Guid id)
-    {
-        var formTemplate = await formTemplatesService.GetFormTemplateByIdAsync(id);
-        if (formTemplate == null)
-        {
-            return NotFound();
-        }
-
-        return Ok(formTemplate);
     }
     
     [HttpGet("GetByUserName/{userName}")]
     public async Task<IActionResult> GetByUserName(string userName)
     {
         var user = await userManager.FindByNameAsync(userName);
-        if (user == null)
-        {
-            return NotFound();
-        }
-
+        if (user == null) return NotFound();
         var formTemplates = await formTemplatesService.GetFormTemplatesByUserId(user.Id);
-        if (formTemplates == null || !formTemplates.Any())
-        {
-            return NotFound();
-        }
+        //if (formTemplates is null || !formTemplates.Any()) return NotFound();
 
-        var model = new SearchViewModel
-        {
-            FormTemplates = formTemplates
-        };
-
+        var model = SearchModelMapper.ToSearchViewModel(formTemplates, string.Empty);
         return View(model);
     }
 
     [HttpGet("Create")]
     public async Task<IActionResult> Create()
     {
-        ViewBag.AllTopics = await topicsService.GetAllTopicsAsync();
-        ViewBag.Tags = await tagsService.GetAllTagsAsync();
+        await InitData();
         return View();
     }
     
     [Authorize]
     [HttpPost("Create")]
-    public async Task<IActionResult> Create(FormTemplateViewModel viewModel)
+    public async Task<IActionResult> Create(FormTemplateRequestViewModel viewModel)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
-
-        var user = await userManager.GetUserAsync(User);
-
-        var formTemplate = new FormTemplate
-        {
-            Title = viewModel.Title,
-            Description = viewModel.Description,
-            Topic = await topicsService.GetTopicByIdAsync(viewModel.TopicId),
-            Creator = user,
-            CreatorId = user.Id,
-            ImageUrl = viewModel.ImageUrl,
-            IsPublic = viewModel.IsPublic,
-            Tags = await tagsService.GetTagsByIdsAsync(viewModel.SelectedTagIds),
-            Questions = viewModel.Questions.Select(q => new Question
-            {
-                Title = q.Title,
-                Description = q.Description,
-                Type = q.Type,
-                Order = q.Order
-                }).ToList()
-        };
+        var creator =  await userManager.FindByNameAsync(viewModel.CreatorUserName);
+        var selectedTags = await tagsService.GetTagsByIdsAsync(viewModel.SelectedTagIds);
+        var topic = await topicsService.GetTopicByIdAsync(viewModel.TopicId);
+        var formTemplate = viewModel.ToDomain(creator!, selectedTags, topic);
         await formTemplatesService.CreateFormTemplate(formTemplate);
         return RedirectToAction("Index");
     }
@@ -107,12 +61,8 @@ public class FormTemplatesController(
     public async Task<IActionResult> Details(Guid id)
     {
         var formTemplate = await formTemplatesService.GetFormTemplateByIdAsync(id);
-        if (formTemplate == null)
-        {
-            return NotFound();
-        }
-
-        return View(formTemplate);
+        var model = formTemplate.ToDetailViewModel();
+        return View(model);
     }
     
     [Authorize]
@@ -124,7 +74,7 @@ public class FormTemplatesController(
             ModelState.AddModelError(string.Empty, "Comment cannot be empty.");
             return RedirectToAction("Details", new { id = formTemplateId });
         }
-
+        
         var user = await userManager.GetUserAsync(User);
         var comment = new Comment
         {
@@ -134,7 +84,6 @@ public class FormTemplatesController(
         };
 
         await commentsService.CreateCommentAsync(comment);
-
         return RedirectToAction("Details", new { id = formTemplateId });
     }
 
@@ -143,79 +92,31 @@ public class FormTemplatesController(
     public async Task<IActionResult> Edit(Guid id)
     {
         var formTemplate = await formTemplatesService.GetFormTemplateByIdAsync(id);
-        if (formTemplate == null || formTemplate.CreatorId != userManager.GetUserId(User))
-        {
-            return Unauthorized();
-        }
-
-        
-        var viewModel = new FormTemplateViewModel
-        {
-            Title = formTemplate.Title,
-            Description = formTemplate.Description,
-            TopicId = formTemplate.TopicId,
-            ImageUrl = formTemplate.ImageUrl,
-            IsPublic = formTemplate.IsPublic,
-            SelectedTagIds = formTemplate.Tags.Select(tag => tag.Id).ToList(),
-            Questions = formTemplate.Questions.Select(q => new QuestionViewModel
-            {
-                Id = q.Id,
-                Title = q.Title,
-                Description = q.Description,
-                Type = q.Type,
-            }).ToList()
-        };
-
-        ViewData["AllTopics"] = await topicsService.GetAllTopicsAsync();
-        ViewData["Tags"] = await tagsService.GetAllTagsAsync();
-
+        if (formTemplate is null || formTemplate.CreatorId != userManager.GetUserId(User)) return Unauthorized();
+        await InitData();
+        var viewModel = formTemplate.ToRequestViewModel();
         return View(viewModel);
     }
 
     [Authorize]
     [HttpPost("Edit/{id}")]
-    public async Task<IActionResult> Edit(Guid id, FormTemplateViewModel viewModel)
+    public async Task<IActionResult> Edit(Guid id, FormTemplateRequestViewModel viewModel)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
-
-        var existingFormTemplate = await formTemplatesService.GetFormTemplateByIdAsync(id);
-        if (existingFormTemplate == null || existingFormTemplate.CreatorId != userManager.GetUserId(User))
-        {
-            return Unauthorized();
-        }
-
-        existingFormTemplate.Title = viewModel.Title;
-        existingFormTemplate.Description = viewModel.Description;
-        existingFormTemplate.Topic = await topicsService.GetTopicByIdAsync(viewModel.TopicId);
-        existingFormTemplate.ImageUrl = viewModel.ImageUrl;
-        existingFormTemplate.IsPublic = viewModel.IsPublic;
-        existingFormTemplate.Tags = await tagsService.GetTagsByIdsAsync(viewModel.SelectedTagIds);
-        existingFormTemplate.Questions = viewModel.Questions.Select(q => new Question
-        {
-            Id = q.Id,
-            Title = q.Title,
-            Description = q.Description,
-            Type = q.Type,
-            Order = q.Order,
-            FormTemplateId = existingFormTemplate.Id
-        }).ToList();
-
-        await formTemplatesService.UpdateFormTemplate(existingFormTemplate);
-
+        var creator =  await userManager.FindByNameAsync(viewModel.CreatorUserName);
+        var selectedTags = await tagsService.GetTagsByIdsAsync(viewModel.SelectedTagIds);
+        var topic = await topicsService.GetTopicByIdAsync(viewModel.TopicId);
+        var formTemplate = viewModel.ToDomain(creator!, selectedTags, topic);
+        await formTemplatesService.UpdateFormTemplate(formTemplate);
         return RedirectToAction("Index");
     }
-
 
     [Authorize]
     [HttpGet("Delete/{id}")]
     public async Task<IActionResult> Delete(Guid id)
     {
         var formTemplate = await formTemplatesService.GetFormTemplateByIdAsync(id);
-        if (formTemplate == null || formTemplate.CreatorId != userManager.GetUserId(User))
-        {
-            return Unauthorized();
-        }
-
+        if (formTemplate is null || formTemplate.CreatorId != userManager.GetUserId(User)) return Unauthorized();
         return View(formTemplate);
     }
 
@@ -224,12 +125,14 @@ public class FormTemplatesController(
     public async Task<IActionResult> DeleteConfirmed(Guid id)
     {
         var formTemplate = await formTemplatesService.GetFormTemplateByIdAsync(id);
-        if (formTemplate == null || formTemplate.CreatorId != userManager.GetUserId(User))
-        {
-            return Unauthorized();
-        }
-
+        if (formTemplate is null || formTemplate.CreatorId != userManager.GetUserId(User)) return Unauthorized();
         await formTemplatesService.DeleteFormTemplate(id);
         return RedirectToAction("Index");
+    }
+
+    private async Task InitData()
+    {
+        ViewBag.AllTopics = await topicsService.GetAllTopicsAsync();
+        ViewBag.Tags = await tagsService.GetAllTagsAsync();
     }
 }

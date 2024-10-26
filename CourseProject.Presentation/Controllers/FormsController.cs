@@ -19,11 +19,6 @@ public class FormsController(
     public async Task<IActionResult> Index(Guid formTemplateId)
     {
         var forms = await formsService.GetFormsByTemplateIdAsync(formTemplateId);
-        if (forms == null || !forms.Any())
-        {
-            return NotFound("Формы по указанному шаблону не найдены.");
-        }
-        
         foreach (var form in forms)
         {
             var questions = await questionService.GetQuestionByFormTemplateIdAsync(form.FormTemplateId);

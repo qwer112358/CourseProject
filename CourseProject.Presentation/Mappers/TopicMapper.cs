@@ -19,7 +19,7 @@ public static class TopicMapper
         return new Topic
         {
             Id = viewModel.Id,
-            Name = viewModel.Name
+            Name = viewModel.Name,
         };
     }
 }

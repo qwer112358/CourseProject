@@ -16,3 +16,21 @@
 /home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/obj/Debug/net8.0/CourseProject.DataAccess.genruntimeconfig.cache
 /home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/obj/Debug/net8.0/ref/CourseProject.DataAccess.dll
 /home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/obj/Debug/net8.0/CourseProject.DataAccess.sourcelink.json
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/bin/Debug/net8.0/CourseProject.DataAccess.deps.json
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/bin/Debug/net8.0/CourseProject.DataAccess.runtimeconfig.json
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/bin/Debug/net8.0/CourseProject.DataAccess.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/bin/Debug/net8.0/CourseProject.DataAccess.pdb
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/bin/Debug/net8.0/CourseProject.Domain.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/bin/Debug/net8.0/CourseProject.Domain.pdb
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/obj/Debug/net8.0/CourseProject.DataAccess.csproj.AssemblyReference.cache
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/obj/Debug/net8.0/CourseProject.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/obj/Debug/net8.0/CourseProject.DataAccess.AssemblyInfoInputs.cache
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/obj/Debug/net8.0/CourseProject.DataAccess.AssemblyInfo.cs
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/obj/Debug/net8.0/CourseProject.DataAccess.csproj.CoreCompileInputs.cache
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/obj/Debug/net8.0/CourseProject.DataAccess.sourcelink.json
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/obj/Debug/net8.0/CourseProject.DataAccess.csproj.CopyComplete
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/obj/Debug/net8.0/CourseProject.DataAccess.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/obj/Debug/net8.0/refint/CourseProject.DataAccess.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/obj/Debug/net8.0/CourseProject.DataAccess.pdb
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/obj/Debug/net8.0/CourseProject.DataAccess.genruntimeconfig.cache
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/obj/Debug/net8.0/ref/CourseProject.DataAccess.dll

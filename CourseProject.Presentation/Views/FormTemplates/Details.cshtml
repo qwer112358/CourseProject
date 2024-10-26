@@ -1,5 +1,4 @@
-@model CourseProject.Domain.Models.FormTemplate
-
+@model CourseProject.Presentation.ViewModels.FormTemplateViewModels.FormTemplateDetailViewModel
 <div class="container">
     <a asp-controller="Forms" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-link">Create a form</a>
     <a asp-controller="Forms" asp-action="Index" asp-route-formTemplateId="@Model.Id" class="btn btn-link">Forms</a>
@@ -13,7 +12,7 @@
 
     <div class="mb-3">
         <strong>Topic:</strong>
-        <p>@Model.Topic?.Name</p>
+        <p>@Model.Topic.Name</p>
     </div>
 
     <div class="mb-3">
@@ -28,7 +27,7 @@
 
     <div class="mb-3">
         <strong>Created By:</strong>
-        <p>@Model.Creator?.UserName</p>
+        <p>@Model.Creator.Name</p>
     </div>
 
     <div class="mb-3">
@@ -45,7 +44,9 @@
             @foreach (var question in Model.Questions.OrderBy(q => q.Order))
             {
                 <li>
-                    <strong>@question.Title:</strong> @question.Description
+                    <strong>Title: @question.Title:</strong>
+                    <br/>
+                    <em>Description:</em>: @question.Description
                     <br/>
                     <em>Type:</em> @question.Type
                 </li>
@@ -59,7 +60,7 @@
             @foreach (var comment in Model.Comments)
             {
                 <li>
-                    <strong>@comment.ApplicationUser.UserName</strong> (@comment.CreatedAt.ToLocalTime()):<br/>
+                    <strong>@comment.ApplicationUserName</strong> (@comment.CreatedAt.ToLocalTime()):<br/>
                     @comment.Text
                 </li>
             }

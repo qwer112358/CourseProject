@@ -11,3 +11,16 @@
 /home/sr/RiderProjects/CourseProject/CourseProject.Domain/obj/Debug/net8.0/CourseProject.Domain.pdb
 /home/sr/RiderProjects/CourseProject/CourseProject.Domain/obj/Debug/net8.0/ref/CourseProject.Domain.dll
 /home/sr/RiderProjects/CourseProject/CourseProject.Domain/obj/Debug/net8.0/CourseProject.Domain.sourcelink.json
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/bin/Debug/net8.0/CourseProject.Domain.deps.json
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/bin/Debug/net8.0/CourseProject.Domain.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/bin/Debug/net8.0/CourseProject.Domain.pdb
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/obj/Debug/net8.0/CourseProject.Domain.csproj.AssemblyReference.cache
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/obj/Debug/net8.0/CourseProject.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/obj/Debug/net8.0/CourseProject.Domain.AssemblyInfoInputs.cache
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/obj/Debug/net8.0/CourseProject.Domain.AssemblyInfo.cs
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/obj/Debug/net8.0/CourseProject.Domain.csproj.CoreCompileInputs.cache
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/obj/Debug/net8.0/CourseProject.Domain.sourcelink.json
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/obj/Debug/net8.0/CourseProject.Domain.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/obj/Debug/net8.0/refint/CourseProject.Domain.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/obj/Debug/net8.0/CourseProject.Domain.pdb
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/obj/Debug/net8.0/ref/CourseProject.Domain.dll

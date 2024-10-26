@@ -5,25 +5,22 @@ namespace CourseProject.Presentation.Mappers;
 
 public static class QuestionMapper
 {
-    public static QuestionViewModel ToViewModel(this Question question)
-    {
-        return new QuestionViewModel
+    public static QuestionViewModel ToViewModel(this Question question) => new()
         {
             Id = question.Id,
             Title = question.Title,
             Description = question.Description,
-            Type = question.Type,
+            Order = question.Order,
+            Type = question.Type
         };
-    }
 
-    public static Question ToModel(this QuestionViewModel viewModel, Guid formTemplateId)
-    {
-        return new Question
+    public static Question ToDomain(this QuestionViewModel viewModel, Guid formTemplateId) => new Question
         {
             Id = viewModel.Id,
             Title = viewModel.Title,
             Description = viewModel.Description,
+            Order = viewModel.Order,
+            Type = viewModel.Type,
             FormTemplateId = formTemplateId,
         };
-    }
 }

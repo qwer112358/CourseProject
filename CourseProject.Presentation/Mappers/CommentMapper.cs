@@ -11,10 +11,8 @@ public static class CommentMapper
         {
             Id = comment.Id,
             Text = comment.Text,
-            CreatedAt = comment.CreatedAt,
-            ApplicationUserId = comment.ApplicationUserId,
-            ApplicationUserName = comment.ApplicationUser?.Name, 
-            FormTemplateId = comment.FormTemplateId
+            ApplicationUserName = comment.ApplicationUser?.Name,
+            CreatedAt = comment.CreatedAt
         };
     }
 

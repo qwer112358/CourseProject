@@ -39,7 +39,7 @@
             {
                 <tr>
                     <td>@formTemplate.Title</td>
-                    <td>@formTemplate.Topic?.Name</td>
+                    <td>@formTemplate.Topic.Name</td>
                     <td>@(formTemplate.IsPublic ? "Yes" : "No")</td>
                     <td>
                         <a href="@Url.Action("Details", new { id = formTemplate.Id })" class="btn btn-link">View</a>
@@ -53,7 +53,7 @@
                                 </button>
                             </form>
                         }
-                        <span id="likesCount_@formTemplate.Id">Likes: @(formTemplate.Likes.Count)</span>
+                        <span id="likesCount_@formTemplate.Id">Likes: @(formTemplate.LikeCount)</span>
                     </td>
                 </tr>
             }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rl7olQch2iA=",
+  "dgSpecHash": "KjvGcL2oLeI=",
   "success": true,
-  "projectFilePath": "/home/sr/RiderProjects/CourseProject/CourseProject.Domain/CourseProject.Domain.csproj",
+  "projectFilePath": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/CourseProject.Domain.csproj",
   "expectedPackageFiles": [
     "/home/sr/.nuget/packages/cloudinarydotnet/1.26.2/cloudinarydotnet.1.26.2.nupkg.sha512",
     "/home/sr/.nuget/packages/microsoft.aspnetcore.cryptography.internal/8.0.10/microsoft.aspnetcore.cryptography.internal.8.0.10.nupkg.sha512",

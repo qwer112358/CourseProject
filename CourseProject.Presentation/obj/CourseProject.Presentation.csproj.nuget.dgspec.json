@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/sr/RiderProjects/CourseProject/CourseProject.Presentation/CourseProject.Presentation.csproj": {}
+    "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/CourseProject.Presentation.csproj": {}
   },
   "projects": {
-    "/home/sr/RiderProjects/CourseProject/CourseProject.Application/CourseProject.Application.csproj": {
+    "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Application/CourseProject.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/sr/RiderProjects/CourseProject/CourseProject.Application/CourseProject.Application.csproj",
+        "projectUniqueName": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Application/CourseProject.Application.csproj",
         "projectName": "CourseProject.Application",
-        "projectPath": "/home/sr/RiderProjects/CourseProject/CourseProject.Application/CourseProject.Application.csproj",
+        "projectPath": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Application/CourseProject.Application.csproj",
         "packagesPath": "/home/sr/.nuget/packages/",
-        "outputPath": "/home/sr/RiderProjects/CourseProject/CourseProject.Application/obj/",
+        "outputPath": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Application/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/sr/.nuget/NuGet/NuGet.Config"
@@ -26,8 +26,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/sr/RiderProjects/CourseProject/CourseProject.Domain/CourseProject.Domain.csproj": {
-                "projectPath": "/home/sr/RiderProjects/CourseProject/CourseProject.Domain/CourseProject.Domain.csproj"
+              "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/CourseProject.Domain.csproj": {
+                "projectPath": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/CourseProject.Domain.csproj"
               }
             }
           }
@@ -71,14 +71,14 @@
         }
       }
     },
-    "/home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/CourseProject.DataAccess.csproj": {
+    "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/CourseProject.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/CourseProject.DataAccess.csproj",
+        "projectUniqueName": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/CourseProject.DataAccess.csproj",
         "projectName": "CourseProject.DataAccess",
-        "projectPath": "/home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/CourseProject.DataAccess.csproj",
+        "projectPath": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/CourseProject.DataAccess.csproj",
         "packagesPath": "/home/sr/.nuget/packages/",
-        "outputPath": "/home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/obj/",
+        "outputPath": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/sr/.nuget/NuGet/NuGet.Config"
@@ -93,8 +93,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/sr/RiderProjects/CourseProject/CourseProject.Domain/CourseProject.Domain.csproj": {
-                "projectPath": "/home/sr/RiderProjects/CourseProject/CourseProject.Domain/CourseProject.Domain.csproj"
+              "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/CourseProject.Domain.csproj": {
+                "projectPath": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/CourseProject.Domain.csproj"
               }
             }
           }
@@ -148,14 +148,14 @@
         }
       }
     },
-    "/home/sr/RiderProjects/CourseProject/CourseProject.Domain/CourseProject.Domain.csproj": {
+    "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/CourseProject.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/sr/RiderProjects/CourseProject/CourseProject.Domain/CourseProject.Domain.csproj",
+        "projectUniqueName": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/CourseProject.Domain.csproj",
         "projectName": "CourseProject.Domain",
-        "projectPath": "/home/sr/RiderProjects/CourseProject/CourseProject.Domain/CourseProject.Domain.csproj",
+        "projectPath": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/CourseProject.Domain.csproj",
         "packagesPath": "/home/sr/.nuget/packages/",
-        "outputPath": "/home/sr/RiderProjects/CourseProject/CourseProject.Domain/obj/",
+        "outputPath": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/sr/.nuget/NuGet/NuGet.Config"
@@ -215,14 +215,14 @@
         }
       }
     },
-    "/home/sr/RiderProjects/CourseProject/CourseProject.Presentation/CourseProject.Presentation.csproj": {
+    "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/CourseProject.Presentation.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/sr/RiderProjects/CourseProject/CourseProject.Presentation/CourseProject.Presentation.csproj",
+        "projectUniqueName": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/CourseProject.Presentation.csproj",
         "projectName": "CourseProject.Presentation",
-        "projectPath": "/home/sr/RiderProjects/CourseProject/CourseProject.Presentation/CourseProject.Presentation.csproj",
+        "projectPath": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/CourseProject.Presentation.csproj",
         "packagesPath": "/home/sr/.nuget/packages/",
-        "outputPath": "/home/sr/RiderProjects/CourseProject/CourseProject.Presentation/obj/",
+        "outputPath": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/sr/.nuget/NuGet/NuGet.Config"
@@ -237,14 +237,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/sr/RiderProjects/CourseProject/CourseProject.Application/CourseProject.Application.csproj": {
-                "projectPath": "/home/sr/RiderProjects/CourseProject/CourseProject.Application/CourseProject.Application.csproj"
+              "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Application/CourseProject.Application.csproj": {
+                "projectPath": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Application/CourseProject.Application.csproj"
               },
-              "/home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/CourseProject.DataAccess.csproj": {
-                "projectPath": "/home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/CourseProject.DataAccess.csproj"
+              "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/CourseProject.DataAccess.csproj": {
+                "projectPath": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/CourseProject.DataAccess.csproj"
               },
-              "/home/sr/RiderProjects/CourseProject/CourseProject.Domain/CourseProject.Domain.csproj": {
-                "projectPath": "/home/sr/RiderProjects/CourseProject/CourseProject.Domain/CourseProject.Domain.csproj"
+              "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/CourseProject.Domain.csproj": {
+                "projectPath": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Domain/CourseProject.Domain.csproj"
               }
             }
           }

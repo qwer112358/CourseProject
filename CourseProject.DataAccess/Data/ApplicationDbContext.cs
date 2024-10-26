@@ -10,7 +10,6 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
         : base(options)
     {
     }
-    
     public DbSet<Comment> Comments { get; set; }
     public DbSet<Form> Forms { get; set; }
     public DbSet<FormAnswer> FormAnswers { get; set; }

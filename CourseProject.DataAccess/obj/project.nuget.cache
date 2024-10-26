@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hOdae4orbbo=",
+  "dgSpecHash": "bsAL+osqLpA=",
   "success": true,
-  "projectFilePath": "/home/sr/RiderProjects/CourseProject/CourseProject.DataAccess/CourseProject.DataAccess.csproj",
+  "projectFilePath": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.DataAccess/CourseProject.DataAccess.csproj",
   "expectedPackageFiles": [
     "/home/sr/.nuget/packages/cloudinarydotnet/1.26.2/cloudinarydotnet.1.26.2.nupkg.sha512",
     "/home/sr/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
