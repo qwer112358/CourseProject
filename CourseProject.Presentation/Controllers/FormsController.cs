@@ -23,9 +23,14 @@ public class FormsController(
         {
             return NotFound("Формы по указанному шаблону не найдены.");
         }
-
-        /*
-        var viewModel = new Form
+        
+        foreach (var form in forms)
+        {
+            var questions = await questionService.GetQuestionByFormTemplateIdAsync(form.FormTemplateId);
+            form.FormTemplate.Questions = questions;
+        }
+        
+        /*var viewModel = new FormViewModel
         {
             FormTemplateId = templateId,
             Forms = forms.Select(f => new FormViewModel

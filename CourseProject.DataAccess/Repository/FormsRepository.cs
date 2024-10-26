@@ -15,7 +15,8 @@ public class FormsRepository(ApplicationDbContext dbContext) : IFormsRepository
 
     public async Task<Form> GetById(Guid id)
     {
-        return await dbContext.Forms.FirstOrDefaultAsync(t => t.Id == id);
+        return await GetAllPropertiesFormsQuery()
+            .FirstOrDefaultAsync(t => t.Id == id);
     }
 
     public async Task Create(Form queston)
@@ -24,13 +25,13 @@ public class FormsRepository(ApplicationDbContext dbContext) : IFormsRepository
         await dbContext.SaveChangesAsync();;
     }
 
-    public async Task Update(Form Form)
+    public async Task Update(Form form)
     {
         await dbContext.Forms
-            .Where(t => t.Id == Form.Id)
+            .Where(t => t.Id == form.Id)
             .ExecuteUpdateAsync(s => s
-                .SetProperty(t => t.SubmissionDate, Form.SubmissionDate)
-                .SetProperty(t => t.Answers, Form.Answers));
+                .SetProperty(t => t.SubmissionDate, form.SubmissionDate)
+                .SetProperty(t => t.Answers, form.Answers));
     }
 
     public async Task Delete(Guid id)
@@ -52,11 +53,19 @@ public class FormsRepository(ApplicationDbContext dbContext) : IFormsRepository
 
     public async Task<ICollection<Form>> GetByTemplateIdAsync(Guid formTemplateId)
     {
-        return await dbContext.Forms.Where(f => f.FormTemplateId == formTemplateId).ToListAsync();
+        return await GetAllPropertiesFormsQuery().Where(f => f.FormTemplateId == formTemplateId).ToListAsync();
     }
 
     public async Task<ICollection<Form>> GetByIdsAsync(ICollection<Guid> ids)
     {
         return await dbContext.Forms.Where(f => ids.Contains(f.Id)).ToListAsync();  
+    }
+    
+    private IQueryable<Form> GetAllPropertiesFormsQuery()
+    {
+        return dbContext.Forms
+            .Include(f => f.Answers)
+            .Include(f => f.FormTemplate)
+            .Include(f => f.ApplicationUser);
     }
 }

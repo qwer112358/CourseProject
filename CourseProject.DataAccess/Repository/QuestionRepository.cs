@@ -49,4 +49,10 @@ public class QuestionRepository(ApplicationDbContext dbContext) : IQuestionRepos
     {
         return await dbContext.Questions.Where(t => ids.Contains(t.Id)).ToListAsync();  
     }
+
+    public async Task<ICollection<Question>> GetByFormTemplateIdAsync(Guid formTemplateId)
+    {
+        return await dbContext
+            .Questions.Where(t => t.FormTemplateId == formTemplateId).ToListAsync();
+    }
 }

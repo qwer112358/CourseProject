@@ -20,14 +20,17 @@ else
         @foreach (var form in Model)
         {
             <tr>
-                <td>@form.ApplicationUser?.UserName ?? "Unknown User"</td>
+                <td>@form.ApplicationUser?.UserName</td>
                 <td>@form.SubmissionDate.ToString("g")</td>
                 <td>
                     <ul>
                         @foreach (var answer in form.Answers)
                         {
                             <li>
-                                Question ID: @answer.QuestionId,
+                                Question title: @answer.Question.Title
+                                <br/>
+                                Question description: @answer.Question.Description,
+                                <br/>
                                 Answer: 
                                 @if (!string.IsNullOrEmpty(answer.AnswerText)) { @answer.AnswerText }
                                 else if (answer.AnswerInteger.HasValue) { @answer.AnswerInteger }
