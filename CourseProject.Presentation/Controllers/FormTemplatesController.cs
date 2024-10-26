@@ -31,8 +31,6 @@ public class FormTemplatesController(
         var user = await userManager.FindByNameAsync(userName);
         if (user == null) return NotFound();
         var formTemplates = await formTemplatesService.GetFormTemplatesByUserId(user.Id);
-        //if (formTemplates is null || !formTemplates.Any()) return NotFound();
-
         var model = SearchModelMapper.ToSearchViewModel(formTemplates, string.Empty);
         return View(model);
     }
