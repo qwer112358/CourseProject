@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CourseProject.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241026124310_InitialCreate")]
+    [Migration("20241027031254_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -43,6 +43,9 @@ namespace CourseProject.DataAccess.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
+
+                    b.Property<Guid?>("FormTemplateId")
+                        .HasColumnType("uuid");
 
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("boolean");
@@ -97,6 +100,8 @@ namespace CourseProject.DataAccess.Migrations
 
                     b.HasIndex("Email")
                         .IsUnique();
+
+                    b.HasIndex("FormTemplateId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -300,17 +305,17 @@ namespace CourseProject.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ae62b2d4-82fc-4cf5-b96e-096208698261"),
+                            Id = new Guid("d1e7ecb9-ae35-4629-8d00-ba449eb17ebc"),
                             Name = "Tag 1"
                         },
                         new
                         {
-                            Id = new Guid("192702f0-e775-4075-89f4-edce51492bb5"),
+                            Id = new Guid("e9e843b0-d91b-4a77-9b18-ba8a00d7992f"),
                             Name = "Tag 2"
                         },
                         new
                         {
-                            Id = new Guid("5c84bb0c-faec-47fd-bd10-52d31c565bd7"),
+                            Id = new Guid("948ca871-8c8b-4570-b2d9-5bade0e12d80"),
                             Name = "Tag 3"
                         });
                 });
@@ -332,17 +337,17 @@ namespace CourseProject.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("46822e5b-6eff-4c67-83bb-a70e8ab7c42d"),
+                            Id = new Guid("180aac55-2817-49d2-b44c-76ce45fb55b9"),
                             Name = "Education"
                         },
                         new
                         {
-                            Id = new Guid("933844f5-6056-4bec-9901-1c21a4321de2"),
+                            Id = new Guid("83554d11-e0f4-4963-a353-517c51c574aa"),
                             Name = "Test"
                         },
                         new
                         {
-                            Id = new Guid("c678f4f1-538c-4bc0-8a87-d82f26f075f5"),
+                            Id = new Guid("5f47258b-247d-4461-9bae-1b52693f51a0"),
                             Name = "Other"
                         });
                 });
@@ -492,6 +497,13 @@ namespace CourseProject.DataAccess.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("CourseProject.Domain.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("CourseProject.Domain.Models.FormTemplate", null)
+                        .WithMany("AllowedUsers")
+                        .HasForeignKey("FormTemplateId");
                 });
 
             modelBuilder.Entity("CourseProject.Domain.Models.Comment", b =>
@@ -684,6 +696,8 @@ namespace CourseProject.DataAccess.Migrations
 
             modelBuilder.Entity("CourseProject.Domain.Models.FormTemplate", b =>
                 {
+                    b.Navigation("AllowedUsers");
+
                     b.Navigation("Comments");
 
                     b.Navigation("Forms");

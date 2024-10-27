@@ -8,17 +8,17 @@
         <div class="row">
             <div class="col-md-6 form-group">
                 <label>User</label>
-                <input type="text" asp-for="CreatorUserName" class="form-control" value="@User.Identity.Name" readonly />
+                <input type="text" asp-for="CreatorUserName" class="form-control" value="@User.Identity.Name" readonly/>
             </div>
             <div class="col-md-6 form-group">
                 <label>Date</label>
-                <input type="text" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" readonly />
+                <input type="text" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" readonly/>
             </div>
         </div>
 
         <div class="form-group">
             <label asp-for="Title"></label>
-            <input asp-for="Title" class="form-control" />
+            <input asp-for="Title" class="form-control"/>
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
 
@@ -28,51 +28,50 @@
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
 
-        <div class="row">
-            <div class="col-md-6 form-group">
-                <label asp-for="TopicId">Topic</label>
-                <select asp-for="TopicId" class="form-control" asp-items="@(new SelectList((IEnumerable<CourseProject.Domain.Models.Topic>)ViewBag.AllTopics, "Id", "Name"))"></select>
-                <span asp-validation-for="TopicId" class="text-danger"></span>
-            </div>
-            <div class="col-md-6 form-group">
-                <label asp-for="SelectedTagIds">Tags</label>
-                <select asp-for="SelectedTagIds" class="form-control" asp-items="@(new SelectList((IEnumerable)ViewBag.Tags, "Id", "Name"))" multiple="multiple"></select>
-            </div>
+        <div class="form-group">
+            <label asp-for="TopicId">Topic</label>
+            <select asp-for="TopicId" class="form-control" asp-items="@(new SelectList((IEnumerable)ViewBag.AllTopics, "Id", "Name"))" id="topicSelect"></select>
+            <span asp-validation-for="TopicId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SelectedTagIds">Tags</label>
+            <select asp-for="SelectedTagIds" class="form-control" asp-items="@(new SelectList((IEnumerable)ViewBag.Tags, "Id", "Name"))" multiple="multiple" id="tagsSelect"></select>
         </div>
 
         <div class="form-group form-check">
-            <input asp-for="IsPublic" class="form-check-input" />
+            <input asp-for="IsPublic" class="form-check-input"/>
             <label asp-for="IsPublic" class="form-check-label">Is Public</label>
         </div>
 
         <div class="form-group">
             <label asp-for="ImageUrl">Image URL</label>
-            <input asp-for="ImageUrl" class="form-control" type="url" />
+            <input asp-for="ImageUrl" class="form-control" type="url"/>
         </div>
 
         <h3 class="mt-4">Questions</h3>
         <div id="questions-container" class="sortable">
             @for (int i = 0; i < Model.Questions.Count; i++)
             {
-            <div class="question-group" id="question-@i" draggable="true" ondragstart="drag(event)">
-                <label>Question Title</label>
-                <input name="Questions[@i].Title" class="form-control mb-2" value="@Model.Questions[i].Title" required />
+                <div class="question-group" id="question-@i" draggable="true" ondragstart="drag(event)">
+                    <label>Question Title</label>
+                    <input name="Questions[@i].Title" class="form-control mb-2" value="@Model.Questions[i].Title" required/>
 
-                <label>Description (optional)</label>
-                <textarea name="Questions[@i].Description" class="form-control mb-2">@Model.Questions[i].Description</textarea>
-                
-                <label for="Questions[@i].Type">Question Type</label>
-                <select asp-for="Questions[i].Type" class="form-control mb-2">
-                    <option value="SingleLine">Single Line</option>
-                    <option value="MultiLine">Multi Line</option>
-                    <option value="Integer">Integer</option>
-                    <option value="Checkbox">Checkbox</option>
-                </select>
+                    <label>Description (optional)</label>
+                    <textarea name="Questions[@i].Description" class="form-control mb-2">@Model.Questions[i].Description</textarea>
 
-                <div class="dynamic-input mb-2" id="dynamic-input-@i"></div>
+                    <label for="Questions[@i].Type">Question Type</label>
+                    <select asp-for="Questions[i].Type" class="form-control mb-2">
+                        <option value="SingleLine">Single Line</option>
+                        <option value="MultiLine">Multi Line</option>
+                        <option value="Integer">Integer</option>
+                        <option value="Checkbox">Checkbox</option>
+                    </select>
 
-                <button type="button" class="btn btn-danger btn-sm" onclick="removeQuestion(this)">Remove Question</button>
-            </div>
+                    <div class="dynamic-input mb-2" id="dynamic-input-@i"></div>
+
+                    <button type="button" class="btn btn-danger btn-sm" onclick="removeQuestion(this)">Remove Question</button>
+                </div>
             }
         </div>
 
@@ -82,9 +81,32 @@
     </form>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
+    $(document).ready(function() {
+        $('#userIds').select2({
+            placeholder: 'Select Users',
+            allowClear: true
+        });
+
+        $('#userIds').on('change', function() {
+            let selectedUserIds = $(this).val();
+            $('#allowedUserIds').val(selectedUserIds);
+        });
+
+        $('#topicSelect').select2({
+            placeholder: 'Выберите тему',
+            allowClear: true
+        });
+
+        $('#tagsSelect').select2({
+            placeholder: 'Выберите теги',
+            allowClear: true
+        });
+    });
+    
     let questionCount = @Model.Questions.Count;
 
     function addQuestion() {
@@ -139,6 +161,7 @@
             targetElement.before(draggedElement);
         }
     });
+
 </script>
 
 <style>

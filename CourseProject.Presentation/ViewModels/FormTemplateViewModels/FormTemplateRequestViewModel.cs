@@ -15,6 +15,7 @@ public class FormTemplateRequestViewModel
     public Guid TopicId { get; set; }
     public string CreatorUserName { get; set; }
     public List<Guid> SelectedTagIds { get; set; } = new List<Guid>();
-    [Required(ErrorMessage = "PAdd questions")]
+    [Required(ErrorMessage = "Add questions")]
     public List<QuestionViewModel> Questions { get; set; }
+    public List<string> AllowedUserIds { get; set; } = new();
 }

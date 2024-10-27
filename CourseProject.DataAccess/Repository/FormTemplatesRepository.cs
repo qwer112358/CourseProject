@@ -26,12 +26,12 @@ public class FormTemplatesRepository(ApplicationDbContext dbContext) : IFormTemp
 
     public async Task Update(FormTemplate formTemplate)
     {
-        var existingFormTemplate = await dbContext.FormTemplates
-            .Include(ft => ft.Tags)
-            .Include(ft => ft.Topic)
+        var existingFormTemplate = await GetFormTemplatesQuery()
             .FirstOrDefaultAsync(ft => ft.Id == formTemplate.Id);
         existingFormTemplate!.Tags = formTemplate.Tags;
         existingFormTemplate.Topic = formTemplate.Topic;
+        existingFormTemplate.AllowedUsers = formTemplate.AllowedUsers;
+        //existingFormTemplate.Questions = formTemplate.Questions;
 
         await dbContext.FormTemplates
             .Where(ft => ft.Id == formTemplate.Id)
@@ -44,6 +44,10 @@ public class FormTemplatesRepository(ApplicationDbContext dbContext) : IFormTemp
             );
         await dbContext.SaveChangesAsync();
     }
+
+
+
+
     
     public async Task Delete(Guid id)
     {
@@ -84,6 +88,7 @@ public class FormTemplatesRepository(ApplicationDbContext dbContext) : IFormTemp
             .Include(ft => ft.Creator)
             .Include(ft => ft.Tags)
             .Include(ft => ft.Likes)
-            .Include(ft => ft.Forms);
+            .Include(ft => ft.Forms)
+            .Include(ft => ft.AllowedUsers);
     }
 }

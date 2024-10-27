@@ -17,5 +17,6 @@ public class FormTemplateDetailViewModel
     public ICollection<TagViewModel> Tags { get; set; }
     public ICollection<CommentViewModel> Comments { get; set; }
     public ICollection<QuestionViewModel> Questions { get; set; }
+    public ICollection<ApplicationUserViewModel> AllowedUsers { get; set; }
     public int LikeCount { get; set; }
 }

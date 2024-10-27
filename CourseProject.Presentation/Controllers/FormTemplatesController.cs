@@ -1,10 +1,12 @@
 using CourseProject.Domain.Abstractions.IServices;
 using CourseProject.Domain.Models;
 using CourseProject.Presentation.Mappers;
+using CourseProject.Presentation.ViewModels;
 using CourseProject.Presentation.ViewModels.FormTemplateViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CourseProject.Presentation.Controllers;
 
@@ -39,6 +41,16 @@ public class FormTemplatesController(
     public async Task<IActionResult> Create()
     {
         await InitData();
+        var users = userManager.Users.ToList();
+        
+        var userViewModels = users.Select(u => new ApplicationUserViewModel
+        {
+            Id = u.Id,
+            Name = u.Name,
+            Email = u.Email
+        }).ToList();
+        
+        ViewBag.Users = userViewModels;
         return View();
     }
     
@@ -50,9 +62,20 @@ public class FormTemplatesController(
         var creator =  await userManager.FindByNameAsync(viewModel.CreatorUserName);
         var selectedTags = await tagsService.GetTagsByIdsAsync(viewModel.SelectedTagIds);
         var topic = await topicsService.GetTopicByIdAsync(viewModel.TopicId);
-        var formTemplate = viewModel.ToDomain(creator!, selectedTags, topic);
+        var allowedUsers = await Task.WhenAll(viewModel.AllowedUserIds.Select(id => userManager.FindByIdAsync(id)));
+        var formTemplate = viewModel.ToDomain(creator!, selectedTags, topic, allowedUsers);
         await formTemplatesService.CreateFormTemplate(formTemplate);
         return RedirectToAction("Index");
+    }
+    
+    [HttpGet("GetUsers")]
+    public IActionResult GetUsers(string searchTerm)
+    {
+        var users = userManager.Users
+            .Where(u => u.Name.Contains(searchTerm) || u.Email.Contains(searchTerm))
+            .Select(u => new { Id = u.Id, Name = u.Name, Email = u.Email })
+            .ToList();
+        return Json(users);
     }
     
     [HttpGet("Details/{id}")]
@@ -84,7 +107,8 @@ public class FormTemplatesController(
         if (!accessService.HasEditAccess(creator.Id, User)) return Unauthorized();
         var selectedTags = await tagsService.GetTagsByIdsAsync(viewModel.SelectedTagIds);
         var topic = await topicsService.GetTopicByIdAsync(viewModel.TopicId);
-        var formTemplate = viewModel.ToDomain(creator!, selectedTags, topic);
+        var allowedUsers = await Task.WhenAll(viewModel.AllowedUserIds.Select(id => userManager.FindByIdAsync(id)));
+        var formTemplate = viewModel.ToDomain(creator!, selectedTags, topic, allowedUsers);
         await formTemplatesService.UpdateFormTemplate(formTemplate);
         return RedirectToAction("Index");
     }
@@ -115,4 +139,10 @@ public class FormTemplatesController(
         ViewBag.AllTopics = await topicsService.GetAllTopicsAsync();
         ViewBag.Tags = await tagsService.GetAllTagsAsync();
     }
+    
+    
+
+    /*private void GetDomainProperties(out ApplicationUser user, ICollection<Tag> tags, Topic topic, ICollection<ApplicationUser> allowedUsers)
+    {
+    }*/
 }

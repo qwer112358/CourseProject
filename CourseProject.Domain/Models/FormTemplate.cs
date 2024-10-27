@@ -1,6 +1,6 @@
 namespace CourseProject.Domain.Models;
 
-public class FormTemplate 
+public class FormTemplate
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public string Title { get; set; }
@@ -17,4 +17,5 @@ public class FormTemplate
     public ICollection<Like> Likes { get; set; } = new List<Like>();
     public ICollection<Comment> Comments { get; set; } = new List<Comment>();
     public ICollection<Form> Forms { get; set; } = new List<Form>();
+    public ICollection<ApplicationUser> AllowedUsers { get; set; } = new List<ApplicationUser>();
 }

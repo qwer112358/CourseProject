@@ -14,4 +14,5 @@ public class FormTemplateViewModel
     public bool IsPublic { get; set; } 
     public ApplicationUserViewModel Creator { get; set; }
     public int LikeCount { get; set; }
+    public int FormCount { get; set; }
 }

@@ -21,9 +21,8 @@ public class FormsController(
     public async Task<IActionResult> Index(Guid formTemplateId)
     {
         var forms = await formsService.GetFormsByTemplateIdAsync(formTemplateId);
-        var questionTasks = forms.Select(form =>
-            questionService.GetQuestionByFormTemplateIdAsync(form.FormTemplateId));
-        var questionsList = await Task.WhenAll(questionTasks);
+        var questionsList = await Task.WhenAll(forms.Select(form =>
+            questionService.GetQuestionByFormTemplateIdAsync(form.FormTemplateId)));
         forms.Zip(questionsList, (form, questions) => form.FormTemplate.Questions = questions);
         return View(forms);
     }

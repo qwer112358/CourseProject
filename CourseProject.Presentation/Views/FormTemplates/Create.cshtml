@@ -28,16 +28,15 @@
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
 
-        <div class="row">
-            <div class="col-md-6 form-group">
-                <label asp-for="TopicId">Topic</label>
-                <select asp-for="TopicId" class="form-control" asp-items="@(new SelectList((IEnumerable)ViewBag.AllTopics, "Id", "Name"))"></select>
-                <span asp-validation-for="TopicId" class="text-danger"></span>
-            </div>
-            <div class="col-md-6 form-group">
-                <label asp-for="SelectedTagIds">Tags</label>
-                <select asp-for="SelectedTagIds" class="form-control" asp-items="@(new SelectList((IEnumerable)ViewBag.Tags, "Id", "Name"))" multiple="multiple"></select>
-            </div>
+        <div class="form-group">
+            <label asp-for="TopicId">Topic</label>
+            <select asp-for="TopicId" class="form-control" asp-items="@(new SelectList((IEnumerable)ViewBag.AllTopics, "Id", "Name"))" id="topicSelect"></select>
+            <span asp-validation-for="TopicId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SelectedTagIds">Tags</label>
+            <select asp-for="SelectedTagIds" class="form-control" asp-items="@(new SelectList((IEnumerable)ViewBag.Tags, "Id", "Name"))" multiple="multiple" id="tagsSelect"></select>
         </div>
 
         <div class="form-group form-check">
@@ -50,6 +49,26 @@
             <input asp-for="ImageUrl" class="form-control" type="url" />
         </div>
 
+        <!--
+        <h3 class="mt-4">Allowed Users</h3>
+        <div class="form-group">
+            <label for="userSelector">Select Users</label>
+            <select id="userSelector" class="form-control" multiple="multiple" name="AllowedUserIds"></select>
+             <input type="hidden" name="AllowedUserIds" id="allowedUserIds" /> 
+        </div>
+        <div id="selectedUsers" class="mb-3"></div>
+        -->
+
+        <div class="form-group">
+            <select id="userIds" name="AllowedUserIds" class="form-control" multiple="multiple">
+                @foreach (var user in ViewBag.Users)
+                {
+                <option value="@user.Id">@user.Name (@user.Email)</option>
+                }
+            </select>
+        </div>
+        
+        
         <h3 class="mt-4">Questions</h3>
         <div id="questions-container" class="sortable"></div>
         <button type="button" class="btn btn-outline-primary mt-3" onclick="addQuestion()">Add Question</button>
@@ -62,14 +81,28 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-    function updateTopicName(selectElement) {
-        const selectedOption = selectElement.options[selectElement.selectedIndex];
-        const topicNameInput = document.querySelector('input[name="Topic.Name"]');
-        if (topicNameInput) {
-            topicNameInput.value = selectedOption.text;
-        }
-    }
-    
+    $(document).ready(function() {
+        $('#userIds').select2({
+            placeholder: 'Select Users',
+            allowClear: true
+        });
+
+        $('#userIds').on('change', function() {
+            let selectedUserIds = $(this).val();
+            $('#allowedUserIds').val(selectedUserIds);
+        });
+
+        $('#topicSelect').select2({
+            placeholder: 'Выберите тему',
+            allowClear: true
+        });
+
+        $('#tagsSelect').select2({
+            placeholder: 'Выберите теги',
+            allowClear: true
+        });
+    });
+
     let questionCount = 0;
 
     function addQuestion() {
@@ -125,33 +158,7 @@
         }
     });
 
-    /*$(document).ready(function () {
-        // Загрузка данных из ViewBag.Tags, переданного с сервера
-        const tagsData = @Html.Raw(Json.Serialize(ViewBag.Tags));
 
-        // Инициализация select2 для выбора и создания тегов
-        $('#tags-selector').select2({
-            tags: true,
-            data: tagsData,
-            placeholder: 'Add tags',
-            allowClear: true,
-            createTag: function (params) {
-                const term = $.trim(params.term);
-                if (term === '') {
-                    return null;
-                }
-                return {
-                    id: term,
-                    text: term,
-                    newTag: true
-                };
-            }
-        }).on('change', function (e) {
-            // Обновляем скрытое поле с выбранными тегами
-            const selectedTags = $(this).val();
-            $('#tags-input').val(selectedTags ? selectedTags.join(',') : '');
-        });
-    });*/
 </script>
 
 <style>
@@ -163,4 +170,3 @@
         background-color: #f8f9fa;
     }
 </style>
-

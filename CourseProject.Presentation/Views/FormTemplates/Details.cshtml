@@ -22,7 +22,16 @@
 
     <div class="mb-3">
         <strong>Public:</strong>
-        <p>@(Model.IsPublic ? "Yes" : "No")</p>
+        @if (Model.IsPublic)
+        {
+            <p>Yes</p>
+        }
+        else
+        {
+            <p>No</p>
+            <strong>Allowed users:</strong>
+            <p>@string.Join(", ", Model.AllowedUsers.Select(u => u.Name))</p>
+        }
     </div>
 
     <div class="mb-3">
