@@ -48,6 +48,7 @@
                             <a href="@Url.Action("Edit", new { id = formTemplate.Id })" class="btn btn-link">Edit</a>
                             <a href="@Url.Action("Delete", new { id = formTemplate.Id })" class="btn btn-link">Delete</a>
                         }
+                        <span id="likesCount_@formTemplate.Id">Likes: @(formTemplate.LikeCount)</span>
                     </td>
                 </tr>
             }
