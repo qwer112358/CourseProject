@@ -270,3 +270,4 @@
 /home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/obj/Debug/net8.0/CourseProject.Presentation.pdb
 /home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/obj/Debug/net8.0/CourseProject.Presentation.genruntimeconfig.cache
 /home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/obj/Debug/net8.0/ref/CourseProject.Presentation.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/CSharpFunctionalExtensions.dll

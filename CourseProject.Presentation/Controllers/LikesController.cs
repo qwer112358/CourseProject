@@ -13,11 +13,7 @@ public class LikesController(ILikesService likesService, UserManager<Application
     public async Task<IActionResult> ToggleLike(Guid templateId)
     {
         var user = await userManager.GetUserAsync(User);
-        if (user == null)
-        {
-            return Unauthorized();
-        }
-
+        if (user is null) return Unauthorized();
         await likesService.ToggleLike(templateId, user.Id);
         return RedirectToAction("Index", "FormTemplates", new { id = templateId });
     }

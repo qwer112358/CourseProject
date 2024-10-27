@@ -10,6 +10,7 @@
       <PackageReference Include="CloudinaryDotNet" Version="1.26.2" />
       <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
       <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.10" />
+      <PackageReference Include="CSharpFunctionalExtensions" Version="3.1.0" />
     </ItemGroup>
-
+    
 </Project>

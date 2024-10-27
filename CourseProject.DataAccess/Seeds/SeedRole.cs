@@ -14,7 +14,7 @@ public static class SeedRole
         string roleLower = role.ToLower();
         string roleUserName = roleLower;
         string roleUserEmail = roleLower + "@mail.com";
-        string roleUserPassword = roleLower;
+        string roleUserPassword = "1";
         
         if (!await roleManager.RoleExistsAsync(role))
         {

@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "OuW8o9OTMn4=",
+  "dgSpecHash": "BAO/UA7X8bE=",
   "success": true,
   "projectFilePath": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Application/CourseProject.Application.csproj",
   "expectedPackageFiles": [
     "/home/sr/.nuget/packages/cloudinarydotnet/1.26.2/cloudinarydotnet.1.26.2.nupkg.sha512",
+    "/home/sr/.nuget/packages/csharpfunctionalextensions/3.1.0/csharpfunctionalextensions.3.1.0.nupkg.sha512",
     "/home/sr/.nuget/packages/microsoft.aspnetcore.authentication/2.2.0/microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "/home/sr/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "/home/sr/.nuget/packages/microsoft.aspnetcore.authentication.cookies/2.2.0/microsoft.aspnetcore.authentication.cookies.2.2.0.nupkg.sha512",

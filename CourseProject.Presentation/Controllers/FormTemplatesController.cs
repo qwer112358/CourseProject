@@ -29,7 +29,7 @@ public class FormTemplatesController(
     public async Task<IActionResult> GetByUserName(string userName)
     {
         var user = await userManager.FindByNameAsync(userName);
-        if (user == null) return NotFound();
+        if (user is null) return NotFound();
         var formTemplates = await formTemplatesService.GetFormTemplatesByUserId(user.Id);
         var model = SearchModelMapper.ToSearchViewModel(formTemplates, string.Empty);
         return View(model);
@@ -81,8 +81,7 @@ public class FormTemplatesController(
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
         var creator =  await userManager.FindByNameAsync(viewModel.CreatorUserName);
-        if (!accessService.HasEditAccess(creator.Id, User))
-            return Unauthorized();
+        if (!accessService.HasEditAccess(creator.Id, User)) return Unauthorized();
         var selectedTags = await tagsService.GetTagsByIdsAsync(viewModel.SelectedTagIds);
         var topic = await topicsService.GetTopicByIdAsync(viewModel.TopicId);
         var formTemplate = viewModel.ToDomain(creator!, selectedTags, topic);
