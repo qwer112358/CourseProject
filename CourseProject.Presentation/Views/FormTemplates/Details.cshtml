@@ -69,7 +69,7 @@
 
     @if (User.Identity.IsAuthenticated)
     {
-        <form asp-action="AddComment" method="post">
+        <form asp-controller="Comments" asp-action="AddComment" method="post">
             <input type="hidden" name="formTemplateId" value="@Model.Id"/>
             <div class="form-group">
                 <label for="commentText">Add Comment:</label>

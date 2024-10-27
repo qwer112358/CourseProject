@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CourseProject.Presentation.Controllers;
 
+[Authorize]
 [Route("[controller]")]
 public class FormsController(
     IFormTemplatesService formTemplatesService,

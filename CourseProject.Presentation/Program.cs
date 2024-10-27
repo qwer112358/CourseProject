@@ -21,7 +21,6 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     await SeedRole.InitializeAsync(services, UserRoles.Admin);
-    
 }
 
 // Configure the HTTP request pipeline.
@@ -43,7 +42,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication(); 
+app.UseAuthentication();
 app.UseAuthorization();
 
 var supportedCultures = new[]
@@ -59,8 +58,17 @@ app.UseRequestLocalization(new RequestLocalizationOptions
     SupportedUICultures = supportedCultures
 });
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapGet("/", context =>
+    {
+        context.Response.Redirect("/FormTemplates");
+        return Task.CompletedTask;
+    });
+
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=FormTemplates}/{action=Index}/{id?}");
+});
 
 app.Run();

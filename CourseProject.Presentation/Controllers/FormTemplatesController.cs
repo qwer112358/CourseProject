@@ -13,7 +13,7 @@ public class FormTemplatesController(
     IFormTemplatesService formTemplatesService,
     ITagsService tagsService,
     ITopicsService topicsService,
-    ICommentsService commentsService,
+    IAccessService accessService,
     UserManager<ApplicationUser> userManager)
     : Controller
 {
@@ -62,35 +62,14 @@ public class FormTemplatesController(
         var model = formTemplate.ToDetailViewModel();
         return View(model);
     }
-    
-    [Authorize]
-    [HttpPost("AddComment")]
-    public async Task<IActionResult> AddComment(Guid formTemplateId, string text)
-    {
-        if (string.IsNullOrWhiteSpace(text)) 
-        {
-            ModelState.AddModelError(string.Empty, "Comment cannot be empty.");
-            return RedirectToAction("Details", new { id = formTemplateId });
-        }
-        
-        var user = await userManager.GetUserAsync(User);
-        var comment = new Comment
-        {
-            Text = text,
-            ApplicationUserId = user.Id,
-            FormTemplateId = formTemplateId
-        };
-
-        await commentsService.CreateCommentAsync(comment);
-        return RedirectToAction("Details", new { id = formTemplateId });
-    }
 
     [Authorize]
     [HttpGet("Edit/{id}")]
     public async Task<IActionResult> Edit(Guid id)
     {
         var formTemplate = await formTemplatesService.GetFormTemplateByIdAsync(id);
-        if (formTemplate is null || formTemplate.CreatorId != userManager.GetUserId(User)) return Unauthorized();
+        if (formTemplate is null || !accessService.HasEditAccess(formTemplate.CreatorId, User))
+            return Unauthorized();
         await InitData();
         var viewModel = formTemplate.ToRequestViewModel();
         return View(viewModel);
@@ -102,6 +81,8 @@ public class FormTemplatesController(
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
         var creator =  await userManager.FindByNameAsync(viewModel.CreatorUserName);
+        if (!accessService.HasEditAccess(creator.Id, User))
+            return Unauthorized();
         var selectedTags = await tagsService.GetTagsByIdsAsync(viewModel.SelectedTagIds);
         var topic = await topicsService.GetTopicByIdAsync(viewModel.TopicId);
         var formTemplate = viewModel.ToDomain(creator!, selectedTags, topic);
@@ -114,7 +95,8 @@ public class FormTemplatesController(
     public async Task<IActionResult> Delete(Guid id)
     {
         var formTemplate = await formTemplatesService.GetFormTemplateByIdAsync(id);
-        if (formTemplate is null || formTemplate.CreatorId != userManager.GetUserId(User)) return Unauthorized();
+        if (formTemplate is null || !accessService.HasEditAccess(formTemplate.CreatorId, User))
+            return Unauthorized();
         return View(formTemplate);
     }
 
@@ -123,7 +105,8 @@ public class FormTemplatesController(
     public async Task<IActionResult> DeleteConfirmed(Guid id)
     {
         var formTemplate = await formTemplatesService.GetFormTemplateByIdAsync(id);
-        if (formTemplate is null || formTemplate.CreatorId != userManager.GetUserId(User)) return Unauthorized();
+        if (formTemplate is null || !accessService.HasEditAccess(formTemplate.CreatorId, User))
+            return Unauthorized();
         await formTemplatesService.DeleteFormTemplate(id);
         return RedirectToAction("Index");
     }

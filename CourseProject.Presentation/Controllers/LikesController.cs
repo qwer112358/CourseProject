@@ -21,11 +21,4 @@ public class LikesController(ILikesService likesService, UserManager<Application
         await likesService.ToggleLike(templateId, user.Id);
         return RedirectToAction("Index", "FormTemplates", new { id = templateId });
     }
-
-    [HttpGet("GetLikesCount/{templateId}")]
-    public async Task<IActionResult> GetLikesCount(Guid templateId)
-    {
-        var likes = await likesService.GetLikesByTemplateId(templateId);
-        return Ok(likes.Count);
-    }
 }

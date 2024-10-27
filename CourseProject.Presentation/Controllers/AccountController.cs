@@ -22,7 +22,7 @@ public class AccountController(IAccountService accountService) : Controller
         if (result.Succeeded)
         {
             await accountService.LoginAsync(new LoginViewModel { Email = model.Email, Password = model.Password });
-            return RedirectToAction("Index", "Home");
+            return RedirectToHome();
         }
         
         foreach (var error in result.Errors)
@@ -44,7 +44,7 @@ public class AccountController(IAccountService accountService) : Controller
         
         var validationMessage = await accountService.LoginAsync(model);
         if (string.IsNullOrEmpty(validationMessage))
-            return RedirectToAction("Index", "Home");
+            return RedirectToHome();
         
         ModelState.AddModelError(string.Empty, validationMessage);
         return View(model);
@@ -57,6 +57,6 @@ public class AccountController(IAccountService accountService) : Controller
         return RedirectToHome();
     }
 
-    private IActionResult RedirectToHome() => RedirectToAction("Index", "Home");
+    private IActionResult RedirectToHome() => Redirect("/");
 }
 

@@ -1,4 +1,5 @@
 @model CourseProject.Presentation.ViewModels.SearchViewModel
+@using CourseProject.Domain
 @using CourseProject.Domain.Models;
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Mvc.TagHelpers
@@ -43,7 +44,7 @@
                     <td>@(formTemplate.IsPublic ? "Yes" : "No")</td>
                     <td>
                         <a href="@Url.Action("Details", new { id = formTemplate.Id })" class="btn btn-link">View</a>
-                        @if (signInManager.IsSignedIn(User))
+                        @if (User.IsInRole(UserRoles.Admin))
                         {
                             <a href="@Url.Action("Edit", new { id = formTemplate.Id })" class="btn btn-link">Edit</a>
                             <a href="@Url.Action("Delete", new { id = formTemplate.Id })" class="btn btn-link">Delete</a>
