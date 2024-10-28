@@ -109,9 +109,19 @@
     connection.on("ReceiveComment", function(userName, commentText) {
         const commentsList = document.getElementById("commentsList");
         const newComment = document.createElement("li");
-        newComment.innerHTML = `<strong>${userName}</strong>: ${commentText}`;
+        newComment.className = "media mb-3"; 
+        newComment.innerHTML = `
+        <img src="https://www.gravatar.com/avatar/?d=mp&s=50" alt="User Avatar" class="mr-3 rounded-circle" />
+        <div class="media-body">
+            <h6 class="mt-0 mb-1">${userName}</h6>
+            <small class="text-muted">${new Date().toLocaleString()}</small>
+            <p class="mb-1">${commentText}</p>
+        </div>
+    `;
+
         commentsList.appendChild(newComment);
     });
+
 
     connection.start().catch(function(err) {
         return console.error(err.toString());
