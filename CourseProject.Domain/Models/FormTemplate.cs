@@ -7,7 +7,7 @@ public class FormTemplate
     public string Description { get; set; }
     public Guid TopicId { get; set; }
     public Topic Topic { get; set; }
-    public string ImageUrl { get; set; } = string.Empty;
+    public string? ImageUrl { get; set; }
     public bool IsPublic { get; set; } = true;
     public DateTime DateCreated { get; set; } = DateTime.UtcNow;
     public string CreatorId { get; set; }

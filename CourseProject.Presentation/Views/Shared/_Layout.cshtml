@@ -31,12 +31,15 @@
                     }
                 </ul>
                 <div class="d-inline-flex align-items-center">
-                    <!-- <form id="languageForm" asp-controller="Language" asp-action="SetLanguage" method="post" class="d-inline-flex">
+                    <!-- Language selection (commented out for now) -->
+                    <!--
+                    <form id="languageForm" asp-controller="Language" asp-action="SetLanguage" method="post" class="d-inline-flex">
                         <select name="culture" class="form-select" onchange="document.getElementById('languageForms').submit();">
                             <option value="en" @(System.Threading.Thread.CurrentThread.CurrentUICulture.Name == "en" ? "selected" : "")>English</option>
                             <option value="ru" @(System.Threading.Thread.CurrentThread.CurrentUICulture.Name == "ru" ? "selected" : "")>Русский</option>
                         </select>
-                    </form> -->
+                    </form>
+                    -->
                 </div>
                 <partial name="_LoginPartial"/>
             </div>
@@ -44,17 +47,16 @@
     </nav>
 </header>
 
-<div class="container">
-    <!-- Включение формы поиска -->
-    @{
-        var searchModel = ViewData["SearchModel"] as CourseProject.Presentation.ViewModels.SearchViewModel;
-    }
-    @if (searchModel != null)
-    {
-       // <partial name="_SearchForm" model="searchModel" />
-    }
 
+<div class="container">
     <main role="main" class="pb-3">
+        <div class="mx-auto"> <!-- Centering the search form -->
+            <form method="get" asp-controller="FormTemplates" asp-action="Search" class="d-flex">
+                <input type="text" name="searchTerm" value="@ViewData["SearchTerm"]" class="form-control me-2" placeholder="Search templates..." aria-label="Search templates" required />
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+        <br/>
         @RenderBody()
     </main>
 </div>

@@ -129,4 +129,13 @@ public class FormTemplatesController(
         ViewBag.Tags = await tagsService.GetAllTagsAsync();
         ViewBag.Users = userManager.Users.Select(u => u.ToViewModel()).ToList();;
     }
+    
+    [HttpGet("Search")]
+    public async Task<IActionResult> Search(string searchTerm)
+    {
+        if (string.IsNullOrWhiteSpace(searchTerm)) RedirectToAction("Index", "FormTemplates", new SearchViewModel());
+        var formTemplates = await formTemplatesService.SearchFormTemplatesAsync(searchTerm);
+        var viewModel = SearchModelMapper.ToSearchViewModel(formTemplates, searchTerm);
+        return RedirectToAction("Index", "FormTemplates", viewModel);
+    }
 }

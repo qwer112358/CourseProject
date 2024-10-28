@@ -179,7 +179,7 @@ namespace CourseProject.DataAccess.Migrations
                     Title = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     TopicId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ImageUrl = table.Column<string>(type: "text", nullable: false),
+                    ImageUrl = table.Column<string>(type: "text", nullable: true),
                     IsPublic = table.Column<bool>(type: "boolean", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatorId = table.Column<string>(type: "text", nullable: false)
@@ -358,9 +358,9 @@ namespace CourseProject.DataAccess.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("948ca871-8c8b-4570-b2d9-5bade0e12d80"), "Tag 3" },
-                    { new Guid("d1e7ecb9-ae35-4629-8d00-ba449eb17ebc"), "Tag 1" },
-                    { new Guid("e9e843b0-d91b-4a77-9b18-ba8a00d7992f"), "Tag 2" }
+                    { new Guid("22f9eb59-c9d3-47c7-b00a-78c5c118bb86"), "Tag 1" },
+                    { new Guid("48f71bc1-6933-48f2-8915-43dda017734e"), "Tag 2" },
+                    { new Guid("afcd13a9-bd92-47da-9e11-a2a68a34c890"), "Tag 3" }
                 });
 
             migrationBuilder.InsertData(
@@ -368,9 +368,9 @@ namespace CourseProject.DataAccess.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("180aac55-2817-49d2-b44c-76ce45fb55b9"), "Education" },
-                    { new Guid("5f47258b-247d-4461-9bae-1b52693f51a0"), "Other" },
-                    { new Guid("83554d11-e0f4-4963-a353-517c51c574aa"), "Test" }
+                    { new Guid("023cb635-9554-4c2d-bb72-f743f8571ac6"), "Education" },
+                    { new Guid("45678fde-0fbc-416d-bd47-f40744a78bb9"), "Other" },
+                    { new Guid("b68a0d21-2409-4eaf-bb29-be82672388af"), "Test" }
                 });
 
             migrationBuilder.CreateIndex(

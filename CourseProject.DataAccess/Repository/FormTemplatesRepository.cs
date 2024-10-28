@@ -89,6 +89,8 @@ public class FormTemplatesRepository(ApplicationDbContext dbContext) : IFormTemp
             .Include(ft => ft.Tags)
             .Include(ft => ft.Likes)
             .Include(ft => ft.Forms)
-            .Include(ft => ft.AllowedUsers);
+            .Include(ft => ft.AllowedUsers)
+            .OrderByDescending(ft => ft.Forms.Count)
+            .ThenByDescending(ft => ft.Likes.Count);
     }
 }
