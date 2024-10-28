@@ -26,4 +26,16 @@
       </PackageReference>
       <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
     </ItemGroup>
+
+    <ItemGroup>
+        <_ContentIncludedByDefault Remove="Views\FormTemplatesController2\Create.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\FormTemplatesController2\Index.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
+    </ItemGroup>
+
 </Project>
