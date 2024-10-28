@@ -23,6 +23,25 @@
           }
         }
       },
+      "AWSSDK.Core/4.0.0-preview.4": {
+        "runtime": {
+          "lib/net8.0/AWSSDK.Core.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.0.0"
+          }
+        }
+      },
+      "AWSSDK.S3/4.0.0-preview.4": {
+        "dependencies": {
+          "AWSSDK.Core": "4.0.0-preview.4"
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.S3.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.0.0"
+          }
+        }
+      },
       "CloudinaryDotNet/1.26.2": {
         "dependencies": {
           "Newtonsoft.Json": "13.0.3",
@@ -1206,6 +1225,7 @@
       },
       "CourseProject.Application/1.0.0": {
         "dependencies": {
+          "AWSSDK.S3": "4.0.0-preview.4",
           "CSharpFunctionalExtensions": "3.1.0",
           "CourseProject.Domain": "1.0.0",
           "Microsoft.AspNetCore.Identity": "2.2.0",
@@ -1244,6 +1264,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AWSSDK.Core/4.0.0-preview.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VeekkHkQVHoQ/5n0Bmbzh0dlfqksMLMYftijZs6zIZ3uv1JWGDTxWHNw3H7FSf1933x1DQRTLSnPbvpTwVLbxw==",
+      "path": "awssdk.core/4.0.0-preview.4",
+      "hashPath": "awssdk.core.4.0.0-preview.4.nupkg.sha512"
+    },
+    "AWSSDK.S3/4.0.0-preview.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pyCEtKBH5lSKlibD2shIBKsP4iQuKPFSVWQQloCrfUIN2ht1TnuD+6UYF1a4SPbBBU6xc8JQDamZe05KJWs+7g==",
+      "path": "awssdk.s3/4.0.0-preview.4",
+      "hashPath": "awssdk.s3.4.0.0-preview.4.nupkg.sha512"
     },
     "CloudinaryDotNet/1.26.2": {
       "type": "package",

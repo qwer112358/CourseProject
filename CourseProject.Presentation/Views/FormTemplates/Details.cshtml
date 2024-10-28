@@ -6,6 +6,13 @@
     <h2>@Model.Title</h2>
 
     <div class="mb-3">
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+        <img src="@Model.ImageUrl" alt="Image" class="img-thumbnail"/>
+        }
+    </div>
+
+    <div class="mb-3">
         <strong>Description:</strong>
         <p>@Model.Description</p>
     </div>
@@ -37,14 +44,6 @@
     <div class="mb-3">
         <strong>Created By:</strong>
         <p>@Model.Creator.Name</p>
-    </div>
-
-    <div class="mb-3">
-        <strong>Image:</strong>
-        @if (!string.IsNullOrEmpty(Model.ImageUrl))
-        {
-            <img src="@Model.ImageUrl" alt="Image" class="img-thumbnail"/>
-        }
     </div>
 
     <div class="mb-3">

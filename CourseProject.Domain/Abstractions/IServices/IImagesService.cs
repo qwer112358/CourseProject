@@ -5,6 +5,6 @@ namespace CourseProject.Domain.Abstractions.IServices;
 
 public interface IImagesService
 {
-    Task<Result<string>> AddImageAsync(IFormFile file);
-    Task<Result> DeleteImageAsync(string publicUrl);
+    Task<string> UploadImageAsync(IFormFile? file);
+    Task DeleteImageAsync(string publicUrl);
 }

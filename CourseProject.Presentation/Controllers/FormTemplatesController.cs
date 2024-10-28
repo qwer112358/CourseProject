@@ -6,7 +6,6 @@ using CourseProject.Presentation.ViewModels.FormTemplateViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace CourseProject.Presentation.Controllers;
 
