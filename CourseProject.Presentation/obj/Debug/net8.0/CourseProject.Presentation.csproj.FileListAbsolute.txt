@@ -240,7 +240,6 @@
 /home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/CourseProject.DataAccess.pdb
 /home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/CourseProject.Domain.pdb
 /home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/obj/Debug/net8.0/CourseProject.Presentation.csproj.AssemblyReference.cache
-/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/obj/Debug/net8.0/CourseProject.Presentation.Resources.VIews.Login.ru.resources
 /home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/obj/Debug/net8.0/CourseProject.Presentation.Resources.VIews.Register.ru.resources
 /home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/obj/Debug/net8.0/CourseProject.Presentation.csproj.GenerateResource.cache
 /home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/obj/Debug/net8.0/CourseProject.Presentation.GeneratedMSBuildEditorConfig.editorconfig
@@ -275,3 +274,7 @@
 /home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/AWSSDK.S3.dll
 /home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/System.Net.WebSockets.WebSocketProtocol.dll
 /home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/libman.json
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/ru-Ru/CourseProject.Presentation.resources.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/obj/Debug/net8.0/CourseProject.Presentation.Resources.VIews.Login.ru-Ru.resources
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/obj/Debug/net8.0/ru-Ru/CourseProject.Presentation.resources.cs
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/obj/Debug/net8.0/ru-Ru/CourseProject.Presentation.resources.dll

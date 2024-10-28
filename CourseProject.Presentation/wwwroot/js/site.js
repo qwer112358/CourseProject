@@ -4,8 +4,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const themeToggleBtn = document.getElementById('themeToggle');
     const currentTheme = localStorage.getItem('theme') || 'light';
-
-    // Apply saved theme
+    
     if (currentTheme === 'dark') {
         document.body.classList.add('dark-theme');
         document.querySelector('.navbar').classList.add('dark-theme');

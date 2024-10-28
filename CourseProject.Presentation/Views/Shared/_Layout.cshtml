@@ -1,4 +1,6 @@
-﻿@using CourseProject.Domain
+﻿@using System.Globalization
+@using CourseProject.Domain
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 <!DOCTYPE html>
 <html lang="@System.Threading.Thread.CurrentThread.CurrentUICulture.Name">
 <head>
@@ -35,15 +37,15 @@
                     <button id="themeToggle" class="btn btn-outline-secondary me-2">
                         <i class="fas fa-moon"></i> Toggle Theme
                     </button>
-                    <!-- Language selection (commented out for now) -->
-                    <!--
-                    <form id="languageForm" asp-controller="Language" asp-action="SetLanguage" method="post" class="d-inline-flex">
-                        <select name="culture" class="form-select" onchange="document.getElementById('languageForms').submit();">
-                            <option value="en" @(System.Threading.Thread.CurrentThread.CurrentUICulture.Name == "en" ? "selected" : "")>English</option>
-                            <option value="ru" @(System.Threading.Thread.CurrentThread.CurrentUICulture.Name == "ru" ? "selected" : "")>Русский</option>
-                        </select>
+
+                    <form asp-controller="Language" asp-action="SetLanguage" method="get">
+                        <div class="btn-group" role="group">
+                            <a asp-controller="Language" asp-action="SetLanguage" asp-route-culture="en-US" asp-route-returnUrl="@Context.Request.Path" class="btn btn-outline-primary">English</a>
+                            <a asp-controller="Language" asp-action="SetLanguage" asp-route-culture="ru-RU" asp-route-returnUrl="@Context.Request.Path" class="btn btn-outline-primary">Русский</a>
+                        </div>
+                        <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
                     </form>
-                    -->
+
                 </div>
                 <partial name="_LoginPartial"/>
             </div>
