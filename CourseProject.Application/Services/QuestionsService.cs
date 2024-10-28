@@ -26,6 +26,11 @@ public class QuestionsService(IQuestionRepository questionRepository) : IQuestio
         return await questionRepository.GetByFormTemplateIdAsync(formTemplateId);
     }
 
+    public async Task<ICollection<Question>> GetQuestionsByFormTemplateIdsAsync(ICollection<Guid> formTemplateId)
+    {
+        return await questionRepository.GetByFormTemplateIdsAsync(formTemplateId);
+    }
+
     public async Task AddQuestionAsync(Question question)
     {
         await questionRepository.Create(question);

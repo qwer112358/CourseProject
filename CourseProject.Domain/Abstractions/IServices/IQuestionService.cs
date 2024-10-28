@@ -8,6 +8,7 @@ public interface IQuestionService
     Task<Question> GetQuestionByIdAsync(Guid id);
     Task<ICollection<Question>> GetQuestionsByIdsAsync(ICollection<Guid> ids);
     Task<ICollection<Question>> GetQuestionByFormTemplateIdAsync(Guid formTemplateId);
+    Task<ICollection<Question>> GetQuestionsByFormTemplateIdsAsync(ICollection<Guid> formTemplateId);
     Task AddQuestionAsync(Question question);
     Task DeleteQuestionByIdAsync(Guid id);
 }

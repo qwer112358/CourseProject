@@ -22,9 +22,27 @@ public class FormTemplatesController(
     public async Task<IActionResult> Index(string searchTerm)
     {
         var formTemplates = await formTemplatesService.SearchFormTemplatesAsync(searchTerm);
-        var viewModel = SearchModelMapper.ToSearchViewModel(formTemplates, searchTerm);
-        return View(viewModel);
+        if (User.Identity.IsAuthenticated)
+        {
+            var user = await userManager.FindByNameAsync(User.Identity.Name);
+            var accessibleTemplates = formTemplates
+                .Where(ft => ft.IsPublic || ft.AllowedUsers.Select(u => u.Id).Contains(user.Id) || ft.CreatorId == user.Id)
+                .ToList();
+            
+            var viewModel = SearchModelMapper.ToSearchViewModel(accessibleTemplates, searchTerm);
+            return View(viewModel);
+        }
+        else
+        {
+            var publicTemplates = formTemplates
+                .Where(ft => ft.IsPublic)
+                .ToList();
+            var viewModel = SearchModelMapper.ToSearchViewModel(publicTemplates, searchTerm);
+            return View(viewModel);
+        }
     }
+
+
     
     [HttpGet("GetByUserName/{userName}")]
     public async Task<IActionResult> GetByUserName(string userName)
@@ -40,6 +58,7 @@ public class FormTemplatesController(
     public async Task<IActionResult> Create()
     {
         await InitData();
+        
         return View();
     }
     

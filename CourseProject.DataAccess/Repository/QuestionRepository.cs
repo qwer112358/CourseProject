@@ -53,6 +53,15 @@ public class QuestionRepository(ApplicationDbContext dbContext) : IQuestionRepos
     public async Task<ICollection<Question>> GetByFormTemplateIdAsync(Guid formTemplateId)
     {
         return await dbContext
-            .Questions.Where(t => t.FormTemplateId == formTemplateId).ToListAsync();
+            .Questions.Where(q => q.FormTemplateId == formTemplateId).ToListAsync();
     }
+    
+    public async Task<ICollection<Question>> GetByFormTemplateIdsAsync(ICollection<Guid> formTemplateIds)
+    {
+        return await dbContext.Questions
+            .Where(q => formTemplateIds.Contains(q.FormTemplateId))
+            .ToListAsync();
+    }
+
+    
 }
