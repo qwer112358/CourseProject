@@ -31,6 +31,10 @@
                     }
                 </ul>
                 <div class="d-inline-flex align-items-center">
+                    <!-- Toggle theme button -->
+                    <button id="themeToggle" class="btn btn-outline-secondary me-2">
+                        <i class="fas fa-moon"></i> Toggle Theme
+                    </button>
                     <!-- Language selection (commented out for now) -->
                     <!--
                     <form id="languageForm" asp-controller="Language" asp-action="SetLanguage" method="post" class="d-inline-flex">
@@ -74,3 +78,4 @@
 @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
