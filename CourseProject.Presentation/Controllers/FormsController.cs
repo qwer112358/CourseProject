@@ -16,16 +16,24 @@ public class FormsController(
     UserManager<ApplicationUser> userManager,
     IQuestionService questionService) : Controller
 {
-    [Authorize]
-    [HttpGet("{formTemplateId}")]
-    public async Task<IActionResult> Index(Guid formTemplateId)
-    {
-        var forms = await formsService.GetFormsByTemplateIdAsync(formTemplateId);
-        var questionsList = await Task.WhenAll(forms.Select(form =>
-            questionService.GetQuestionByFormTemplateIdAsync(form.FormTemplateId)));
-        forms.Zip(questionsList, (form, questions) => form.FormTemplate.Questions = questions);
-        return View(forms);
-    }
+  
+   [Authorize]
+   [HttpGet("{formTemplateId}")]
+   public async Task<IActionResult> Index(Guid formTemplateId)
+   {
+       var forms = await formsService.GetFormsByTemplateIdAsync(formTemplateId);
+       var questionsList = new List<IEnumerable<Question>>();
+       foreach (var form in forms)
+       {
+           var questions = await questionService.GetQuestionByFormTemplateIdAsync(form.FormTemplateId);
+           questionsList.Add(questions);
+       }
+       var formsList = forms.ToList();
+       for (int i = 0; i < forms.Count; i++)
+           formsList[i].FormTemplate.Questions = questionsList[i].ToList();
+       return View(forms);
+   }
+
     
     [Authorize]
     [HttpGet("Create/{id}")]
@@ -37,6 +45,7 @@ public class FormsController(
             FormTemplateId = formTemplate.Id,
             Questions = formTemplate.Questions.Select(q => q.ToFormQuestionViewModel()).ToList()
         };
+        ViewBag.FormTemplateTitle = formTemplate.Title;
         return View(viewModel);
     }
 
