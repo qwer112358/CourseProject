@@ -1,97 +1,102 @@
 @model CourseProject.Presentation.ViewModels.FormTemplateViewModels.FormTemplateDetailViewModel
-<div class="container">
-    <a asp-controller="Forms" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-link">Create a form</a>
-    <a asp-controller="Forms" asp-action="Index" asp-route-formTemplateId="@Model.Id" class="btn btn-link">Forms</a>
-
-    <h2>@Model.Title</h2>
-
-    <div class="mb-3">
-        @if (!string.IsNullOrEmpty(Model.ImageUrl))
-        {
-            <img src="@Model.ImageUrl" alt="Image" class="img-thumbnail"/>
-        }
+<div class="container mt-5">
+    <div class="d-flex justify-content-between mb-4">
+        <h2>@Model.Title</h2>
+        <div>
+            <a asp-controller="Forms" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-primary">Create a form</a>
+            <a asp-controller="Forms" asp-action="Index" asp-route-formTemplateId="@Model.Id" class="btn btn-link">Forms</a>
+        </div>
     </div>
 
-    <div class="mb-3">
+    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+    {
+    <div class="mb-4 text-center">
+        <img src="@Model.ImageUrl" alt="Image" class="img-fluid img-thumbnail" />
+    </div>
+    }
+
+    <div class="mb-4">
         <strong>Description:</strong>
         <p>@Model.Description</p>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-4">
         <strong>Topic:</strong>
         <p>@Model.Topic.Name</p>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-4">
         <strong>Tags:</strong>
         <p>@string.Join(", ", Model.Tags.Select(t => t.Name))</p>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-4">
         <strong>Public:</strong>
-        @if (Model.IsPublic)
+        <p>@(Model.IsPublic ? "Yes" : "No")</p>
+        @if (!Model.IsPublic)
         {
-            <p>Yes</p>
-        }
-        else
-        {
-            <p>No</p>
-            <strong>Allowed users:</strong>
-            <p>@string.Join(", ", Model.AllowedUsers.Select(u => u.Name))</p>
+        <strong>Allowed users:</strong>
+        <p>@string.Join(", ", Model.AllowedUsers.Select(u => u.Name))</p>
         }
     </div>
 
-    <div class="mb-3">
+    <div class="mb-4">
         <strong>Created By:</strong>
         <p>@Model.Creator.Name</p>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-4">
         <strong>Questions:</strong>
-        <ul>
+        <ul class="list-unstyled">
             @foreach (var question in Model.Questions.OrderBy(q => q.Order))
             {
-                <li>
-                    <strong>Title: @question.Title:</strong>
-                    <br/>
-                    <em>Description:</em>: @question.Description
-                    <br/>
-                    <em>Type:</em> @question.Type
-                </li>
-            }
-        </ul>
-    </div>
-
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-    
-    @if (User.Identity.IsAuthenticated)
-    {
-        <form id="commentForm">
-            <input type="hidden" name="formTemplateId" value="@Model.Id" />
-            <div class="form-group">
-                <label for="commentText">Add Comment:</label>
-                <textarea id="commentText" class="form-control" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    }
-    else
-    {
-        <p>Please <a asp-controller="Account" asp-action="Login">log in</a> to add comments.</p>
-    }
-
-    <div class="mb-3">
-        <strong>Comments:</strong>
-        <ul id="commentsList">
-            @foreach (var comment in Model.Comments)
-            {
-            <li>
-                <strong>@comment.ApplicationUserName</strong> (@comment.CreatedAt.ToLocalTime()):<br/>
-                @comment.Text
+            <li class="mb-3">
+                <strong>Title: @question.Title</strong>
+                <br />
+                <em>Description:</em> @question.Description
+                <br />
+                <em>Type:</em> @question.Type
             </li>
             }
         </ul>
     </div>
+
+    <a asp-action="Index" class="btn btn-secondary mb-4">Back to List</a>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+    <form id="commentForm" class="mb-4">
+        <input type="hidden" name="formTemplateId" value="@Model.Id" />
+        <div class="form-group">
+            <label for="commentText">Add Comment:</label>
+            <textarea id="commentText" class="form-control" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    }
+    else
+    {
+    <p>Please <a asp-controller="Account" asp-action="Login">log in</a> to add comments.</p>
+    }
+
+    <div class="mb-4">
+        <h5>Comments:</h5>
+        <ul id="commentsList" class="list-unstyled">
+            @foreach (var comment in Model.Comments)
+            {
+            <li class="media mb-3">
+                <img src="https://www.gravatar.com/avatar/?d=mp&s=50" alt="User Avatar" class="mr-3 rounded-circle" />
+                <div class="media-body">
+                    <h6 class="mt-0 mb-1">@comment.ApplicationUserName</h6>
+                    <small class="text-muted">@comment.CreatedAt.ToLocalTime()</small>
+                    <p class="mb-1">@comment.Text</p>
+                </div>
+            </li>
+            }
+        </ul>
+    </div>
+
+
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
@@ -115,14 +120,12 @@
     document.getElementById("commentForm").addEventListener("submit", function(event) {
         event.preventDefault();
         const commentText = document.getElementById("commentText").value;
-        const userName = '@User.Identity.Name'; 
+        const userName = '@User.Identity.Name';
 
         connection.invoke("SendComment", userName, commentText, "@Model.Id").catch(function(err) {
             return console.error(err.toString());
         });
 
-        document.getElementById("commentText").value = ''; 
+        document.getElementById("commentText").value = '';
     });
 </script>
-
-

@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-6 form-group">
                 <label>User</label>
-                <input type="text" asp-for="CreatorUserName" class="form-control" value="@User.Identity.Name" readonly/>
+                <input type="text" asp-for="CreatorUserName" class="form-control" value="@Model.CreatorUserName" readonly/>
             </div>
             <div class="col-md-6 form-group">
                 <label>Date</label>
@@ -45,8 +45,12 @@
         </div>
 
         <div class="form-group">
+            <label for="fileUpload">Upload image</label>
+            <input id="fileUpload" type="file" class="form-control" onchange="uploadImage()" />
+        </div>
+        <div class="form-group">
             <label asp-for="ImageUrl">Image URL</label>
-            <input asp-for="ImageUrl" class="form-control" type="url"/>
+            <input asp-for="ImageUrl" id="ImageUrl" class="form-control" type="url" readonly />
         </div>
 
         <h3 class="mt-4">Questions</h3>
@@ -162,6 +166,37 @@
         }
     });
 
+    async function uploadImage() {
+        const fileInput = document.getElementById("fileUpload");
+        const imageUrlInput = document.getElementById("ImageUrl");
+
+        if (fileInput.files.length === 0) {
+            alert("select the file to upload");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", fileInput.files[0]);
+
+        try {
+            const response = await fetch("/api/images/upload", {
+                method: "POST",
+                body: formData
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                imageUrlInput.value = `${data.imageUrl}`;
+                //alert("Изображение загружено успешно!");
+            } else {
+                const error = await response.text();
+                //alert("Ошибка загрузки изображения: " + error);
+            }
+        } catch (error) {
+            console.error("Ошибка:", error);
+            //alert("Произошла ошибка при загрузке изображения.");
+        }
+    }
 </script>
 
 <style>

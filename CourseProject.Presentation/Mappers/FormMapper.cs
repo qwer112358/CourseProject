@@ -17,7 +17,6 @@ public static class FormMapper
         ApplicationUserId = user.Id,
         ApplicationUser = user,
         SubmissionDate = DateTime.UtcNow,
-        Answers = viewModel.Questions.Select(q => q.ToFormAnswer(viewModel.FormTemplateId)).ToList() 
-
+        Answers = viewModel.Questions.Select(q => q.ToFormAnswer(viewModel.FormTemplateId)).ToList(),
     };
 }

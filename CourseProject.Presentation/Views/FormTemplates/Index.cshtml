@@ -5,63 +5,81 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @inject SignInManager<ApplicationUser> signInManager
 
-<div class="container">
-    <h2>Form Templates</h2>
+<div class="container mt-5">
+    <h2 class="mb-4">Form Templates</h2>
 
     <!-- Search form -->
     @{ Html.RenderPartial("_SearchForm", Model); }
 
-    
     @if (signInManager.IsSignedIn(User))
     {
-        <a asp-controller="FormTemplates" asp-action="Create" class="btn btn-link">Create New Form Template</a>
+    <a asp-controller="FormTemplates" asp-action="Create" class="btn btn-primary mb-3">Create New Form Template</a>
     }
-    
+
     <!-- Templates table -->
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Topic</th>
-            <th>Public</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        @if (!Model.FormTemplates.Any())
-        {
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-light">
             <tr>
-                <td colspan="4" class="text-center">No templates found.</td>
+                <th>Thumbnail</th> <!-- New header for the thumbnail -->
+                <th>Title</th>
+                <th>Topic</th>
+                <th>Public</th>
+                <th>Actions</th>
             </tr>
-        }
-        else
-        {
+            </thead>
+            <tbody>
+            @if (!Model.FormTemplates.Any())
+            {
+            <tr>
+                <td colspan="5" class="text-center">No templates found.</td>
+            </tr>
+            }
+            else
+            {
             foreach (var formTemplate in Model.FormTemplates)
             {
-                <tr>
-                    <td>@formTemplate.Title</td>
-                    <td>@formTemplate.Topic.Name</td>
-                    <td>@(formTemplate.IsPublic ? "Yes" : "No")</td>
-                    <td>
-                        <a href="@Url.Action("Details", new { id = formTemplate.Id })" class="btn btn-link">View</a>
-                        @if (User.IsInRole(UserRoles.Admin))
-                        {
-                            <a href="@Url.Action("Edit", new { id = formTemplate.Id })" class="btn btn-link">Edit</a>
-                            <a href="@Url.Action("Delete", new { id = formTemplate.Id })" class="btn btn-link">Delete</a>
-                        }
-                        @if (signInManager.IsSignedIn(User))
-                        {
-                            <form asp-controller="Likes" asp-action="ToggleLike" asp-route-templateId="@formTemplate.Id" method="post" style="display:inline;">
-                                <button type="submit" class="btn btn-link">
-                                    Like
-                                </button>
-                            </form>
-                        }
-                        <span id="likesCount_@formTemplate.Id">Likes: @(formTemplate.LikeCount)</span>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @if (!string.IsNullOrEmpty(formTemplate.ImageUrl))
+                    {
+                    <img src="@formTemplate.ImageUrl" alt="Thumbnail" class="img-thumbnail" style="width: 50px; height: 50px; object-fit: cover;" />
+                    }
+                    else
+                    {
+                    <span class="text-muted">No image</span>
+                    }
+                </td>
+                <td>@formTemplate.Title</td>
+                <td>@formTemplate.Topic.Name</td>
+                <td>@(formTemplate.IsPublic ? "Yes" : "No")</td>
+                <td>
+                    <a href="@Url.Action("Details", new { id = formTemplate.Id })" class="btn btn-link">
+                        <i class="fas fa-eye"></i> View
+                    </a>
+                    @if (User.IsInRole(UserRoles.Admin))
+                    {
+                    <a href="@Url.Action("Edit", new { id = formTemplate.Id })" class="btn btn-warning">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <a href="@Url.Action("Delete", new { id = formTemplate.Id })" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i> Delete
+                    </a>
+                    }
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                    <form asp-controller="Likes" asp-action="ToggleLike" asp-route-templateId="@formTemplate.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-link">
+                            <i class="fas fa-thumbs-up"></i> Like
+                        </button>
+                    </form>
+                    }
+                    <span id="likesCount_@formTemplate.Id">Likes: @(formTemplate.LikeCount)</span>
+                </td>
+            </tr>
             }
-        }
-        </tbody>
-    </table>
+            }
+            </tbody>
+        </table>
+    </div>
 </div>

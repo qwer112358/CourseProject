@@ -40,16 +40,6 @@ public class FormTemplatesController(
     public async Task<IActionResult> Create()
     {
         await InitData();
-        var users = userManager.Users.ToList();
-        
-        var userViewModels = users.Select(u => new ApplicationUserViewModel
-        {
-            Id = u.Id,
-            Name = u.Name,
-            Email = u.Email
-        }).ToList();
-        
-        ViewBag.Users = userViewModels;
         return View();
     }
     
@@ -137,11 +127,6 @@ public class FormTemplatesController(
     {
         ViewBag.AllTopics = await topicsService.GetAllTopicsAsync();
         ViewBag.Tags = await tagsService.GetAllTagsAsync();
+        ViewBag.Users = userManager.Users.Select(u => u.ToViewModel()).ToList();;
     }
-    
-    
-
-    /*private void GetDomainProperties(out ApplicationUser user, ICollection<Tag> tags, Topic topic, ICollection<ApplicationUser> allowedUsers)
-    {
-    }*/
 }

@@ -8,7 +8,7 @@ public class FormTemplateRequestViewModel
     public Guid Id { get; set; } = Guid.NewGuid();
     [Required]
     public string Title { get; set; }
-    public string Description { get; set; } = string.Empty;
+    public string? Description { get; set; } = string.Empty;
     [Url]
     public string? ImageUrl { get; set; }
     public bool IsPublic { get; set; }
