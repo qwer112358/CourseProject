@@ -8,7 +8,7 @@
     <div class="mb-3">
         @if (!string.IsNullOrEmpty(Model.ImageUrl))
         {
-        <img src="@Model.ImageUrl" alt="Image" class="img-thumbnail"/>
+            <img src="@Model.ImageUrl" alt="Image" class="img-thumbnail"/>
         }
     </div>
 
@@ -62,26 +62,15 @@
         </ul>
     </div>
 
-    <div class="mb-3">
-        <strong>Comments:</strong>
-        <ul>
-            @foreach (var comment in Model.Comments)
-            {
-                <li>
-                    <strong>@comment.ApplicationUserName</strong> (@comment.CreatedAt.ToLocalTime()):<br/>
-                    @comment.Text
-                </li>
-            }
-        </ul>
-    </div>
-
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    
     @if (User.Identity.IsAuthenticated)
     {
-        <form asp-controller="Comments" asp-action="AddComment" method="post">
-            <input type="hidden" name="formTemplateId" value="@Model.Id"/>
+        <form id="commentForm">
+            <input type="hidden" name="formTemplateId" value="@Model.Id" />
             <div class="form-group">
                 <label for="commentText">Add Comment:</label>
-                <textarea name="text" class="form-control" rows="3" id="commentText"></textarea>
+                <textarea id="commentText" class="form-control" rows="3"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -91,5 +80,49 @@
         <p>Please <a asp-controller="Account" asp-action="Login">log in</a> to add comments.</p>
     }
 
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    <div class="mb-3">
+        <strong>Comments:</strong>
+        <ul id="commentsList">
+            @foreach (var comment in Model.Comments)
+            {
+            <li>
+                <strong>@comment.ApplicationUserName</strong> (@comment.CreatedAt.ToLocalTime()):<br/>
+                @comment.Text
+            </li>
+            }
+        </ul>
+    </div>
 </div>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/commentHub")
+        .build();
+
+    connection.on("ReceiveComment", function(userName, commentText) {
+        const commentsList = document.getElementById("commentsList");
+        const newComment = document.createElement("li");
+        newComment.innerHTML = `<strong>${userName}</strong>: ${commentText}`;
+        commentsList.appendChild(newComment);
+    });
+
+    connection.start().catch(function(err) {
+        return console.error(err.toString());
+    });
+
+    document.getElementById("commentForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const commentText = document.getElementById("commentText").value;
+        const userName = '@User.Identity.Name'; 
+
+        connection.invoke("SendComment", userName, commentText, "@Model.Id").catch(function(err) {
+            return console.error(err.toString());
+        });
+
+        document.getElementById("commentText").value = ''; 
+    });
+</script>
+
+

@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
+      "Id": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/wwwroot/js/signalr/dist/browser/signalr.js",
+      "PackagePath": "staticwebassets/js/signalr/dist/browser/signalr.js"
+    },
+    {
       "Id": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },

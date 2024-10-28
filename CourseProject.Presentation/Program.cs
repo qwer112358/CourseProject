@@ -1,9 +1,9 @@
 using CourseProject.DataAccess.Seeds;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
+using CourseProject.DataAccess.Hubs;
 using CourseProject.Domain;
 using CourseProject.Presentation.Configuration.LayerConfigurations;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +14,17 @@ builder.Services.AddServices();
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+        policy.AllowCredentials();
+        policy.SetIsOriginAllowed(hostName => true);
+    });
+});
 
 var app = builder.Build();
 
@@ -69,6 +80,8 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=FormTemplates}/{action=Index}/{id?}");
+    
+    endpoints.MapHub<CommentHub>("/commentHub");
 });
 
 app.Run();

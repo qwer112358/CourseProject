@@ -273,3 +273,5 @@
 /home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/CSharpFunctionalExtensions.dll
 /home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/AWSSDK.Core.dll
 /home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/AWSSDK.S3.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/System.Net.WebSockets.WebSocketProtocol.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/libman.json

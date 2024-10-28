@@ -36,6 +36,19 @@ public static class ServiceLayerConfigurations
             {
                 options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
             });
+        
+        services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(policy =>
+            {
+                policy.AllowAnyHeader();
+                policy.AllowAnyMethod();
+                policy.AllowCredentials();
+                policy.SetIsOriginAllowed(hostName => true);
+            });
+        });
+        
+        services.AddSignalR();
 
         services.AddScoped<IAdminService, AdminService>();
         services.AddScoped<IAccountService, AccountService>();
@@ -48,6 +61,6 @@ public static class ServiceLayerConfigurations
         services.AddScoped<ILikesService, LikesService>();
         services.AddScoped<IAccessService, AccessService>();
         services.AddScoped<IImagesService, ImagesService>();
-        //services.AddHttpClient<IImagesService, ImagesService>();
+
     }
 }

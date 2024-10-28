@@ -16,7 +16,7 @@ public class CommentsController(ICommentsService commentsService, UserManager<Ap
         if (string.IsNullOrWhiteSpace(text)) 
         {
             ModelState.AddModelError(string.Empty, "Comment cannot be empty.");
-            return RedirectToAction("Details", new { id = formTemplateId });
+            return RedirectToAction("Details", "FormTemplates", new { id = formTemplateId });
         }
         
         var user = await userManager.GetUserAsync(User);

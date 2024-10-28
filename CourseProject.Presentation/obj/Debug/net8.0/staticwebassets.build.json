@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "97f/aRZO8PlbC3MSG3Hc0fWkGfT5ypme23dzf9G7jkY=",
+  "Hash": "2C8Y+KjT+QCwZH5fZZgi9EPUUZzfktuFrIJfppPCdoU=",
   "Source": "CourseProject.Presentation",
   "BasePath": "_content/CourseProject.Presentation",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/favicon.ico"
+    },
+    {
+      "Identity": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/wwwroot/js/signalr/dist/browser/signalr.js",
+      "SourceId": "CourseProject.Presentation",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/wwwroot/",
+      "BasePath": "_content/CourseProject.Presentation",
+      "RelativePath": "js/signalr/dist/browser/signalr.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/signalr/dist/browser/signalr.js"
     },
     {
       "Identity": "/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/wwwroot/js/site.js",
