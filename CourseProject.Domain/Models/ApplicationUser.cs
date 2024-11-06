@@ -1,3 +1,4 @@
+using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.Identity;
 
 namespace CourseProject.Domain.Models;
@@ -13,4 +14,5 @@ public class ApplicationUser : IdentityUser
     public ICollection<FormTemplate> FormTemplates { get; set; } = new List<FormTemplate>();
     public ICollection<Comment> Comments { get; set; } = new List<Comment>();
     public ICollection<Like> Likes { get; set; } = new List<Like>();
+    
 }

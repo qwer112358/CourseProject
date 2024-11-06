@@ -61,6 +61,9 @@ public static class ServiceLayerConfigurations
         services.AddScoped<ILikesService, LikesService>();
         services.AddScoped<IAccessService, AccessService>();
         services.AddScoped<IImagesService, ImagesService>();
+        
+        services.AddScoped<SalesforceService>();
+        services.AddHttpClient();
 
     }
 }

@@ -141,13 +141,6 @@ public class FormTemplatesController(
         await formTemplatesService.DeleteFormTemplate(id);
         return RedirectToAction("Index");
     }
-
-    private async Task InitData()
-    {
-        ViewBag.AllTopics = await topicsService.GetAllTopicsAsync();
-        ViewBag.Tags = await tagsService.GetAllTagsAsync();
-        ViewBag.Users = userManager.Users.Select(u => u.ToViewModel()).ToList();;
-    }
     
     [HttpGet("Search")]
     public async Task<IActionResult> Search(string searchTerm)
@@ -156,5 +149,12 @@ public class FormTemplatesController(
         var formTemplates = await formTemplatesService.SearchFormTemplatesAsync(searchTerm);
         var viewModel = SearchModelMapper.ToSearchViewModel(formTemplates, searchTerm);
         return RedirectToAction("Index", "FormTemplates", viewModel);
+    }
+    
+    private async Task InitData()
+    {
+        ViewBag.AllTopics = await topicsService.GetAllTopicsAsync();
+        ViewBag.Tags = await tagsService.GetAllTagsAsync();
+        ViewBag.Users = userManager.Users.Select(u => u.ToViewModel()).ToList();;
     }
 }

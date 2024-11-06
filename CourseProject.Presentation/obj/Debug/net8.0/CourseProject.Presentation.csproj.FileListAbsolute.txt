@@ -278,3 +278,14 @@
 /home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/obj/Debug/net8.0/CourseProject.Presentation.Resources.VIews.Login.ru-Ru.resources
 /home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/obj/Debug/net8.0/ru-Ru/CourseProject.Presentation.resources.cs
 /home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/obj/Debug/net8.0/ru-Ru/CourseProject.Presentation.resources.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/CommonLibrariesForNET.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/Salesforce.Force.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/Microsoft.Extensions.Configuration.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/Microsoft.Extensions.Configuration.Abstractions.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/Microsoft.Extensions.Configuration.Binder.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/Microsoft.Extensions.Diagnostics.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/Microsoft.Extensions.Diagnostics.Abstractions.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/Microsoft.Extensions.Http.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/Microsoft.Extensions.Primitives.dll
+/home/sr/RiderProjects/CourseProject (Копия)/CourseProject.Presentation/bin/Debug/net8.0/System.Diagnostics.DiagnosticSource.dll
