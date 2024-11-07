@@ -32,12 +32,7 @@
                         </li>
                     }
                 </ul>
-
-
-                <a class="nav-link text-dark" asp-controller="Tickets" asp-action="CreateTicket">Create ticket</a>
-
-
-
+                
                 <div class="d-inline-flex align-items-center">
                     <!-- Toggle theme button -->
                     <button id="themeToggle" class="btn btn-outline-secondary me-2">
@@ -75,8 +70,11 @@
 
 <footer class="border-top footer text-muted">
     <div class="container">
+        <a class="text-primary fw-bold text-decoration-underline" asp-controller="Tickets" asp-action="CreateTicket">Create support ticket</a>
+        <br/>
         &copy; 2024 - Course Project
     </div>
+   
 </footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,10 +1,10 @@
 @model CourseProject.Application.ViewModels.CreateTicketViewModel
 
 @{
-ViewData["Title"] = "Create ticket";
+ViewData["Title"] = "Create Ticket";
 }
 
-<h2>Create ticket</h2>
+<h2>Create Ticket</h2>
 
 <form asp-action="CreateTicket" method="post" class="form-horizontal">
     <div class="form-group">
@@ -21,23 +21,28 @@ ViewData["Title"] = "Create ticket";
         </select>
     </div>
 
+    <div class="form-group">
+        <label asp-for="Template" class="control-label">Template:</label>
+        <input asp-for="Template" class="form-control" placeholder="Enter template title if applicable" />
+    </div>
+
     <input type="hidden" asp-for="PageUrl" value="@ViewContext.HttpContext.Request.Path" />
 
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Create a ticket</button>
+        <button type="submit" class="btn btn-primary">Create Ticket</button>
     </div>
 </form>
 
 @if (ViewBag.TicketUrl != null)
 {
 <div class="alert alert-success mt-4">
-    <p>Ticket successfully created! You can view it at the link:</p>
+    <p>Ticket successfully created! You can view it at the link below:</p>
     <a href="@ViewBag.TicketUrl" target="_blank">@ViewBag.TicketUrl</a>
 </div>
 }
 else if (!ViewData.ModelState.IsValid)
 {
 <div class="alert alert-danger mt-4">
-    <p>There was an error when creating a ticket. Please try again.</p>
+    <p>There was an error while creating the ticket. Please try again.</p>
 </div>
 }

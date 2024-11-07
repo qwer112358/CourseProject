@@ -1,0 +1,38 @@
+@model List<CourseProject.Application.ViewModels.TicketViewModel>
+
+<h2>Tickets Assigned to You</h2>
+
+@if (Model.Any())
+{
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+    <tr>
+        <th>Key</th>
+        <th>Summary</th>
+        <th>Status</th>
+        <th>Priority</th>
+        <th>Reporter</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var ticket in Model)
+    {
+    <tr>
+        <td>
+            <a href="https://rs1409089988.atlassian.net/browse/@ticket.Key" target="_blank">
+                @ticket.Key
+            </a>
+        </td>
+        <td>@ticket.Summary</td>
+        <td>@ticket.Status</td>
+        <td>@ticket.Priority</td>
+        <td>@ticket.Reporter</td>
+    </tr>
+    }
+    </tbody>
+</table>
+}
+else
+{
+<p>No tickets assigned to you.</p>
+}
