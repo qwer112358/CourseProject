@@ -54,3 +54,17 @@ public class JiraService
         throw new Exception("Error when creating a ticket in Jira");
     }
 }
+
+
+/*
+ public async Task<List<CreateTicketViewModel>> GetUserTicketsAsync(string username)
+ {
+     var response = await _httpClient.GetAsync($"{_jiraBaseUrl}/rest/api/2/search?jql=reporter={username}");
+     if (response.IsSuccessStatusCode)
+     {
+         var responseContent = await response.Content.ReadAsStringAsync();
+         var tickets = JsonSerializer.Deserialize<List<CreateTicketViewModel>>(responseContent);
+         return tickets;
+     }
+     throw new Exception("Error fetching user tickets");
+ }*/
