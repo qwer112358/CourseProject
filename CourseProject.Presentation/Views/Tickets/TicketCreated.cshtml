@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "Ticked created";
+}
+
+<h2>Ticket successfully created!</h2>
+
+<div class="alert alert-success mt-4">
+    <p>Your ticket has been successfully created in Jira. You can view it by clicking on the following link:</p>
+    <a href="@Model" target="_blank">@Model</a>
+</div>
+
+<div class="mt-3">
+    <a href="@Url.Action("Index", "FormTemplates")" class="btn btn-primary">Back to Home</a>
+</div>

@@ -27,11 +27,17 @@
                 <ul class="navbar-nav flex-grow-1">
                     @if (User.IsInRole(UserRoles.Admin))
                     {
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Admin" asp-action="Index">Admin Panel</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Admin" asp-action="Index">Admin Panel</a>
+                        </li>
                     }
                 </ul>
+
+
+                <a class="nav-link text-dark" asp-controller="Tickets" asp-action="CreateTicket">Create ticket</a>
+
+
+
                 <div class="d-inline-flex align-items-center">
                     <!-- Toggle theme button -->
                     <button id="themeToggle" class="btn btn-outline-secondary me-2">

@@ -64,6 +64,7 @@ public static class ServiceLayerConfigurations
         
         services.AddScoped<SalesforceService>();
         services.AddHttpClient();
+        services.AddHttpClient<JiraService>();
 
     }
 }
